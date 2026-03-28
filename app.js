@@ -734,7 +734,10 @@ function renderCategorias(filterText) {
   miVocabulario.forEach(w => {
     if (query && !normalizeStr(w.es).includes(normalizeStr(query)) && !(w.uk || '').toLowerCase().includes(query)) return;
     const catKey = w.categoria || 'Sin categoría';
-    if (!catMap.has(catKey)) catMap.set(catKey, { uk: w.categoriaUk || '', subs: new Map() });
+    if (!catMap.has(catKey)) {
+      const baseCat = vocabBase.categorias.find(c => c.id === w.categoriaId);
+      catMap.set(catKey, { uk: w.categoriaUk || '', emoji: baseCat?.emoji || '', subs: new Map() });
+    }
     const subKey = w.subcategoria || 'General';
     if (!catMap.get(catKey).subs.has(subKey)) catMap.get(catKey).subs.set(subKey, { uk: w.subcategoriaUk || '', words: [] });
     catMap.get(catKey).subs.get(subKey).words.push(w);
@@ -773,7 +776,7 @@ function renderCategorias(filterText) {
 
     html += `<div class="explorar-cat">
       <div class="explorar-cat-header" onclick="toggleExploreCat('${catId}')">
-        <span>📂 ${catName}${catData.uk ? ' / ' + catData.uk : ''}</span>
+        <span>${catData.emoji || '📁'} ${catName}${catData.uk ? ' / ' + catData.uk : ''}</span>
         <span class="cat-count">${totalWords}</span>
         <div class="cat-actions" onclick="event.stopPropagation()">
           <button class="cat-action-btn" onclick="openSubcatModal('${catName}')" title="Nueva subcategoría">+</button>
