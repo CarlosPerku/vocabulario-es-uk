@@ -283,12 +283,28 @@ function setupSearch() {
   });
 }
 
+function normalizeStr(str) {
+  return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function isCyrillicText(str) {
+  return /[\u0400-\u04FF]/.test(str);
+}
+
+function matchesQuery(word, query) {
+  const q = normalizeStr(query);
+  const esNorm = normalizeStr(word.es);
+  const ukLower = (word.uk || '').toLowerCase();
+  return (
+    esNorm.includes(q) ||
+    levenshtein(esNorm, q) <= 2 ||
+    ukLower.includes(query.toLowerCase())
+  );
+}
+
 function showSuggestions(query) {
   const allWords = getAllBaseWords();
-  const matches = allWords.filter(w =>
-    w.es.toLowerCase().includes(query) ||
-    levenshtein(w.es.toLowerCase(), query) <= 2
-  ).slice(0, 5);
+  const matches = allWords.filter(w => matchesQuery(w, query)).slice(0, 5);
 
   const container = document.getElementById('suggestions');
   if (matches.length === 0) {
@@ -297,9 +313,12 @@ function showSuggestions(query) {
   }
 
   container.innerHTML = matches.map(m =>
-    `<span class="suggestion-item" onclick="doSearch('${m.es}')">${m.emoji || ''} ${m.es}</span>`
+    `<span class="suggestion-item" onclick="doSearch('${m.es}')">${m.emoji || ''} ${m.es} — ${m.uk}</span>`
   ).join('');
 }
+
+// Almacena datos de palabras del buscador para recuperarlos al añadir
+const searchResultData = new Map();
 
 async function doSearch(query) {
   if (!query) return;
@@ -311,46 +330,54 @@ async function doSearch(query) {
 
   results.innerHTML = '<div class="loading"><div class="spinner"></div>Buscando / Шукаю...</div>';
   empty.style.display = 'none';
+  searchResultData.clear();
 
-  // 1. Search in base vocabulary
-  const baseMatches = getAllBaseWords().filter(w =>
-    w.es.toLowerCase().includes(query.toLowerCase()) ||
-    levenshtein(w.es.toLowerCase(), query.toLowerCase()) <= 2
-  );
+  // Detectar si la búsqueda es en ucraniano
+  const isUkrainian = isCyrillicText(query);
+  let queryEs = query;
+  let queryUk = '';
 
-  // 2. Fetch translation
-  let translation = '';
-  try {
-    translation = await translateToUkrainian(query);
-  } catch (e) {
-    console.warn('Translation failed:', e);
+  if (isUkrainian) {
+    // Traducir ucraniano → español para buscar y para imágenes
+    try { queryEs = await translateText(query, 'uk', 'es') || query; } catch (e) {}
+    queryUk = query;
+  } else {
+    // Traducir español → ucraniano para mostrarlo
+    try { queryUk = await translateToUkrainian(query); } catch (e) {}
   }
 
-  // 3. Fetch images
+  // 1. Buscar en vocabulario base (por ES normalizado o por UK)
+  const allWords = getAllBaseWords();
+  const baseMatches = allWords.filter(w => {
+    const qNorm = normalizeStr(queryEs);
+    const esNorm = normalizeStr(w.es);
+    const ukLow = (w.uk || '').toLowerCase();
+    return (
+      esNorm.includes(qNorm) ||
+      levenshtein(esNorm, qNorm) <= 2 ||
+      (isUkrainian && ukLow.includes(query.toLowerCase()))
+    );
+  });
+
+  // 2. Buscar imágenes usando término en español
   let images = [];
-  try {
-    images = await searchImages(query);
-  } catch (e) {
-    console.warn('Image search failed:', e);
-  }
+  try { images = await searchImages(queryEs); } catch (e) {}
 
-  // Build results
+  // Construir resultados
   let html = '';
 
-  // Base vocab matches
   baseMatches.forEach(match => {
     const isAdded = miVocabulario.some(w => w.id === match.id);
     html += renderSearchResult(match, images, isAdded, true);
   });
 
-  // If no base match, show as new word
   if (baseMatches.length === 0) {
     const newWord = {
-      id: slugify(query),
-      es: capitalizeFirst(query),
-      uk: translation || '',
+      id: slugify(queryEs),
+      es: capitalizeFirst(isUkrainian ? queryEs : query),
+      uk: isUkrainian ? query : (queryUk || ''),
       descripcion: '',
-      emoji: guessEmoji(query),
+      emoji: guessEmoji(queryEs),
       imagen: images.length > 0 ? images[0] : ''
     };
     const isAdded = miVocabulario.some(w => w.id === newWord.id);
@@ -366,6 +393,9 @@ async function doSearch(query) {
 }
 
 function renderSearchResult(word, images, isAdded, isFromBase) {
+  // Guardar datos de la palabra para recuperarlos al añadir
+  searchResultData.set(word.id, { ...word, _images: images });
+
   const imgHtml = images.length > 0
     ? `<div class="result-images">${images.map((url, i) =>
         `<img src="${url}" class="result-img${i === 0 ? ' selected' : ''}" onclick="selectResultImage(this, '${word.id}')" alt="${word.es}">`
@@ -383,10 +413,7 @@ function renderSearchResult(word, images, isAdded, isFromBase) {
         <div class="result-actions">
           ${isAdded
             ? '<span class="badge-added">✓ Añadida / Додано</span>'
-            : `<button class="btn btn-add" onclick="openAddModal('${escapeAttr(JSON.stringify({
-                ...word,
-                imagen: images.length > 0 ? images[0] : ''
-              }))}')">+ Añadir / Додати</button>`
+            : `<button class="btn btn-add" onclick="addFromSearchCard('${word.id}')">+ Añadir / Додати</button>`
           }
         </div>
       </div>
@@ -398,6 +425,16 @@ function selectResultImage(imgEl, wordId) {
   const card = imgEl.closest('.search-result-card');
   card.querySelectorAll('.result-img').forEach(i => i.classList.remove('selected'));
   imgEl.classList.add('selected');
+}
+
+function addFromSearchCard(wordId) {
+  const word = searchResultData.get(wordId);
+  if (!word) return;
+  // Leer la imagen actualmente seleccionada en el card
+  const card = document.querySelector(`.search-result-card[data-word-id="${wordId}"]`);
+  const selectedImg = card?.querySelector('.result-img.selected');
+  const wordWithImage = { ...word, imagen: selectedImg?.src || word.imagen || '' };
+  openAddModal(JSON.stringify(wordWithImage));
 }
 
 // ==================== ADD MODAL ====================
@@ -1542,6 +1579,7 @@ window.setQuizFilter = setQuizFilter;
 window.startQuizWithFilter = startQuizWithFilter;
 window.openCameraInput = openCameraInput;
 window.triggerInstall = triggerInstall;
+window.addFromSearchCard = addFromSearchCard;
 window.openWordDetail = openWordDetail;
 window.saveAndCloseDetail = saveAndCloseDetail;
 window.deleteWordFromDetail = deleteWordFromDetail;
