@@ -17,6 +17,16 @@ function speakWord(text, rate = 1.0) {
   setTimeout(() => window.speechSynthesis.speak(utter), 50);
 }
 
+// Emojis genéricos que NO representan exactamente la palabra
+const GENERIC_EMOJIS = new Set(['🍽️', '📖', '📝', '🔤', '❓', '']);
+
+function wordVisual(w, imgStyle = '') {
+  const exactEmoji = w.emoji && !GENERIC_EMOJIS.has(w.emoji);
+  if (exactEmoji) return w.emoji;
+  if (w.imagen) return `<img src="${w.imagen}"${imgStyle ? ' style="' + imgStyle + '"' : ''} onerror="this.outerHTML='${w.emoji || '🍽️'}'">`;
+  return w.emoji || '🍽️';
+}
+
 function speakBtns(text) {
   return `<div class="speak-btns"><button class="btn-speak" onclick="event.stopPropagation();speakWord('${text.replace(/'/g, "\\'")}',1.0)" title="Pronunciar / Вимова">🔊</button><button class="btn-speak btn-speak-slow" onclick="event.stopPropagation();speakWord('${text.replace(/'/g, "\\'")}',0.25)" title="Lento / Повільно">🐢</button></div>`;
 }
@@ -238,9 +248,7 @@ function renderMyVocab() {
   list.innerHTML = words.map(w => `
     <div class="word-card" data-id="${w.id}" onclick="openWordDetail('${w.id}')">
       <div class="card-image" onclick="event.stopPropagation(); openImagePicker('${w.id}')" title="Cambiar imagen / Змінити зображення">
-        ${w.imagen
-          ? `<img src="${w.imagen}" alt="${w.es}" onerror="this.parentElement.innerHTML='${w.emoji || '🍽️'}'">`
-          : (w.emoji || '🍽️')}
+        ${wordVisual(w)}
         <div class="card-image-hint">🖼️</div>
       </div>
       <div class="card-info">
@@ -741,7 +749,7 @@ function renderCategorias(filterText) {
         <div class="explorar-words-grid" id="${catId}-${slugify(subName)}">
           ${subData.words.map(w => `
             <div class="explorar-word" onclick="openWordDetail('${w.id}')">
-              <span class="explorar-word-emoji">${w.imagen ? `<img src="${w.imagen}" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.outerHTML='${w.emoji || '🍽️'}'">` : (w.emoji || '🍽️')}</span>
+              <span class="explorar-word-emoji">${wordVisual(w, 'width:36px;height:36px;border-radius:8px;object-fit:cover')}</span>
               <div class="explorar-word-text">
                 <div class="explorar-es-row"><span class="explorar-es">${w.es}</span>${speakBtns(w.es)}</div>
                 <div class="explorar-uk">${w.uk}</div>
@@ -964,7 +972,10 @@ function endQuiz() {
 function showQuizCard() {
   const word = quizWords[quizIndex];
   const imageDiv = document.getElementById('quiz-image');
-  if (word.imagen) {
+  const exactEmoji = word.emoji && !GENERIC_EMOJIS.has(word.emoji);
+  if (exactEmoji) {
+    imageDiv.innerHTML = `<span style="font-size:80px">${word.emoji}</span>`;
+  } else if (word.imagen) {
     imageDiv.innerHTML = `<img src="${word.imagen}" onerror="this.outerHTML='<span style=font-size:80px>${word.emoji || '🍽️'}</span>'">`;
   } else {
     imageDiv.innerHTML = `<span style="font-size:80px">${word.emoji || '🍽️'}</span>`;
