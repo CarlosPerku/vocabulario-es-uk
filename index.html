@@ -93,8 +93,12 @@
             <input type="text" id="modal-uk" class="input-field" placeholder="Traducción / Переклад...">
           </div>
           <div class="form-group">
-            <label>Descripción / Опис</label>
-            <input type="text" id="modal-desc" class="input-field" placeholder="Breve descripción / Короткий опис...">
+            <label>Descripción en español</label>
+            <input type="text" id="modal-desc-es" class="input-field" placeholder="Ej: Se sirve entero a la plancha...">
+          </div>
+          <div class="form-group">
+            <label>Опис українською / Descripción en ucraniano</label>
+            <input type="text" id="modal-desc" class="input-field" placeholder="Короткий опис / Breve descripción...">
           </div>
           <div class="form-group">
             <label>Categoría / Категорія</label>
@@ -129,22 +133,64 @@
 
     <!-- Vista: Categorías -->
     <main id="view-categorias" class="view">
+      <button class="btn btn-primary" style="width:100%;margin-bottom:14px" onclick="openCatModal()">
+        + Nueva categoría / Нова категорія
+      </button>
       <div id="categorias-tree" class="categorias-tree"></div>
     </main>
+
+    <!-- Modal gestión de categorías -->
+    <div id="cat-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3 class="modal-title" id="cat-modal-title">Nueva categoría / Нова категорія</h3>
+        <div class="form-group">
+          <label>Nombre en español / Назва іспанською</label>
+          <input type="text" id="cat-modal-es" class="input-field" placeholder="Ej: Ropa, Transporte...">
+        </div>
+        <div class="form-group">
+          <label>Nombre en ucraniano / Назва українською</label>
+          <input type="text" id="cat-modal-uk" class="input-field" placeholder="Ej: Одяг, Транспорт...">
+        </div>
+        <div id="cat-modal-subcat-section" class="hidden">
+          <div class="form-group">
+            <label>Categoría padre / Батьківська категорія</label>
+            <select id="cat-modal-parent" class="select-field"></select>
+          </div>
+        </div>
+        <input type="hidden" id="cat-modal-mode" value="cat">
+        <input type="hidden" id="cat-modal-edit-id" value="">
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="closeCatModal()">Cancelar / Скасувати</button>
+          <button class="btn btn-primary" onclick="saveCatModal()">Guardar / Зберегти</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Quiz mode overlay -->
     <div id="quiz-overlay" class="quiz-overlay hidden">
       <div class="quiz-card">
         <button id="quiz-close" class="quiz-close">✕</button>
-        <div id="quiz-image" class="quiz-image"></div>
-        <div id="quiz-question" class="quiz-question"></div>
-        <div id="quiz-answer" class="quiz-answer hidden"></div>
-        <button id="quiz-reveal" class="btn btn-primary btn-block">Mostrar / Показати</button>
+        <!-- Selector de filtro del quiz -->
+        <div id="quiz-filter-screen" class="quiz-filter-screen">
+          <h3 class="quiz-filter-title">¿Con qué palabras practicar?<br><small>З якими словами практикувати?</small></h3>
+          <div id="quiz-filter-options" class="quiz-filter-options"></div>
+          <button id="quiz-start-btn" class="btn btn-primary btn-block" style="margin-top:16px" onclick="startQuizWithFilter()">
+            Empezar quiz / Почати
+          </button>
+        </div>
+        <!-- Tarjeta del quiz -->
+        <div id="quiz-card-screen" class="hidden">
+          <div id="quiz-image" class="quiz-image"></div>
+          <div id="quiz-question" class="quiz-question"></div>
+          <div id="quiz-answer" class="quiz-answer hidden"></div>
+          <button id="quiz-reveal" class="btn btn-primary btn-block">Mostrar / Показати</button>
+        </div>
         <div id="quiz-nav" class="quiz-nav">
           <button id="quiz-prev" class="btn btn-secondary">← Anterior / Назад</button>
           <span id="quiz-counter" class="quiz-counter"></span>
           <button id="quiz-next" class="btn btn-secondary">Siguiente / Далі →</button>
         </div>
+        </div><!-- fin quiz-card-screen -->
       </div>
     </div>
 
@@ -162,8 +208,9 @@
         </div>
         <div id="image-picker-grid" class="image-picker-grid"></div>
         <input type="hidden" id="image-picker-wordid">
-        <div class="modal-actions" style="margin-top:16px">
-          <button id="image-picker-close" class="btn btn-primary btn-block">Listo / Готово</button>
+        <div class="modal-actions" style="margin-top:16px;gap:8px">
+          <button onclick="openCameraInput()" class="btn btn-secondary" style="flex:1">📷 Foto / Фото</button>
+          <button id="image-picker-close" class="btn btn-primary" style="flex:1">Listo / Готово</button>
         </div>
       </div>
     </div>

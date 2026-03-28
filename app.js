@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupQuiz();
   setupImagePicker();
   setupTagsInput();
+  setupCameraInput();
+  checkIosInstallHint();
 });
 
 function updateAuthUI(user) {
@@ -106,8 +108,10 @@ function getAllBaseWords() {
           ...p,
           categoria: cat.nombre.es,
           categoriaUk: cat.nombre.uk,
+          categoriaId: cat.id,
           subcategoria: sub.nombre.es,
-          subcategoriaUk: sub.nombre.uk
+          subcategoriaUk: sub.nombre.uk,
+          subcategoriaId: sub.id
         });
       });
     });
@@ -196,7 +200,8 @@ function renderMyVocab() {
       <div class="card-info">
         <div class="card-es">${w.es}</div>
         <div class="card-uk">${w.uk}</div>
-        ${w.descripcion ? `<div class="card-desc">${w.descripcion}</div>` : ''}
+        ${w.descripcion_es ? `<div class="card-desc card-desc-es">${w.descripcion_es}</div>` : ''}
+        ${w.descripcion ? `<div class="card-desc card-desc-uk">${w.descripcion}</div>` : ''}
         <span class="card-category">${w.categoria || ''}${w.subcategoria ? ' › ' + w.subcategoria : ''}</span>
         ${w.etiquetas && w.etiquetas.length > 0
           ? `<div class="card-tags">${w.etiquetas.map(t => `<span class="tag-badge">#${t}</span>`).join('')}</div>`
@@ -371,9 +376,10 @@ function openAddModal(wordJsonStr) {
   document.getElementById('modal-es').value = word.es;
   document.getElementById('modal-uk').value = word.uk || '';
   document.getElementById('modal-desc').value = word.descripcion || '';
+  document.getElementById('modal-desc-es').value = word.descripcion_es || '';
   document.getElementById('modal-new-cat').value = '';
   document.getElementById('modal-new-subcat').value = '';
-  modalTags = [];
+  modalTags = word.etiquetas ? [...word.etiquetas] : [];
   renderModalTags();
 
   // Populate category select
@@ -482,11 +488,14 @@ function saveFromModal() {
     }
   }
 
+  const desc_es = document.getElementById('modal-desc-es').value.trim();
+
   const word = {
     id: slugify(es),
     es,
     uk: uk || es,
     descripcion: desc,
+    descripcion_es: desc_es,
     emoji: guessEmoji(es),
     imagen: selectedImageUrl,
     categoria: catName,
@@ -550,17 +559,26 @@ function renderCategorias() {
     const catId = slugify(catName);
 
     html += `<div class="cat-group">
-      <div class="cat-header" onclick="toggleCat('${catId}')">
-        ${catName}${catData.uk ? ' / ' + catData.uk : ''}
-        <span class="cat-count">${totalWords}</span>
+      <div class="cat-header">
+        <span onclick="toggleCat('${catId}')" style="flex:1;cursor:pointer">
+          ${catName}${catData.uk ? ' / ' + catData.uk : ''}
+          <span class="cat-count">${totalWords}</span>
+        </span>
+        <div class="cat-actions">
+          <button class="cat-action-btn" onclick="openSubcatModal('${catName}')" title="Nueva subcategoría / Нова підкатегорія">+</button>
+          <button class="cat-action-btn cat-action-del" onclick="deleteCategoria('${catName}')" title="Eliminar categoría / Видалити категорію">✕</button>
+        </div>
       </div>`;
 
     catData.subs.forEach((subData, subName) => {
       const subId = `${catId}-${slugify(subName)}`;
       html += `
-        <div class="subcat-header" onclick="toggleSubcat('${subId}')">
-          ${subName}${subData.uk ? ' / ' + subData.uk : ''}
-          <span class="cat-count">${subData.words.length}</span>
+        <div class="subcat-header">
+          <span onclick="toggleSubcat('${subId}')" style="flex:1;cursor:pointer">
+            ${subName}${subData.uk ? ' / ' + subData.uk : ''}
+            <span class="cat-count">${subData.words.length}</span>
+          </span>
+          <button class="cat-action-btn cat-action-del" onclick="deleteSubcategoria('${catName}', '${subName}')" title="Eliminar subcategoría / Видалити підкатегорію">✕</button>
         </div>
         <div class="subcat-words" id="subcat-${subId}">
           ${subData.words.map(w => `
@@ -579,6 +597,105 @@ function renderCategorias() {
   });
 
   container.innerHTML = html;
+}
+
+// ==================== GESTIÓN DE CATEGORÍAS ====================
+function openCatModal(mode = 'cat') {
+  document.getElementById('cat-modal-title').textContent =
+    mode === 'cat' ? 'Nueva categoría / Нова категорія' : 'Nueva subcategoría / Нова підкатегорія';
+  document.getElementById('cat-modal-es').value = '';
+  document.getElementById('cat-modal-uk').value = '';
+  document.getElementById('cat-modal-mode').value = mode;
+  document.getElementById('cat-modal-edit-id').value = '';
+
+  const subcatSection = document.getElementById('cat-modal-subcat-section');
+  if (mode === 'subcat') {
+    subcatSection.classList.remove('hidden');
+    const parentSelect = document.getElementById('cat-modal-parent');
+    const cats = new Set(miVocabulario.map(w => w.categoria).filter(Boolean));
+    parentSelect.innerHTML = [...cats].map(c => `<option value="${c}">${c}</option>`).join('');
+  } else {
+    subcatSection.classList.add('hidden');
+  }
+
+  document.getElementById('cat-modal').classList.remove('hidden');
+}
+
+function openSubcatModal(catName) {
+  openCatModal('subcat');
+  document.getElementById('cat-modal-title').textContent = `Nueva subcategoría en "${catName}" / Нова підкатегорія`;
+  document.getElementById('cat-modal-parent').value = catName;
+}
+
+function closeCatModal() {
+  document.getElementById('cat-modal').classList.add('hidden');
+}
+
+function saveCatModal() {
+  const nameEs = document.getElementById('cat-modal-es').value.trim();
+  const nameUk = document.getElementById('cat-modal-uk').value.trim();
+  const mode = document.getElementById('cat-modal-mode').value;
+
+  if (!nameEs) { showToast('Escribe un nombre / Введи назву'); return; }
+
+  if (mode === 'cat') {
+    // Guardar categoría de usuario
+    saveUserCategory(slugify(nameEs), nameEs, nameUk);
+    showToast('Categoría creada / Категорію створено ✓');
+  } else {
+    const parent = document.getElementById('cat-modal-parent').value;
+    const parentWord = miVocabulario.find(w => w.categoria === parent);
+    const catId = parentWord?.categoriaId || slugify(parent);
+    saveUserSubcategory(catId, slugify(nameEs), nameEs, nameUk);
+    showToast('Subcategoría creada / Підкатегорію створено ✓');
+  }
+
+  closeCatModal();
+  renderCategorias();
+  // También actualizar el modal de añadir palabra
+  populateCategoryFilter();
+}
+
+function deleteCategoria(catName) {
+  const count = miVocabulario.filter(w => w.categoria === catName).length;
+  const msg = count > 0
+    ? `¿Eliminar "${catName}"? Las ${count} palabras quedarán sin categoría.\n¿Борати "${catName}"? ${count} слів залишаться без категорії.`
+    : `¿Eliminar la categoría "${catName}"?\n¿Видалити категорію "${catName}"?`;
+  if (!confirm(msg)) return;
+
+  miVocabulario.forEach(w => {
+    if (w.categoria === catName) {
+      w.categoria = '';
+      w.categoriaUk = '';
+      w.categoriaId = '';
+      w.subcategoria = '';
+      w.subcategoriaUk = '';
+      w.subcategoriaId = '';
+    }
+  });
+  saveMyVocab();
+  renderCategorias();
+  populateCategoryFilter();
+  showToast('Eliminada / Видалено');
+}
+
+function deleteSubcategoria(catName, subName) {
+  const count = miVocabulario.filter(w => w.categoria === catName && w.subcategoria === subName).length;
+  const msg = count > 0
+    ? `¿Eliminar subcategoría "${subName}"? Las ${count} palabras pasarán a "${catName}" sin subcategoría.`
+    : `¿Eliminar subcategoría "${subName}"?`;
+  if (!confirm(msg)) return;
+
+  miVocabulario.forEach(w => {
+    if (w.categoria === catName && w.subcategoria === subName) {
+      w.subcategoria = '';
+      w.subcategoriaUk = '';
+      w.subcategoriaId = '';
+    }
+  });
+  saveMyVocab();
+  renderCategorias();
+  showToast('Subcategoría eliminada / Підкатегорію видалено');
 }
 
 function toggleCat(catId) {
@@ -602,14 +719,98 @@ function setupQuiz() {
   document.getElementById('quiz-next').addEventListener('click', () => navigateQuiz(1));
 }
 
+let quizSelectedFilter = 'all';
+
 function startQuiz() {
   if (miVocabulario.length === 0) {
     showToast('Añade palabras primero / Спочатку додай слова');
     return;
   }
-  quizWords = shuffleArray([...miVocabulario]);
-  quizIndex = 0;
+  quizSelectedFilter = 'all';
+  // Mostrar pantalla de filtro
   document.getElementById('quiz-overlay').classList.remove('hidden');
+  document.getElementById('quiz-filter-screen').classList.remove('hidden');
+  document.getElementById('quiz-card-screen').classList.add('hidden');
+  renderQuizFilterOptions();
+}
+
+function renderQuizFilterOptions() {
+  const container = document.getElementById('quiz-filter-options');
+  const cats = [...new Set(miVocabulario.map(w => w.categoria).filter(Boolean))];
+  const subcats = [...new Set(miVocabulario.map(w => w.subcategoria).filter(Boolean))];
+  const tags = getAllTags();
+
+  let html = `
+    <div class="quiz-filter-group">
+      <label class="quiz-filter-opt ${quizSelectedFilter === 'all' ? 'active' : ''}" onclick="setQuizFilter('all', this)">
+        📚 Todas las palabras / Всі слова (${miVocabulario.length})
+      </label>
+    </div>`;
+
+  if (cats.length > 0) {
+    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por categoría / За категорією</div>`;
+    cats.forEach(cat => {
+      const count = miVocabulario.filter(w => w.categoria === cat).length;
+      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'cat:' + cat ? 'active' : ''}" onclick="setQuizFilter('cat:${cat}', this)">
+        📂 ${cat} (${count})
+      </label>`;
+    });
+    html += '</div>';
+  }
+
+  if (subcats.length > 0) {
+    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por subcategoría / За підкатегорією</div>`;
+    subcats.forEach(sub => {
+      const count = miVocabulario.filter(w => w.subcategoria === sub).length;
+      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'sub:' + sub ? 'active' : ''}" onclick="setQuizFilter('sub:${sub}', this)">
+        › ${sub} (${count})
+      </label>`;
+    });
+    html += '</div>';
+  }
+
+  if (tags.length > 0) {
+    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por etiqueta / За міткою</div>`;
+    tags.forEach(tag => {
+      const count = miVocabulario.filter(w => (w.etiquetas || []).includes(tag)).length;
+      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'tag:' + tag ? 'active' : ''}" onclick="setQuizFilter('tag:${tag}', this)">
+        #${tag} (${count})
+      </label>`;
+    });
+    html += '</div>';
+  }
+
+  container.innerHTML = html;
+}
+
+function setQuizFilter(filter, el) {
+  quizSelectedFilter = filter;
+  document.querySelectorAll('.quiz-filter-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function startQuizWithFilter() {
+  let words = [...miVocabulario];
+  if (quizSelectedFilter.startsWith('cat:')) {
+    const cat = quizSelectedFilter.slice(4);
+    words = words.filter(w => w.categoria === cat);
+  } else if (quizSelectedFilter.startsWith('sub:')) {
+    const sub = quizSelectedFilter.slice(4);
+    words = words.filter(w => w.subcategoria === sub);
+  } else if (quizSelectedFilter.startsWith('tag:')) {
+    const tag = quizSelectedFilter.slice(4);
+    words = words.filter(w => (w.etiquetas || []).includes(tag));
+  }
+
+  if (words.length === 0) {
+    showToast('Sin palabras en este filtro / Немає слів у цьому фільтрі');
+    return;
+  }
+
+  quizWords = shuffleArray(words);
+  quizIndex = 0;
+  document.getElementById('quiz-filter-screen').classList.add('hidden');
+  document.getElementById('quiz-card-screen').classList.remove('hidden');
   showQuizCard();
 }
 
@@ -1089,6 +1290,98 @@ function setupImagePicker() {
   });
 }
 
+// ==================== PWA INSTALL BANNER ====================
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  showInstallBanner();
+});
+
+function showInstallBanner() {
+  if (document.getElementById('install-banner')) return;
+  const banner = document.createElement('div');
+  banner.id = 'install-banner';
+  banner.className = 'install-banner';
+  banner.innerHTML = `
+    <span>📲 Instalar app / Встановити додаток</span>
+    <div class="install-banner-actions">
+      <button id="install-btn" class="btn btn-primary btn-sm">Instalar</button>
+      <button id="install-dismiss" class="btn btn-secondary btn-sm">✕</button>
+    </div>
+  `;
+  document.getElementById('app').prepend(banner);
+  document.getElementById('install-btn').addEventListener('click', async () => {
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      const { outcome } = await deferredInstallPrompt.userChoice;
+      if (outcome === 'accepted') banner.remove();
+      deferredInstallPrompt = null;
+    }
+  });
+  document.getElementById('install-dismiss').addEventListener('click', () => banner.remove());
+}
+
+function checkIosInstallHint() {
+  const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isInStandalone = window.navigator.standalone === true;
+  const dismissed = localStorage.getItem('ios_install_dismissed');
+  if (isIos && !isInStandalone && !dismissed) {
+    showIosInstallBanner();
+  }
+}
+
+function showIosInstallBanner() {
+  if (document.getElementById('install-banner')) return;
+  const banner = document.createElement('div');
+  banner.id = 'install-banner';
+  banner.className = 'install-banner install-banner-ios';
+  banner.innerHTML = `
+    <span>📲 Para instalar: toca <strong>Compartir</strong> y luego <strong>"Añadir a inicio"</strong><br>
+    <small>Щоб встановити: натисни «Поділитися» → «На екран "Домів"»</small></span>
+    <button id="install-dismiss" class="btn btn-secondary btn-sm" style="flex-shrink:0">✕</button>
+  `;
+  document.getElementById('app').prepend(banner);
+  document.getElementById('install-dismiss').addEventListener('click', () => {
+    banner.remove();
+    localStorage.setItem('ios_install_dismissed', '1');
+  });
+}
+
+// ==================== PHOTO FROM CAMERA/GALLERY ====================
+function setupCameraInput() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.id = 'camera-input';
+  input.style.display = 'none';
+  document.body.appendChild(input);
+
+  input.addEventListener('change', async () => {
+    const file = input.files[0];
+    if (!file) return;
+    const wordId = document.getElementById('image-picker-wordid').value;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+      const word = miVocabulario.find(w => w.id === wordId);
+      if (word) {
+        word.imagen = dataUrl;
+        saveMyVocab();
+      }
+      closeImagePicker();
+      showToast('Foto guardada / Фото збережено ✓');
+    };
+    reader.readAsDataURL(file);
+    input.value = '';
+  });
+}
+
+function openCameraInput() {
+  document.getElementById('camera-input').click();
+}
+
 // Make functions available globally for onclick handlers
 window.removeWord = removeWord;
 window.doSearch = doSearch;
@@ -1103,5 +1396,14 @@ window.closeImagePicker = closeImagePicker;
 window.discardPickerImage = discardPickerImage;
 window.setTagFilter = setTagFilter;
 window.removeModalTag = removeModalTag;
+window.openCatModal = openCatModal;
+window.openSubcatModal = openSubcatModal;
+window.closeCatModal = closeCatModal;
+window.saveCatModal = saveCatModal;
+window.deleteCategoria = deleteCategoria;
+window.deleteSubcategoria = deleteSubcategoria;
 window.loginWithGoogle = loginWithGoogle;
 window.logout = logout;
+window.setQuizFilter = setQuizFilter;
+window.startQuizWithFilter = startQuizWithFilter;
+window.openCameraInput = openCameraInput;
