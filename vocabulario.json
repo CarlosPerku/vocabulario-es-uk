@@ -6,134 +6,48 @@
       "emoji": "🍽️",
       "subcategorias": [
         {
-          "id": "mariscos",
-          "nombre": { "es": "Mariscos", "uk": "Морепродукти" },
-          "emoji": "🦐",
+          "id": "frutas",
+          "nombre": { "es": "Frutas", "uk": "Фрукти" },
+          "emoji": "🍎",
           "palabras": [
-            {
-              "id": "langostinos",
-              "es": "Langostinos",
-              "uk": "Лангустини",
-              "descripcion_es": "Crustáceo grande, de 15-25 cm. Se sirven enteros con cabeza.",
-              "descripcion": "Великі креветки (15-25 см)",
-              "emoji": "🦐",
-              "imagen": ""
-            },
-            {
-              "id": "camarones",
-              "es": "Camarones",
-              "uk": "Креветки",
-              "descripcion_es": "Crustáceo pequeño, de 5-8 cm. Muy habitual en cocina española.",
-              "descripcion": "Маленькі креветки (5-8 см)",
-              "emoji": "🦐",
-              "imagen": ""
-            },
-            {
-              "id": "gambas",
-              "es": "Gambas",
-              "uk": "Гамби",
-              "descripcion_es": "Crustáceo de tamaño mediano, 10-15 cm. Las más consumidas en España.",
-              "descripcion": "Середні креветки (10-15 см)",
-              "emoji": "🦐",
-              "imagen": ""
-            },
-            {
-              "id": "cola-de-langostino",
-              "es": "Cola de langostino",
-              "uk": "Хвіст лангустина",
-              "descripcion_es": "Solo la parte de la cola, sin cabeza ni caparazón.",
-              "descripcion": "Тільки хвостова частина, без голови",
-              "emoji": "🦐",
-              "imagen": ""
-            },
-            {
-              "id": "bogavante",
-              "es": "Bogavante",
-              "uk": "Омар",
-              "descripcion_es": "Gran crustáceo con pinzas. El marisco más caro y valorado.",
-              "descripcion": "Великий морський рак з клешнями",
-              "emoji": "🦞",
-              "imagen": ""
-            }
+            { "id": "manzana", "es": "Manzana", "uk": "Яблуко", "descripcion_es": "Fruta redonda de color rojo o verde. Muy común en España.", "descripcion": "Кругла червона або зелена фрукта", "emoji": "🍎", "imagen": "", "etiquetas": ["database"] },
+            { "id": "naranja", "es": "Naranja", "uk": "Апельсин", "descripcion_es": "Fruta cítrica de color naranja. Muy usada para zumo.", "descripcion": "Цитрусовий фрукт, з якого роблять сік", "emoji": "🍊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "platano", "es": "Plátano", "uk": "Банан", "descripcion_es": "Fruta tropical alargada de color amarillo.", "descripcion": "Жовтий тропічний фрукт", "emoji": "🍌", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fresa", "es": "Fresa", "uk": "Полуниця", "descripcion_es": "Fruta pequeña roja y dulce. Temporada en primavera.", "descripcion": "Маленька червона солодка ягода", "emoji": "🍓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sandia", "es": "Sandía", "uk": "Кавун", "descripcion_es": "Fruta grande verde por fuera y roja por dentro. Típica del verano.", "descripcion": "Велика зелена фрукта з червоною м'якоттю", "emoji": "🍉", "imagen": "", "etiquetas": ["database"] },
+            { "id": "melon", "es": "Melón", "uk": "Диня", "descripcion_es": "Fruta grande y dulce de color amarillo o verde.", "descripcion": "Велика солодка жовта або зелена фрукта", "emoji": "🍈", "imagen": "", "etiquetas": ["database"] },
+            { "id": "uva", "es": "Uva", "uk": "Виноград", "descripcion_es": "Fruta pequeña que crece en racimos. Se usa para hacer vino.", "descripcion": "Дрібні ягоди в гронах, з яких роблять вино", "emoji": "🍇", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pera", "es": "Pera", "uk": "Груша", "descripcion_es": "Fruta con forma de lágrima, verde o amarilla.", "descripcion": "Грушоподібна зелена або жовта фрукта", "emoji": "🍐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "melocoton", "es": "Melocotón", "uk": "Персик", "descripcion_es": "Fruta de verano con piel suave y hueso en el centro.", "descripcion": "Літній фрукт з ніжною шкіркою та кісточкою", "emoji": "🍑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cereza", "es": "Cereza", "uk": "Вишня", "descripcion_es": "Fruta pequeña y roja que crece en árbol. Muy dulce.", "descripcion": "Маленькі червоні ягоди, дуже солодкі", "emoji": "🍒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "kiwi", "es": "Kiwi", "uk": "Ківі", "descripcion_es": "Fruta tropical de piel marrón y pulpa verde.", "descripcion": "Тропічний фрукт з коричневою шкіркою і зеленою м'якоттю", "emoji": "🥝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mango", "es": "Mango", "uk": "Манго", "descripcion_es": "Fruta tropical dulce y jugosa de color amarillo-naranja.", "descripcion": "Солодкий тропічний фрукт жовто-оранжевого кольору", "emoji": "🥭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pina", "es": "Piña", "uk": "Ананас", "descripcion_es": "Fruta tropical grande con piel dura y pulpa amarilla.", "descripcion": "Великий тропічний фрукт з жорсткою шкіркою", "emoji": "🍍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "limon", "es": "Limón", "uk": "Лимон", "descripcion_es": "Fruta cítrica ácida de color amarillo. Muy usada en cocina.", "descripcion": "Кислий жовтий цитрус, широко використовується на кухні", "emoji": "🍋", "imagen": "", "etiquetas": ["database"] },
+            { "id": "frambuesa", "es": "Frambuesa", "uk": "Малина", "descripcion_es": "Fruta pequeña de color rosa-rojo, muy aromática.", "descripcion": "Маленька рожево-червона ароматна ягода", "emoji": "🫐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "arandano", "es": "Arándano", "uk": "Чорниця", "descripcion_es": "Fruta pequeña azul-morada, muy rica en antioxidantes.", "descripcion": "Дрібна синьо-фіолетова ягода, багата антиоксидантами", "emoji": "🫐", "imagen": "", "etiquetas": ["database"] }
           ]
         },
         {
-          "id": "moluscos",
-          "nombre": { "es": "Moluscos", "uk": "Молюски" },
-          "emoji": "🐚",
+          "id": "verduras",
+          "nombre": { "es": "Verduras", "uk": "Овочі" },
+          "emoji": "🥦",
           "palabras": [
-            {
-              "id": "chipirones",
-              "es": "Chipirones",
-              "uk": "Чіпірони",
-              "descripcion_es": "Calamar muy pequeño, se cocina entero. Típico de la cocina vasca.",
-              "descripcion": "Маленькі кальмари, смажені цілком",
-              "emoji": "🦑",
-              "imagen": ""
-            },
-            {
-              "id": "calamares",
-              "es": "Calamares",
-              "uk": "Кальмари",
-              "descripcion_es": "Molusco cefalópodo. Se suele servir en anillas rebozadas y fritas.",
-              "descripcion": "Кальмари, зазвичай нарізані кільцями",
-              "emoji": "🦑",
-              "imagen": ""
-            },
-            {
-              "id": "chocos",
-              "es": "Chocos",
-              "uk": "Каракатиця",
-              "descripcion_es": "Sepia o jibia. Similar al calamar pero más ancho y plano. Muy tierno.",
-              "descripcion": "Схожі на кальмарів, але ширші й плоскіші",
-              "emoji": "🦑",
-              "imagen": ""
-            },
-            {
-              "id": "zamburinas",
-              "es": "Zamburiñas",
-              "uk": "Замбурінья",
-              "descripcion_es": "Vieira pequeña, de 4-7 cm. Muy común en Galicia. Sabor intenso.",
-              "descripcion": "Маленькі гребінці (4-7 см)",
-              "emoji": "🐚",
-              "imagen": ""
-            },
-            {
-              "id": "vieiras",
-              "es": "Vieiras",
-              "uk": "Гребінці",
-              "descripcion_es": "Molusco bivalvo grande, de 10-15 cm. Símbolo del Camino de Santiago.",
-              "descripcion": "Великі гребінці (10-15 см)",
-              "emoji": "🐚",
-              "imagen": ""
-            },
-            {
-              "id": "berberechos",
-              "es": "Berberechos",
-              "uk": "Серцевидки",
-              "descripcion_es": "Molusco bivalvo pequeño con concha estriada. Se abre al cocerse.",
-              "descripcion": "Маленькі молюски з ребристою мушлею",
-              "emoji": "🐚",
-              "imagen": ""
-            },
-            {
-              "id": "navajas",
-              "es": "Navajas",
-              "uk": "Навахас",
-              "descripcion_es": "Molusco largo y estrecho con forma de navaja de afeitar. Se comen a la plancha.",
-              "descripcion": "Довгі вузькі молюски, схожі на ніж",
-              "emoji": "🪦",
-              "imagen": ""
-            },
-            {
-              "id": "almejas",
-              "es": "Almejas",
-              "uk": "Молюски",
-              "descripcion_es": "Molusco bivalvo redondeado. Muy usadas en arroces, pasta y salsas.",
-              "descripcion": "Круглі двостулкові молюски",
-              "emoji": "🐚",
-              "imagen": ""
-            }
+            { "id": "tomate", "es": "Tomate", "uk": "Помідор", "descripcion_es": "Fruto rojo muy usado en cocina española. Base del sofrito.", "descripcion": "Червоний плід, основа іспанської кухні", "emoji": "🍅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lechuga", "es": "Lechuga", "uk": "Салат", "descripcion_es": "Verdura de hojas verdes. Base de ensaladas.", "descripcion": "Зелений листовий овоч для салатів", "emoji": "🥬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "zanahoria", "es": "Zanahoria", "uk": "Морква", "descripcion_es": "Verdura naranja alargada. Rica en vitamina A.", "descripcion": "Оранжевий витягнутий коренеплід, багатий вітаміном А", "emoji": "🥕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cebolla", "es": "Cebolla", "uk": "Цибуля", "descripcion_es": "Verdura esférica con capas. Base de muchas salsas.", "descripcion": "Цибулина, основа багатьох соусів", "emoji": "🧅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ajo", "es": "Ajo", "uk": "Часник", "descripcion_es": "Bulbo pequeño con sabor y aroma intensos. Muy usado en España.", "descripcion": "Маленька цибулинка з сильним ароматом", "emoji": "🧄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pimiento", "es": "Pimiento", "uk": "Перець", "descripcion_es": "Verdura roja, verde o amarilla. Muy usada en asados.", "descripcion": "Червоний, зелений або жовтий овоч", "emoji": "🫑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pepino", "es": "Pepino", "uk": "Огірок", "descripcion_es": "Verdura verde alargada. Muy fresca y ligera.", "descripcion": "Зелений витягнутий освіжаючий овоч", "emoji": "🥒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "calabacin", "es": "Calabacín", "uk": "Цукіні", "descripcion_es": "Verdura alargada verde, similar al pepino. Se cocina a la plancha.", "descripcion": "Зелений овоч, схожий на огірок, смажать на грилі", "emoji": "🥒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "berenjena", "es": "Berenjena", "uk": "Баклажан", "descripcion_es": "Verdura morada alargada. Se usa en pistos y asados.", "descripcion": "Фіолетовий витягнутий овоч", "emoji": "🍆", "imagen": "", "etiquetas": ["database"] },
+            { "id": "brocoli", "es": "Brócoli", "uk": "Броколі", "descripcion_es": "Verdura verde con forma de árbol. Muy nutritiva.", "descripcion": "Зелений овоч у формі дерева, дуже поживний", "emoji": "🥦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "patata", "es": "Patata", "uk": "Картопля", "descripcion_es": "Tubérculo marrón. Base de tortilla española y muchos platos.", "descripcion": "Бульба, основа іспанської тортільї", "emoji": "🥔", "imagen": "", "etiquetas": ["database"] },
+            { "id": "champinon", "es": "Champiñón", "uk": "Шампіньйон", "descripcion_es": "Hongo blanco pequeño. Se saltea con ajo y perejil.", "descripcion": "Білий маленький гриб, смажать з часником", "emoji": "🍄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "esparragos", "es": "Espárragos", "uk": "Спаржа", "descripcion_es": "Brotes verdes o blancos. Se comen a la plancha o hervidos.", "descripcion": "Зелені або білі паростки, варені або на грилі", "emoji": "🌿", "imagen": "", "etiquetas": ["database"] },
+            { "id": "maiz", "es": "Maíz", "uk": "Кукурудза", "descripcion_es": "Cereal amarillo en mazorca. Muy usado en ensaladas.", "descripcion": "Жовтий злак у качані, часто в салатах", "emoji": "🌽", "imagen": "", "etiquetas": ["database"] },
+            { "id": "espinacas", "es": "Espinacas", "uk": "Шпинат", "descripcion_es": "Hojas verdes oscuras muy nutritivas, ricas en hierro.", "descripcion": "Темно-зелені листки, багаті залізом", "emoji": "🥬", "imagen": "", "etiquetas": ["database"] }
           ]
         },
         {
@@ -141,15 +55,614 @@
           "nombre": { "es": "Carnes", "uk": "М'ясо" },
           "emoji": "🍗",
           "palabras": [
-            {
-              "id": "pollo",
-              "es": "Pollo",
-              "uk": "Курка",
-              "descripcion_es": "Ave doméstica. La carne más consumida en España.",
-              "descripcion": "М'ясо курки",
-              "emoji": "🍗",
-              "imagen": ""
-            }
+            { "id": "pollo", "es": "Pollo", "uk": "Курка", "descripcion_es": "Ave doméstica. La carne más consumida en España.", "descripcion": "М'ясо курки, найпоширеніше в Іспанії", "emoji": "🍗", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cerdo", "es": "Cerdo", "uk": "Свинина", "descripcion_es": "Carne de cerdo. Muy usada en embutidos y asados.", "descripcion": "Свиняче м'ясо, широко використовується", "emoji": "🥩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ternera", "es": "Ternera", "uk": "Яловичина", "descripcion_es": "Carne de vacuno joven. Muy tierna y jugosa.", "descripcion": "Молода яловичина, ніжна та соковита", "emoji": "🥩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cordero", "es": "Cordero", "uk": "Баранина", "descripcion_es": "Carne de oveja joven. Muy popular en asados.", "descripcion": "М'ясо молодої вівці, популярне в запеченому вигляді", "emoji": "🥩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pavo", "es": "Pavo", "uk": "Індичка", "descripcion_es": "Ave grande. Se cocina principalmente en Navidad.", "descripcion": "Велика птиця, яку готують на Різдво", "emoji": "🦃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jamon-serrano", "es": "Jamón serrano", "uk": "Хамон серрано", "descripcion_es": "Jamón curado de cerdo ibérico. Producto estrella de España.", "descripcion": "В'ялений іберійський окіст, символ Іспанії", "emoji": "🥓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "chorizo", "es": "Chorizo", "uk": "Чорісо", "descripcion_es": "Embutido de cerdo con pimentón rojo. Sabor intenso.", "descripcion": "Ковбаса зі свинини з червоним паприкою", "emoji": "🌭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bacon", "es": "Bacon", "uk": "Бекон", "descripcion_es": "Panceta de cerdo ahumada. Se usa mucho en bocadillos.", "descripcion": "Копчена свиняча грудинка", "emoji": "🥓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "salchichon", "es": "Salchichón", "uk": "Салямі", "descripcion_es": "Embutido curado de cerdo con especias. Se come en lonchas.", "descripcion": "В'ялена ковбаса зі свинини та спеціями", "emoji": "🌭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "costillas", "es": "Costillas", "uk": "Ребра", "descripcion_es": "Costillas de cerdo o ternera. Se hacen a la brasa o al horno.", "descripcion": "Свинячі або яловичі ребра, запечені або на грилі", "emoji": "🍖", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "pescados",
+          "nombre": { "es": "Pescados", "uk": "Риба" },
+          "emoji": "🐟",
+          "palabras": [
+            { "id": "merluza", "es": "Merluza", "uk": "Хек", "descripcion_es": "Pescado blanco suave. El más consumido en España.", "descripcion": "Ніжна біла риба, найпоширеніша в Іспанії", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "salmon", "es": "Salmón", "uk": "Лосось", "descripcion_es": "Pescado azul de color rosado. Rico en omega-3.", "descripcion": "Рожева риба, багата на омега-3", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bacalao", "es": "Bacalao", "uk": "Тріска", "descripcion_es": "Pescado blanco que se conserva en sal. Muy tradicional.", "descripcion": "Біла риба, яку зберігають у солі, дуже традиційна", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "atun", "es": "Atún", "uk": "Тунець", "descripcion_es": "Pescado azul grande. Se come fresco o en conserva.", "descripcion": "Велика синя риба, їдять свіжою або з консерви", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sardina", "es": "Sardina", "uk": "Сардина", "descripcion_es": "Pescado pequeño azul. Típico a la plancha en verano.", "descripcion": "Маленька синя риба, типова на грилі влітку", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dorada", "es": "Dorada", "uk": "Дорада", "descripcion_es": "Pescado blanco de carne firme. Muy buena al horno.", "descripcion": "Біла риба з щільним м'ясом, чудова запечена", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lubina", "es": "Lubina", "uk": "Морський окунь", "descripcion_es": "Pescado blanco de sabor delicado. Se cocina a la sal.", "descripcion": "Ніжна біла риба, готується в солі", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "trucha", "es": "Trucha", "uk": "Форель", "descripcion_es": "Pescado de río de carne rosada. Se hace a la navarra.", "descripcion": "Річкова риба з рожевим м'ясом", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "boqueron", "es": "Boquerón", "uk": "Анчоус свіжий", "descripcion_es": "Pescado pequeño. Se come fresco en vinagre o frito.", "descripcion": "Маленька риба, їдять у оцті або смаженою", "emoji": "🐟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pulpo", "es": "Pulpo", "uk": "Восьминіг", "descripcion_es": "Cefalópodo con ocho tentáculos. Típico en Galicia.", "descripcion": "Молюск з вісьмома щупальцями, типовий для Галісії", "emoji": "🐙", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mejillones", "es": "Mejillones", "uk": "Мідії", "descripcion_es": "Molusco bivalvo negro. Se cocina al vapor con limón.", "descripcion": "Чорні двостулкові молюски, готуються на парі", "emoji": "🐚", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "mariscos",
+          "nombre": { "es": "Mariscos", "uk": "Морепродукти" },
+          "emoji": "🦐",
+          "palabras": [
+            { "id": "langostinos", "es": "Langostinos", "uk": "Лангустини", "descripcion_es": "Crustáceo grande, de 15-25 cm. Se sirven enteros con cabeza.", "descripcion": "Великі креветки (15-25 см)", "emoji": "🦐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "camarones", "es": "Camarones", "uk": "Креветки", "descripcion_es": "Crustáceo pequeño, de 5-8 cm. Muy habitual en cocina española.", "descripcion": "Маленькі креветки (5-8 см)", "emoji": "🦐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gambas", "es": "Gambas", "uk": "Гамби", "descripcion_es": "Crustáceo de tamaño mediano, 10-15 cm. Las más consumidas en España.", "descripcion": "Середні креветки (10-15 см)", "emoji": "🦐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bogavante", "es": "Bogavante", "uk": "Омар", "descripcion_es": "Gran crustáceo con pinzas. El marisco más caro y valorado.", "descripcion": "Великий морський рак з клешнями", "emoji": "🦞", "imagen": "", "etiquetas": ["database"] },
+            { "id": "necora", "es": "Nécora", "uk": "Краб", "descripcion_es": "Cangrejo de mar pequeño. Muy apreciado en Galicia.", "descripcion": "Маленький морський краб, цінується в Галісії", "emoji": "🦀", "imagen": "", "etiquetas": ["database"] },
+            { "id": "percebes", "es": "Percebes", "uk": "Персебес", "descripcion_es": "Crustáceo que se adhiere a las rocas. Sabor intenso a mar.", "descripcion": "Молюски, що ростуть на скелях, смак моря", "emoji": "🌊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cigalas", "es": "Cigalas", "uk": "Норвезький омар", "descripcion_es": "Crustáceo similar al bogavante pero más pequeño.", "descripcion": "Схожий на омара, але менший", "emoji": "🦐", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "moluscos",
+          "nombre": { "es": "Moluscos", "uk": "Молюски" },
+          "emoji": "🐚",
+          "palabras": [
+            { "id": "chipirones", "es": "Chipirones", "uk": "Чіпірони", "descripcion_es": "Calamar muy pequeño, se cocina entero. Típico de la cocina vasca.", "descripcion": "Маленькі кальмари, смажені цілком", "emoji": "🦑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "calamares", "es": "Calamares", "uk": "Кальмари", "descripcion_es": "Molusco cefalópodo. Se suele servir en anillas rebozadas y fritas.", "descripcion": "Кальмари, зазвичай нарізані кільцями", "emoji": "🦑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "chocos", "es": "Chocos", "uk": "Каракатиця", "descripcion_es": "Sepia o jibia. Similar al calamar pero más ancho y plano.", "descripcion": "Схожі на кальмарів, але ширші й плоскіші", "emoji": "🦑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "zamburinas", "es": "Zamburiñas", "uk": "Замбурінья", "descripcion_es": "Vieira pequeña, de 4-7 cm. Muy común en Galicia.", "descripcion": "Маленькі гребінці (4-7 см)", "emoji": "🐚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vieiras", "es": "Vieiras", "uk": "Гребінці", "descripcion_es": "Molusco bivalvo grande, de 10-15 cm. Símbolo del Camino de Santiago.", "descripcion": "Великі гребінці (10-15 см)", "emoji": "🐚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "berberechos", "es": "Berberechos", "uk": "Серцевидки", "descripcion_es": "Molusco bivalvo pequeño con concha estriada.", "descripcion": "Маленькі молюски з ребристою мушлею", "emoji": "🐚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "navajas", "es": "Navajas", "uk": "Навахас", "descripcion_es": "Molusco largo y estrecho con forma de navaja de afeitar.", "descripcion": "Довгі вузькі молюски, схожі на ніж", "emoji": "🪦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "almejas", "es": "Almejas", "uk": "Молюски алмехас", "descripcion_es": "Molusco bivalvo redondeado. Muy usadas en arroces y salsas.", "descripcion": "Круглі двостулкові молюски", "emoji": "🐚", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "lacteos",
+          "nombre": { "es": "Lácteos", "uk": "Молочні продукти" },
+          "emoji": "🥛",
+          "palabras": [
+            { "id": "leche", "es": "Leche", "uk": "Молоко", "descripcion_es": "Bebida láctea básica. Se consume sola o en café.", "descripcion": "Основний молочний напій", "emoji": "🥛", "imagen": "", "etiquetas": ["database"] },
+            { "id": "queso", "es": "Queso", "uk": "Сир", "descripcion_es": "Producto lácteo sólido. España tiene muchas variedades.", "descripcion": "Твердий молочний продукт, багато видів в Іспанії", "emoji": "🧀", "imagen": "", "etiquetas": ["database"] },
+            { "id": "yogur", "es": "Yogur", "uk": "Йогурт", "descripcion_es": "Producto lácteo fermentado. Se come solo o con fruta.", "descripcion": "Ферментований молочний продукт", "emoji": "🥛", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mantequilla", "es": "Mantequilla", "uk": "Масло вершкове", "descripcion_es": "Grasa láctea sólida. Se usa para untar y cocinar.", "descripcion": "Тверда молочна жировина для намазування", "emoji": "🧈", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nata", "es": "Nata", "uk": "Вершки", "descripcion_es": "Crema de leche espesa. Se usa en salsas y postres.", "descripcion": "Густі вершки для соусів і десертів", "emoji": "🥛", "imagen": "", "etiquetas": ["database"] },
+            { "id": "huevo", "es": "Huevo", "uk": "Яйце", "descripcion_es": "Producto básico de la cocina. Se usa en tortillas, revueltos.", "descripcion": "Основний продукт кухні, використовується в тортільї", "emoji": "🥚", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "pan-reposteria",
+          "nombre": { "es": "Pan y repostería", "uk": "Хліб і випічка" },
+          "emoji": "🍞",
+          "palabras": [
+            { "id": "pan", "es": "Pan", "uk": "Хліб", "descripcion_es": "Alimento básico hecho de harina. Presente en todas las comidas.", "descripcion": "Основна їжа з борошна, є на кожному столі", "emoji": "🍞", "imagen": "", "etiquetas": ["database"] },
+            { "id": "baguette", "es": "Baguette", "uk": "Багет", "descripcion_es": "Pan largo y crujiente de origen francés. Muy común en España.", "descripcion": "Довгий хрусткий хліб французького походження", "emoji": "🥖", "imagen": "", "etiquetas": ["database"] },
+            { "id": "croissant", "es": "Croissant", "uk": "Круасан", "descripcion_es": "Bollo hojaldrado con forma de media luna. Típico del desayuno.", "descripcion": "Листкова булочка у формі місяця, типова для сніданку", "emoji": "🥐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tarta", "es": "Tarta", "uk": "Торт", "descripcion_es": "Pastel de varios pisos para celebraciones.", "descripcion": "Багатошаровий торт для свят", "emoji": "🎂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "galletas", "es": "Galletas", "uk": "Печиво", "descripcion_es": "Snack dulce horneado. Muy variado en España.", "descripcion": "Солодка запечена закуска", "emoji": "🍪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "churros", "es": "Churros", "uk": "Чуррос", "descripcion_es": "Masa frita en forma de espiral. Se acompaña de chocolate caliente.", "descripcion": "Смажені спіральки тіста з гарячим шоколадом", "emoji": "🍩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "magdalenas", "es": "Magdalenas", "uk": "Маффіни", "descripcion_es": "Pequeños bollos dulces esponjosos. Típicos del desayuno español.", "descripcion": "Маленькі м'які солодкі булочки", "emoji": "🧁", "imagen": "", "etiquetas": ["database"] },
+            { "id": "flan", "es": "Flan", "uk": "Флан", "descripcion_es": "Postre de huevo y leche con caramelo. Muy tradicional.", "descripcion": "Десерт з яєць і молока з карамеллю", "emoji": "🍮", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "bebidas",
+          "nombre": { "es": "Bebidas", "uk": "Напої" },
+          "emoji": "🥤",
+          "palabras": [
+            { "id": "agua", "es": "Agua", "uk": "Вода", "descripcion_es": "Bebida esencial. Se pide con o sin gas.", "descripcion": "Основний напій, замовляють газовану або негазовану", "emoji": "💧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cafe", "es": "Café", "uk": "Кава", "descripcion_es": "Bebida caliente de cafeína. España tiene gran cultura cafetera.", "descripcion": "Гарячий напій з кофеїном, велика кавова культура", "emoji": "☕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "te", "es": "Té", "uk": "Чай", "descripcion_es": "Infusión de hojas de té. Se sirve caliente o frío.", "descripcion": "Настій з чайного листя, гарячий або холодний", "emoji": "🍵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "zumo", "es": "Zumo", "uk": "Сік", "descripcion_es": "Jugo de fruta natural. El de naranja es el más popular.", "descripcion": "Натуральний фруктовий сік", "emoji": "🍊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vino", "es": "Vino", "uk": "Вино", "descripcion_es": "Bebida alcohólica de uva. España es uno de los mayores productores.", "descripcion": "Алкогольний напій з винограду", "emoji": "🍷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cerveza", "es": "Cerveza", "uk": "Пиво", "descripcion_es": "Bebida alcohólica de cebada. Muy popular en bares españoles.", "descripcion": "Алкогольний напій з ячменю", "emoji": "🍺", "imagen": "", "etiquetas": ["database"] },
+            { "id": "horchata", "es": "Horchata", "uk": "Орчата", "descripcion_es": "Bebida vegetal de chufa. Típica de Valencia, se sirve fría.", "descripcion": "Рослинний напій, типовий для Валенсії", "emoji": "🥛", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sangria", "es": "Sangría", "uk": "Сангрія", "descripcion_es": "Bebida de vino tinto con frutas y azúcar. Típica en verano.", "descripcion": "Червоне вино з фруктами, типове влітку", "emoji": "🍷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "refresco", "es": "Refresco", "uk": "Газований напій", "descripcion_es": "Bebida fría y burbujeante. Cola, naranja, limón.", "descripcion": "Холодний газований напій", "emoji": "🥤", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ropa",
+      "nombre": { "es": "Ropa y moda", "uk": "Одяг і мода" },
+      "emoji": "👕",
+      "subcategorias": [
+        {
+          "id": "ropa-superior",
+          "nombre": { "es": "Ropa superior", "uk": "Верхній одяг" },
+          "emoji": "👕",
+          "palabras": [
+            { "id": "camiseta", "es": "Camiseta", "uk": "Футболка", "descripcion_es": "Prenda básica de manga corta. La más usada en verano.", "descripcion": "Базовий одяг з коротким рукавом", "emoji": "👕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "camisa", "es": "Camisa", "uk": "Сорочка", "descripcion_es": "Prenda con botones y cuello. Formal o informal.", "descripcion": "Одяг з ґудзиками та коміром", "emoji": "👔", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jersey", "es": "Jersey", "uk": "Светр", "descripcion_es": "Prenda de punto para el frío. Con o sin cuello.", "descripcion": "В'язаний одяг для холодної погоди", "emoji": "🧥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "chaqueta", "es": "Chaqueta", "uk": "Куртка", "descripcion_es": "Prenda con botones para cubrir el torso. Formal o informal.", "descripcion": "Одяг з ґудзиками для тулуба", "emoji": "🧥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "abrigo", "es": "Abrigo", "uk": "Пальто", "descripcion_es": "Prenda larga y gruesa para el invierno.", "descripcion": "Довгий теплий зимовий одяг", "emoji": "🧥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vestido", "es": "Vestido", "uk": "Сукня", "descripcion_es": "Prenda femenina de una pieza, cubre torso y piernas.", "descripcion": "Жіночий одяг з одного шматка", "emoji": "👗", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sudadera", "es": "Sudadera", "uk": "Худі", "descripcion_es": "Prenda deportiva de tela gruesa. Con o sin capucha.", "descripcion": "Спортивний одяг з товстої тканини", "emoji": "👕", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "ropa-inferior",
+          "nombre": { "es": "Ropa inferior", "uk": "Нижній одяг" },
+          "emoji": "👖",
+          "palabras": [
+            { "id": "pantalon", "es": "Pantalón", "uk": "Штани", "descripcion_es": "Prenda que cubre las piernas. Formal o casual.", "descripcion": "Одяг, що покриває ноги", "emoji": "👖", "imagen": "", "etiquetas": ["database"] },
+            { "id": "falda", "es": "Falda", "uk": "Спідниця", "descripcion_es": "Prenda femenina que cubre desde la cintura. Corta o larga.", "descripcion": "Жіночий одяг від талії, коротка або довга", "emoji": "👗", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vaqueros", "es": "Vaqueros", "uk": "Джинси", "descripcion_es": "Pantalón de tela vaquera azul. El más usado en el mundo.", "descripcion": "Джинсовий штани, найпоширеніші у світі", "emoji": "👖", "imagen": "", "etiquetas": ["database"] },
+            { "id": "shorts", "es": "Shorts", "uk": "Шорти", "descripcion_es": "Pantalón corto para el calor. Muy típico en verano.", "descripcion": "Короткі штани для спеки", "emoji": "🩳", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "calzado",
+          "nombre": { "es": "Calzado", "uk": "Взуття" },
+          "emoji": "👟",
+          "palabras": [
+            { "id": "zapatos", "es": "Zapatos", "uk": "Туфлі", "descripcion_es": "Calzado formal de cuero o piel. Para ocasiones formales.", "descripcion": "Формальне шкіряне взуття", "emoji": "👞", "imagen": "", "etiquetas": ["database"] },
+            { "id": "zapatillas", "es": "Zapatillas", "uk": "Кросівки", "descripcion_es": "Calzado deportivo cómodo. Para deporte o uso diario.", "descripcion": "Зручне спортивне взуття для щоденного використання", "emoji": "👟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "botas", "es": "Botas", "uk": "Чоботи", "descripcion_es": "Calzado alto que cubre el tobillo. Para invierno o campo.", "descripcion": "Взуття, що покриває щиколотку, для зими", "emoji": "👢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sandalias", "es": "Sandalias", "uk": "Сандалі", "descripcion_es": "Calzado abierto para el calor. Muy usadas en verano.", "descripcion": "Відкрите взуття для спеки", "emoji": "👡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tacones", "es": "Tacones", "uk": "Підбори", "descripcion_es": "Zapatos de mujer con tacón alto. Para ocasiones formales.", "descripcion": "Жіноче взуття на високому каблуці", "emoji": "👠", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "accesorios",
+          "nombre": { "es": "Accesorios", "uk": "Аксесуари" },
+          "emoji": "👜",
+          "palabras": [
+            { "id": "bolso", "es": "Bolso", "uk": "Сумка", "descripcion_es": "Bolsa de mano para llevar objetos personales.", "descripcion": "Ручна сумка для особистих речей", "emoji": "👜", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mochila", "es": "Mochila", "uk": "Рюкзак", "descripcion_es": "Bolsa que se lleva a la espalda. Para viajes y deporte.", "descripcion": "Сумка, яку носять за спиною", "emoji": "🎒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sombrero", "es": "Sombrero", "uk": "Капелюх", "descripcion_es": "Complemento para la cabeza con ala. Protege del sol.", "descripcion": "Головний убір з крисами, захищає від сонця", "emoji": "🎩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gorra", "es": "Gorra", "uk": "Кепка", "descripcion_es": "Gorro con visera. Muy usado en deporte y ocio.", "descripcion": "Кепка з козирком, популярна в спорті", "emoji": "🧢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bufanda", "es": "Bufanda", "uk": "Шарф", "descripcion_es": "Prenda de tela para proteger el cuello del frío.", "descripcion": "Шматок тканини для захисту шиї від холоду", "emoji": "🧣", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gafas", "es": "Gafas", "uk": "Окуляри", "descripcion_es": "Lentes para ver bien o protegerse del sol.", "descripcion": "Лінзи для кращого зору або захисту від сонця", "emoji": "👓", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "casa",
+      "nombre": { "es": "Casa y hogar", "uk": "Будинок та побут" },
+      "emoji": "🏠",
+      "subcategorias": [
+        {
+          "id": "habitaciones",
+          "nombre": { "es": "Habitaciones", "uk": "Кімнати" },
+          "emoji": "🏠",
+          "palabras": [
+            { "id": "salon", "es": "Salón", "uk": "Вітальня", "descripcion_es": "Habitación principal para estar y recibir visitas.", "descripcion": "Головна кімната для відпочинку та гостей", "emoji": "🛋️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cocina", "es": "Cocina", "uk": "Кухня", "descripcion_es": "Habitación donde se prepara la comida.", "descripcion": "Кімната, де готують їжу", "emoji": "🍳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dormitorio", "es": "Dormitorio", "uk": "Спальня", "descripcion_es": "Habitación para dormir. Tiene cama y armario.", "descripcion": "Кімната для сну з ліжком і шафою", "emoji": "🛏️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bano", "es": "Baño", "uk": "Ванна кімната", "descripcion_es": "Habitación con bañera o ducha, lavabo y espejo.", "descripcion": "Кімната з ванною або душем", "emoji": "🛁", "imagen": "", "etiquetas": ["database"] },
+            { "id": "balcon", "es": "Balcón", "uk": "Балкон", "descripcion_es": "Salida exterior pequeña en un piso de altura.", "descripcion": "Маленький зовнішній вихід на висотному поверсі", "emoji": "🏠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "terraza", "es": "Terraza", "uk": "Тераса", "descripcion_es": "Espacio exterior de una vivienda. Más grande que el balcón.", "descripcion": "Зовнішній простір будинку, більший за балкон", "emoji": "🌿", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jardin", "es": "Jardín", "uk": "Сад", "descripcion_es": "Espacio con plantas y flores alrededor de la casa.", "descripcion": "Простір з рослинами навколо будинку", "emoji": "🌳", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "muebles",
+          "nombre": { "es": "Muebles", "uk": "Меблі" },
+          "emoji": "🛋️",
+          "palabras": [
+            { "id": "sofa", "es": "Sofá", "uk": "Диван", "descripcion_es": "Asiento amplio y cómodo del salón.", "descripcion": "Зручне широке сидіння у вітальні", "emoji": "🛋️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mesa", "es": "Mesa", "uk": "Стіл", "descripcion_es": "Mueble con superficie plana. Para comer o trabajar.", "descripcion": "Меблі з плоскою поверхнею для їжі або роботи", "emoji": "🪑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "silla", "es": "Silla", "uk": "Стілець", "descripcion_es": "Asiento individual con respaldo.", "descripcion": "Індивідуальне сидіння зі спинкою", "emoji": "🪑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cama", "es": "Cama", "uk": "Ліжко", "descripcion_es": "Mueble para dormir. Con colchón, sábanas y almohadas.", "descripcion": "Меблі для сну з матрацом та подушками", "emoji": "🛏️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "armario", "es": "Armario", "uk": "Шафа", "descripcion_es": "Mueble grande para guardar ropa.", "descripcion": "Великі меблі для зберігання одягу", "emoji": "🚪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "estanteria", "es": "Estantería", "uk": "Полиця", "descripcion_es": "Mueble con estantes para libros u objetos.", "descripcion": "Меблі з полицями для книг або речей", "emoji": "📚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lampara", "es": "Lámpara", "uk": "Лампа", "descripcion_es": "Aparato para iluminar. De pie, de techo o de mesa.", "descripcion": "Прилад для освітлення", "emoji": "💡", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "electrodomesticos",
+          "nombre": { "es": "Electrodomésticos", "uk": "Побутова техніка" },
+          "emoji": "📺",
+          "palabras": [
+            { "id": "frigorifico", "es": "Frigorífico", "uk": "Холодильник", "descripcion_es": "Electrodoméstico para conservar alimentos fríos.", "descripcion": "Побутова техніка для зберігання холодних продуктів", "emoji": "🧊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lavadora", "es": "Lavadora", "uk": "Пральна машина", "descripcion_es": "Electrodoméstico para lavar ropa automáticamente.", "descripcion": "Побутова техніка для автоматичного прання одягу", "emoji": "🫧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "microondas", "es": "Microondas", "uk": "Мікрохвильова піч", "descripcion_es": "Electrodoméstico para calentar comida rápidamente.", "descripcion": "Побутова техніка для швидкого розігріву їжі", "emoji": "📦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "horno", "es": "Horno", "uk": "Духовка", "descripcion_es": "Electrodoméstico para cocinar con calor seco.", "descripcion": "Побутова техніка для приготування їжі сухим жаром", "emoji": "🔥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "television", "es": "Televisión", "uk": "Телевізор", "descripcion_es": "Aparato electrónico para ver imagen y sonido.", "descripcion": "Електронний пристрій для перегляду зображень та звуку", "emoji": "📺", "imagen": "", "etiquetas": ["database"] },
+            { "id": "aspiradora", "es": "Aspiradora", "uk": "Пилосос", "descripcion_es": "Electrodoméstico para limpiar el suelo aspirando el polvo.", "descripcion": "Побутова техніка для чищення підлоги", "emoji": "🧹", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "cocina-utensilios",
+          "nombre": { "es": "Utensilios de cocina", "uk": "Кухонне приладдя" },
+          "emoji": "🍳",
+          "palabras": [
+            { "id": "taza", "es": "Taza", "uk": "Чашка", "descripcion_es": "Recipiente para beber café, té u otras bebidas calientes.", "descripcion": "Посудина для кави, чаю та гарячих напоїв", "emoji": "☕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "plato", "es": "Plato", "uk": "Тарілка", "descripcion_es": "Utensilio para servir y comer la comida.", "descripcion": "Посуд для подачі та вживання їжі", "emoji": "🍽️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vaso", "es": "Vaso", "uk": "Склянка", "descripcion_es": "Recipiente para beber bebidas frías.", "descripcion": "Посудина для холодних напоїв", "emoji": "🥛", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tenedor", "es": "Tenedor", "uk": "Виделка", "descripcion_es": "Cubierto con puntas para pinchar la comida.", "descripcion": "Столовий прибор з зубцями для їжі", "emoji": "🍴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cuchillo", "es": "Cuchillo", "uk": "Ніж", "descripcion_es": "Utensilio cortante para cocinar y comer.", "descripcion": "Різальний прибор для кухні та столу", "emoji": "🔪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cuchara", "es": "Cuchara", "uk": "Ложка", "descripcion_es": "Cubierto con cavidad para tomar líquidos o sopas.", "descripcion": "Столовий прибор для рідини та супу", "emoji": "🥄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "olla", "es": "Olla", "uk": "Каструля", "descripcion_es": "Recipiente metálico para cocinar con agua.", "descripcion": "Металевий посуд для приготування їжі у воді", "emoji": "🫕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sarten", "es": "Sartén", "uk": "Сковорідка", "descripcion_es": "Recipiente plano para freír o saltear alimentos.", "descripcion": "Плоский посуд для смаження продуктів", "emoji": "🍳", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transporte",
+      "nombre": { "es": "Transporte", "uk": "Транспорт" },
+      "emoji": "🚗",
+      "subcategorias": [
+        {
+          "id": "vehiculos",
+          "nombre": { "es": "Vehículos", "uk": "Транспортні засоби" },
+          "emoji": "🚗",
+          "palabras": [
+            { "id": "coche", "es": "Coche", "uk": "Автомобіль", "descripcion_es": "Vehículo de cuatro ruedas para desplazarse.", "descripcion": "Транспортний засіб на чотирьох колесах", "emoji": "🚗", "imagen": "", "etiquetas": ["database"] },
+            { "id": "moto", "es": "Moto", "uk": "Мотоцикл", "descripcion_es": "Vehículo de dos ruedas con motor.", "descripcion": "Транспортний засіб на двох колесах з мотором", "emoji": "🏍️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bicicleta", "es": "Bicicleta", "uk": "Велосипед", "descripcion_es": "Vehículo de dos ruedas que se mueve pedaleando.", "descripcion": "Транспортний засіб на педалях", "emoji": "🚲", "imagen": "", "etiquetas": ["database"] },
+            { "id": "camion", "es": "Camión", "uk": "Вантажівка", "descripcion_es": "Vehículo grande para transportar mercancías.", "descripcion": "Великий транспортний засіб для перевезення вантажів", "emoji": "🚛", "imagen": "", "etiquetas": ["database"] },
+            { "id": "furgoneta", "es": "Furgoneta", "uk": "Мікроавтобус", "descripcion_es": "Vehículo tipo van para transporte de personas o cosas.", "descripcion": "Транспортний засіб типу фургон", "emoji": "🚐", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "transporte-publico",
+          "nombre": { "es": "Transporte público", "uk": "Громадський транспорт" },
+          "emoji": "🚌",
+          "palabras": [
+            { "id": "autobus", "es": "Autobús", "uk": "Автобус", "descripcion_es": "Vehículo grande para transporte urbano de pasajeros.", "descripcion": "Великий транспортний засіб для міських пасажирів", "emoji": "🚌", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tren", "es": "Tren", "uk": "Потяг", "descripcion_es": "Medio de transporte sobre raíles. Para largas distancias.", "descripcion": "Транспорт на рейках для далеких відстаней", "emoji": "🚂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "metro", "es": "Metro", "uk": "Метро", "descripcion_es": "Tren subterráneo urbano. Muy rápido en las grandes ciudades.", "descripcion": "Підземний міський потяг", "emoji": "🚇", "imagen": "", "etiquetas": ["database"] },
+            { "id": "avion", "es": "Avión", "uk": "Літак", "descripcion_es": "Medio de transporte aéreo. Para viajes internacionales.", "descripcion": "Повітряний транспорт для міжнародних поїздок", "emoji": "✈️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "barco", "es": "Barco", "uk": "Корабель", "descripcion_es": "Medio de transporte acuático para cruzar mares.", "descripcion": "Водний транспорт для перетину морів", "emoji": "🚢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "taxi", "es": "Taxi", "uk": "Таксі", "descripcion_es": "Coche de alquiler con conductor. Se pide por app o en la calle.", "descripcion": "Автомобіль з водієм, замовляють через додаток", "emoji": "🚕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tranvia", "es": "Tranvía", "uk": "Трамвай", "descripcion_es": "Transporte eléctrico sobre raíles en la ciudad.", "descripcion": "Електричний транспорт на рейках у місті", "emoji": "🚃", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ciudad",
+      "nombre": { "es": "Ciudad y lugares", "uk": "Місто та місця" },
+      "emoji": "🏙️",
+      "subcategorias": [
+        {
+          "id": "lugares-publicos",
+          "nombre": { "es": "Lugares públicos", "uk": "Громадські місця" },
+          "emoji": "🏛️",
+          "palabras": [
+            { "id": "calle", "es": "Calle", "uk": "Вулиця", "descripcion_es": "Vía pública en una ciudad. Tiene aceras y calzada.", "descripcion": "Громадський шлях у місті з тротуарами", "emoji": "🛣️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "plaza", "es": "Plaza", "uk": "Площа", "descripcion_es": "Espacio abierto en el centro de una ciudad.", "descripcion": "Відкритий простір у центрі міста", "emoji": "🏛️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "parque", "es": "Parque", "uk": "Парк", "descripcion_es": "Zona verde con árboles y jardines para el descanso.", "descripcion": "Зелена зона з деревами для відпочинку", "emoji": "🌳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hospital", "es": "Hospital", "uk": "Лікарня", "descripcion_es": "Centro médico donde se atienden enfermos.", "descripcion": "Медичний заклад для лікування хворих", "emoji": "🏥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "escuela", "es": "Escuela", "uk": "Школа", "descripcion_es": "Centro educativo para niños y jóvenes.", "descripcion": "Навчальний заклад для дітей та молоді", "emoji": "🏫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "aeropuerto", "es": "Aeropuerto", "uk": "Аеропорт", "descripcion_es": "Infraestructura donde despegan y aterrizan aviones.", "descripcion": "Інфраструктура для зльоту та посадки літаків", "emoji": "✈️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "estacion", "es": "Estación", "uk": "Вокзал", "descripcion_es": "Lugar donde paran los trenes o autobuses.", "descripcion": "Місце зупинки потягів або автобусів", "emoji": "🚉", "imagen": "", "etiquetas": ["database"] },
+            { "id": "biblioteca", "es": "Biblioteca", "uk": "Бібліотека", "descripcion_es": "Lugar público con libros para leer o llevar prestados.", "descripcion": "Громадське місце з книгами для читання", "emoji": "📚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "museo", "es": "Museo", "uk": "Музей", "descripcion_es": "Lugar donde se exponen obras de arte o historia.", "descripcion": "Місце, де виставляють твори мистецтва або історії", "emoji": "🏛️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "iglesia", "es": "Iglesia", "uk": "Церква", "descripcion_es": "Templo cristiano para la oración y los servicios religiosos.", "descripcion": "Християнський храм для молитви", "emoji": "⛪", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "comercios",
+          "nombre": { "es": "Comercios y servicios", "uk": "Магазини та послуги" },
+          "emoji": "🛒",
+          "palabras": [
+            { "id": "supermercado", "es": "Supermercado", "uk": "Супермаркет", "descripcion_es": "Gran tienda de alimentación y productos del hogar.", "descripcion": "Великий магазин з продуктами та побутовими товарами", "emoji": "🛒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "farmacia", "es": "Farmacia", "uk": "Аптека", "descripcion_es": "Establecimiento donde se venden medicamentos.", "descripcion": "Заклад, де продають ліки", "emoji": "💊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "banco", "es": "Banco", "uk": "Банк", "descripcion_es": "Institución financiera para guardar y gestionar dinero.", "descripcion": "Фінансова установа для зберігання грошей", "emoji": "🏦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "restaurante", "es": "Restaurante", "uk": "Ресторан", "descripcion_es": "Establecimiento para comer comida preparada.", "descripcion": "Заклад для вживання приготовленої їжі", "emoji": "🍽️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bar", "es": "Bar", "uk": "Бар", "descripcion_es": "Local para tomar bebidas y tapas. Muy típico en España.", "descripcion": "Заклад для напоїв і закусок, типовий для Іспанії", "emoji": "🍺", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mercado", "es": "Mercado", "uk": "Ринок", "descripcion_es": "Lugar donde varios vendedores ofrecen productos frescos.", "descripcion": "Місце, де продавці пропонують свіжі продукти", "emoji": "🏪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tienda", "es": "Tienda", "uk": "Магазин", "descripcion_es": "Local comercial donde se venden artículos.", "descripcion": "Торговельний заклад для продажу товарів", "emoji": "🏪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "peluqueria", "es": "Peluquería", "uk": "Перукарня", "descripcion_es": "Establecimiento donde se corta y arregla el pelo.", "descripcion": "Заклад, де стрижуть і роблять зачіски", "emoji": "✂️", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "naturaleza",
+      "nombre": { "es": "Naturaleza", "uk": "Природа" },
+      "emoji": "🌿",
+      "subcategorias": [
+        {
+          "id": "paisaje",
+          "nombre": { "es": "Paisaje y geografía", "uk": "Пейзаж та географія" },
+          "emoji": "🏔️",
+          "palabras": [
+            { "id": "montana", "es": "Montaña", "uk": "Гора", "descripcion_es": "Elevación del terreno de gran altura.", "descripcion": "Велике підвищення рельєфу", "emoji": "🏔️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "playa", "es": "Playa", "uk": "Пляж", "descripcion_es": "Orilla del mar con arena. Muy popular en España.", "descripcion": "Узбережжя моря з піском, дуже популярне в Іспанії", "emoji": "🏖️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bosque", "es": "Bosque", "uk": "Ліс", "descripcion_es": "Zona con gran densidad de árboles.", "descripcion": "Зона з великою кількістю дерев", "emoji": "🌲", "imagen": "", "etiquetas": ["database"] },
+            { "id": "rio", "es": "Río", "uk": "Річка", "descripcion_es": "Corriente de agua que fluye hacia el mar.", "descripcion": "Потік води, що тече до моря", "emoji": "🏞️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lago", "es": "Lago", "uk": "Озеро", "descripcion_es": "Masa de agua rodeada de tierra.", "descripcion": "Водоймище, оточене сушею", "emoji": "🏞️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mar", "es": "Mar", "uk": "Море", "descripcion_es": "Extensión de agua salada. España tiene costa en tres mares.", "descripcion": "Великий водний простір з солоною водою", "emoji": "🌊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "isla", "es": "Isla", "uk": "Острів", "descripcion_es": "Trozo de tierra rodeado de agua. Canarias y Baleares.", "descripcion": "Клаптик суші, оточений водою", "emoji": "🏝️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "desierto", "es": "Desierto", "uk": "Пустеля", "descripcion_es": "Zona árida con poca lluvia y mucho calor.", "descripcion": "Суха зона з невеликою кількістю опадів", "emoji": "🏜️", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "clima",
+          "nombre": { "es": "Tiempo meteorológico", "uk": "Погода" },
+          "emoji": "☀️",
+          "palabras": [
+            { "id": "sol", "es": "Sol", "uk": "Сонце", "descripcion_es": "Estrella que da luz y calor. España tiene mucho sol.", "descripcion": "Зірка, що дає світло та тепло", "emoji": "☀️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lluvia", "es": "Lluvia", "uk": "Дощ", "descripcion_es": "Agua que cae del cielo. Más frecuente en el norte de España.", "descripcion": "Вода, що падає з неба", "emoji": "🌧️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nieve", "es": "Nieve", "uk": "Сніг", "descripcion_es": "Precipitación de agua helada en forma de copos blancos.", "descripcion": "Опади замерзлої води у вигляді білих пластівців", "emoji": "❄️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "viento", "es": "Viento", "uk": "Вітер", "descripcion_es": "Movimiento del aire. Puede ser suave o muy fuerte.", "descripcion": "Рух повітря, може бути слабким або сильним", "emoji": "💨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "niebla", "es": "Niebla", "uk": "Туман", "descripcion_es": "Nube baja que reduce la visibilidad.", "descripcion": "Низька хмара, що зменшує видимість", "emoji": "🌫️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tormenta", "es": "Tormenta", "uk": "Гроза", "descripcion_es": "Fenómeno meteorológico con lluvia intensa, truenos y relámpagos.", "descripcion": "Метеорологічне явище з дощем, громом та блискавкою", "emoji": "⛈️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nube", "es": "Nube", "uk": "Хмара", "descripcion_es": "Masa de vapor de agua en el cielo.", "descripcion": "Маса водяного пару в небі", "emoji": "☁️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "arcoiris", "es": "Arcoíris", "uk": "Веселка", "descripcion_es": "Fenómeno óptico con siete colores que aparece tras la lluvia.", "descripcion": "Оптичне явище з сімома кольорами після дощу", "emoji": "🌈", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "animales",
+      "nombre": { "es": "Animales", "uk": "Тварини" },
+      "emoji": "🐾",
+      "subcategorias": [
+        {
+          "id": "mascotas",
+          "nombre": { "es": "Mascotas", "uk": "Домашні тварини" },
+          "emoji": "🐕",
+          "palabras": [
+            { "id": "perro", "es": "Perro", "uk": "Собака", "descripcion_es": "Animal doméstico fiel. El mejor amigo del hombre.", "descripcion": "Вірна домашня тварина, найкращий друг людини", "emoji": "🐕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gato", "es": "Gato", "uk": "Кіт", "descripcion_es": "Animal doméstico independiente y cariñoso.", "descripcion": "Незалежна і ніжна домашня тварина", "emoji": "🐈", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pajaro", "es": "Pájaro", "uk": "Птах", "descripcion_es": "Animal con plumas y alas. Muchos canta.", "descripcion": "Тварина з пір'ям та крилами", "emoji": "🐦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pez", "es": "Pez", "uk": "Рибка", "descripcion_es": "Animal acuático. Como mascota vive en pecera.", "descripcion": "Водна тварина, як домашній улюбленець живе в акваріумі", "emoji": "🐠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "conejo", "es": "Conejo", "uk": "Кролик", "descripcion_es": "Mamífero pequeño con orejas largas.", "descripcion": "Маленький ссавець з довгими вухами", "emoji": "🐰", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hamster", "es": "Hámster", "uk": "Хом'як", "descripcion_es": "Roedor pequeño y peludo. Muy popular como mascota.", "descripcion": "Маленький пухнастий гризун", "emoji": "🐹", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "animales-granja",
+          "nombre": { "es": "Animales de granja", "uk": "Сільськогосподарські тварини" },
+          "emoji": "🐄",
+          "palabras": [
+            { "id": "vaca", "es": "Vaca", "uk": "Корова", "descripcion_es": "Mamífero que da leche. Símbolo del campo.", "descripcion": "Ссавець, що дає молоко", "emoji": "🐄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "caballo", "es": "Caballo", "uk": "Кінь", "descripcion_es": "Mamífero grande y veloz. Se usa para montar y trabajar.", "descripcion": "Великий та швидкий ссавець для верхової їзди", "emoji": "🐎", "imagen": "", "etiquetas": ["database"] },
+            { "id": "oveja", "es": "Oveja", "uk": "Вівця", "descripcion_es": "Animal que da lana y leche. Típica del campo español.", "descripcion": "Тварина, що дає вовну та молоко", "emoji": "🐑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gallina", "es": "Gallina", "uk": "Курка", "descripcion_es": "Ave que pone huevos. Muy común en granjas.", "descripcion": "Птах, що несе яйця, поширений на фермах", "emoji": "🐓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cabra", "es": "Cabra", "uk": "Коза", "descripcion_es": "Mamífero ágil que da leche. Se usa para hacer queso.", "descripcion": "Спритний ссавець, що дає молоко для сиру", "emoji": "🐐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cerdo-animal", "es": "Cerdo", "uk": "Свиня", "descripcion_es": "Mamífero que se cría para obtener carne.", "descripcion": "Ссавець, якого розводять для м'яса", "emoji": "🐷", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "animales-salvajes",
+          "nombre": { "es": "Animales salvajes", "uk": "Дикі тварини" },
+          "emoji": "🦁",
+          "palabras": [
+            { "id": "leon", "es": "León", "uk": "Лев", "descripcion_es": "Gran felino africano. El rey de la selva.", "descripcion": "Великий африканський кіт. Цар звірів.", "emoji": "🦁", "imagen": "", "etiquetas": ["database"] },
+            { "id": "elefante", "es": "Elefante", "uk": "Слон", "descripcion_es": "El animal terrestre más grande. Tiene trompa larga.", "descripcion": "Найбільша наземна тварина з довгим хоботом", "emoji": "🐘", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jirafa", "es": "Jirafa", "uk": "Жираф", "descripcion_es": "Animal africano con cuello muy largo. El más alto del mundo.", "descripcion": "Африканська тварина з дуже довгою шиєю", "emoji": "🦒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mono", "es": "Mono", "uk": "Мавпа", "descripcion_es": "Primate muy inteligente. Vive en árboles tropicales.", "descripcion": "Дуже розумний примат, живе на деревах", "emoji": "🐒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "oso", "es": "Oso", "uk": "Ведмідь", "descripcion_es": "Mamífero grande con pelaje espeso. Hiberna en invierno.", "descripcion": "Великий ссавець з густою шерстю, зимує", "emoji": "🐻", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lobo", "es": "Lobo", "uk": "Вовк", "descripcion_es": "Cánido salvaje que vive en manadas.", "descripcion": "Дикий собакоподібний, живе зграями", "emoji": "🐺", "imagen": "", "etiquetas": ["database"] },
+            { "id": "delfin", "es": "Delfín", "uk": "Дельфін", "descripcion_es": "Mamífero marino muy inteligente y amigable.", "descripcion": "Дуже розумний морський ссавець", "emoji": "🐬", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familia",
+      "nombre": { "es": "Familia", "uk": "Сім'я" },
+      "emoji": "👨‍👩‍👧",
+      "subcategorias": [
+        {
+          "id": "familia-directa",
+          "nombre": { "es": "Familia directa", "uk": "Найближча родина" },
+          "emoji": "👨‍👩‍👧",
+          "palabras": [
+            { "id": "padre", "es": "Padre", "uk": "Батько", "descripcion_es": "Progenitor masculino. El papá de la familia.", "descripcion": "Чоловік-батько, тато", "emoji": "👨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "madre", "es": "Madre", "uk": "Мати", "descripcion_es": "Progenitora femenina. La mamá de la familia.", "descripcion": "Жінка-мати, мама", "emoji": "👩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hijo", "es": "Hijo", "uk": "Син", "descripcion_es": "Descendiente masculino.", "descripcion": "Дитина чоловічої статі", "emoji": "👦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hija", "es": "Hija", "uk": "Донька", "descripcion_es": "Descendiente femenina.", "descripcion": "Дитина жіночої статі", "emoji": "👧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hermano", "es": "Hermano", "uk": "Брат", "descripcion_es": "Persona que tiene los mismos padres. Masculino.", "descripcion": "Людина зі спільними батьками, чоловіча стать", "emoji": "👦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hermana", "es": "Hermana", "uk": "Сестра", "descripcion_es": "Persona que tiene los mismos padres. Femenino.", "descripcion": "Людина зі спільними батьками, жіноча стать", "emoji": "👧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "marido", "es": "Marido", "uk": "Чоловік", "descripcion_es": "Esposo, compañero en el matrimonio.", "descripcion": "Чоловік, партнер у шлюбі", "emoji": "👨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mujer-esposa", "es": "Mujer", "uk": "Дружина", "descripcion_es": "Esposa, compañera en el matrimonio.", "descripcion": "Жінка, партнерка у шлюбі", "emoji": "👩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bebe", "es": "Bebé", "uk": "Немовля", "descripcion_es": "Niño muy pequeño, recién nacido.", "descripcion": "Маленька дитина, немовля", "emoji": "👶", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "familia-extendida",
+          "nombre": { "es": "Familia extendida", "uk": "Розширена родина" },
+          "emoji": "👴",
+          "palabras": [
+            { "id": "abuelo", "es": "Abuelo", "uk": "Дідусь", "descripcion_es": "Padre del padre o de la madre.", "descripcion": "Батько батька або матері", "emoji": "👴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "abuela", "es": "Abuela", "uk": "Бабуся", "descripcion_es": "Madre del padre o de la madre.", "descripcion": "Мати батька або матері", "emoji": "👵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tio", "es": "Tío", "uk": "Дядько", "descripcion_es": "Hermano del padre o de la madre.", "descripcion": "Брат батька або матері", "emoji": "👨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tia", "es": "Tía", "uk": "Тітка", "descripcion_es": "Hermana del padre o de la madre.", "descripcion": "Сестра батька або матері", "emoji": "👩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "primo", "es": "Primo", "uk": "Двоюрідний брат", "descripcion_es": "Hijo de un tío o tía. Masculino.", "descripcion": "Син дядька або тітки", "emoji": "👦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "prima", "es": "Prima", "uk": "Двоюрідна сестра", "descripcion_es": "Hija de un tío o tía. Femenino.", "descripcion": "Донька дядька або тітки", "emoji": "👧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sobrino", "es": "Sobrino", "uk": "Племінник", "descripcion_es": "Hijo de un hermano o hermana. Masculino.", "descripcion": "Син брата або сестри", "emoji": "👦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sobrina", "es": "Sobrina", "uk": "Племінниця", "descripcion_es": "Hija de un hermano o hermana. Femenino.", "descripcion": "Донька брата або сестри", "emoji": "👧", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cuerpo",
+      "nombre": { "es": "Cuerpo humano", "uk": "Тіло людини" },
+      "emoji": "💪",
+      "subcategorias": [
+        {
+          "id": "cabeza-cara",
+          "nombre": { "es": "Cabeza y cara", "uk": "Голова та обличчя" },
+          "emoji": "👤",
+          "palabras": [
+            { "id": "cabeza", "es": "Cabeza", "uk": "Голова", "descripcion_es": "Parte superior del cuerpo donde está el cerebro.", "descripcion": "Верхня частина тіла, де знаходиться мозок", "emoji": "💭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cara", "es": "Cara", "uk": "Обличчя", "descripcion_es": "Parte frontal de la cabeza con ojos, nariz y boca.", "descripcion": "Передня частина голови з очима, носом та ротом", "emoji": "😊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ojo", "es": "Ojo", "uk": "Око", "descripcion_es": "Órgano de la vista. Sirve para ver.", "descripcion": "Орган зору", "emoji": "👁️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nariz", "es": "Nariz", "uk": "Ніс", "descripcion_es": "Órgano del olfato. Sirve para oler y respirar.", "descripcion": "Орган нюху та дихання", "emoji": "👃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "boca", "es": "Boca", "uk": "Рот", "descripcion_es": "Apertura para comer, beber y hablar.", "descripcion": "Отвір для їжі, пиття та мовлення", "emoji": "👄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "oreja", "es": "Oreja", "uk": "Вухо", "descripcion_es": "Órgano auditivo. Sirve para escuchar.", "descripcion": "Орган слуху", "emoji": "👂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pelo", "es": "Pelo", "uk": "Волосся", "descripcion_es": "Filamentos que crecen en la cabeza.", "descripcion": "Ниточки, що ростуть на голові", "emoji": "💇", "imagen": "", "etiquetas": ["database"] },
+            { "id": "diente", "es": "Diente", "uk": "Зуб", "descripcion_es": "Hueso duro en la boca para masticar.", "descripcion": "Тверда кістка в роті для жування", "emoji": "🦷", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "cuerpo-partes",
+          "nombre": { "es": "Partes del cuerpo", "uk": "Частини тіла" },
+          "emoji": "💪",
+          "palabras": [
+            { "id": "cuello", "es": "Cuello", "uk": "Шия", "descripcion_es": "Parte que une la cabeza con el cuerpo.", "descripcion": "Частина, що з'єднує голову з тілом", "emoji": "🦒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hombro", "es": "Hombro", "uk": "Плече", "descripcion_es": "Articulación que une el brazo con el torso.", "descripcion": "Суглоб, що з'єднує руку з тулубом", "emoji": "💪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "brazo", "es": "Brazo", "uk": "Рука", "descripcion_es": "Extremidad superior del cuerpo.", "descripcion": "Верхня кінцівка тіла", "emoji": "💪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mano", "es": "Mano", "uk": "Кисть", "descripcion_es": "Parte final del brazo con cinco dedos.", "descripcion": "Кінцева частина руки з п'ятьма пальцями", "emoji": "🤚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dedo", "es": "Dedo", "uk": "Палець", "descripcion_es": "Apéndice de la mano o el pie. Hay diez en total.", "descripcion": "Відросток руки або ноги, всього десять", "emoji": "☝️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "espalda", "es": "Espalda", "uk": "Спина", "descripcion_es": "Parte posterior del torso.", "descripcion": "Задня частина тулуба", "emoji": "🔙", "imagen": "", "etiquetas": ["database"] },
+            { "id": "estomago", "es": "Estómago", "uk": "Живіт", "descripcion_es": "Órgano digestivo. También zona frontal del abdomen.", "descripcion": "Орган травлення, також передня частина черевної порожнини", "emoji": "🫃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pierna", "es": "Pierna", "uk": "Нога", "descripcion_es": "Extremidad inferior del cuerpo para caminar.", "descripcion": "Нижня кінцівка для ходьби", "emoji": "🦵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "rodilla", "es": "Rodilla", "uk": "Коліно", "descripcion_es": "Articulación que dobla la pierna.", "descripcion": "Суглоб, що згинає ногу", "emoji": "🦵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pie", "es": "Pie", "uk": "Ступня", "descripcion_es": "Parte final de la pierna. Sobre la que apoyamos el cuerpo.", "descripcion": "Кінцева частина ноги, на яку спираємося", "emoji": "🦶", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salud",
+      "nombre": { "es": "Salud", "uk": "Здоров'я" },
+      "emoji": "🏥",
+      "subcategorias": [
+        {
+          "id": "personal-medico",
+          "nombre": { "es": "Personal médico", "uk": "Медичний персонал" },
+          "emoji": "👨‍⚕️",
+          "palabras": [
+            { "id": "medico", "es": "Médico", "uk": "Лікар", "descripcion_es": "Profesional de la salud que diagnostica y trata enfermedades.", "descripcion": "Медичний фахівець, що діагностує та лікує хвороби", "emoji": "👨‍⚕️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "enfermera", "es": "Enfermera", "uk": "Медсестра", "descripcion_es": "Personal sanitario que cuida a los pacientes.", "descripcion": "Медичний персонал, що доглядає за пацієнтами", "emoji": "👩‍⚕️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dentista", "es": "Dentista", "uk": "Стоматолог", "descripcion_es": "Médico especialista en la salud dental.", "descripcion": "Лікар, що спеціалізується на здоров'ї зубів", "emoji": "🦷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "farmaceutico", "es": "Farmacéutico", "uk": "Фармацевт", "descripcion_es": "Profesional que trabaja en la farmacia y dispensa medicamentos.", "descripcion": "Фахівець, що працює в аптеці та видає ліки", "emoji": "💊", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "enfermedades-sintomas",
+          "nombre": { "es": "Síntomas y medicamentos", "uk": "Симптоми та ліки" },
+          "emoji": "🤒",
+          "palabras": [
+            { "id": "fiebre", "es": "Fiebre", "uk": "Температура", "descripcion_es": "Temperatura corporal elevada. Síntoma de infección.", "descripcion": "Підвищена температура тіла, симптом інфекції", "emoji": "🤒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tos", "es": "Tos", "uk": "Кашель", "descripcion_es": "Expulsión brusca de aire de los pulmones.", "descripcion": "Різкий викид повітря з легенів", "emoji": "😷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dolor-cabeza", "es": "Dolor de cabeza", "uk": "Головний біль", "descripcion_es": "Sensación de dolor en la cabeza. Muy común.", "descripcion": "Відчуття болю в голові", "emoji": "🤕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pastilla", "es": "Pastilla", "uk": "Таблетка", "descripcion_es": "Medicamento en forma sólida para tomar con agua.", "descripcion": "Ліки у твердій формі, приймають з водою", "emoji": "💊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "alergia", "es": "Alergia", "uk": "Алергія", "descripcion_es": "Reacción del sistema inmune a sustancias externas.", "descripcion": "Реакція імунної системи на зовнішні речовини", "emoji": "🤧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "receta", "es": "Receta", "uk": "Рецепт", "descripcion_es": "Documento del médico para obtener medicamentos.", "descripcion": "Документ від лікаря для отримання ліків", "emoji": "📄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vacuna", "es": "Vacuna", "uk": "Вакцина", "descripcion_es": "Medicamento preventivo que protege de enfermedades.", "descripcion": "Профілактичні ліки від хвороб", "emoji": "💉", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trabajo",
+      "nombre": { "es": "Trabajo y profesiones", "uk": "Робота та професії" },
+      "emoji": "💼",
+      "subcategorias": [
+        {
+          "id": "profesiones",
+          "nombre": { "es": "Profesiones", "uk": "Професії" },
+          "emoji": "👷",
+          "palabras": [
+            { "id": "abogado", "es": "Abogado", "uk": "Адвокат", "descripcion_es": "Profesional del derecho que defiende a personas en juicio.", "descripcion": "Фахівець з права, що захищає людей у суді", "emoji": "⚖️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "profesor", "es": "Profesor", "uk": "Вчитель", "descripcion_es": "Persona que enseña en escuelas o universidades.", "descripcion": "Людина, яка навчає в школах або університетах", "emoji": "👩‍🏫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cocinero", "es": "Cocinero", "uk": "Кухар", "descripcion_es": "Profesional que prepara comida en un restaurante.", "descripcion": "Фахівець, що готує їжу в ресторані", "emoji": "👨‍🍳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "camarero", "es": "Camarero", "uk": "Офіціант", "descripcion_es": "Persona que sirve en bares y restaurantes.", "descripcion": "Людина, що обслуговує в барах та ресторанах", "emoji": "🧑‍🍳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ingeniero", "es": "Ingeniero", "uk": "Інженер", "descripcion_es": "Profesional técnico que diseña y construye estructuras.", "descripcion": "Технічний фахівець, що проектує та будує конструкції", "emoji": "👷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "programador", "es": "Programador", "uk": "Програміст", "descripcion_es": "Persona que escribe código de software.", "descripcion": "Людина, що пише програмний код", "emoji": "👨‍💻", "imagen": "", "etiquetas": ["database"] },
+            { "id": "arquitecto", "es": "Arquitecto", "uk": "Архітектор", "descripcion_es": "Profesional que diseña edificios y espacios.", "descripcion": "Фахівець, що проектує будівлі та простори", "emoji": "🏗️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "policia", "es": "Policía", "uk": "Поліцейський", "descripcion_es": "Agente del orden público que protege a los ciudadanos.", "descripcion": "Агент правопорядку, що захищає громадян", "emoji": "👮", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bombero", "es": "Bombero", "uk": "Пожежник", "descripcion_es": "Profesional que apaga incendios y rescata personas.", "descripcion": "Фахівець, що гасить пожежі та рятує людей", "emoji": "🚒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "conductor", "es": "Conductor", "uk": "Водій", "descripcion_es": "Persona que conduce vehículos profesionalmente.", "descripcion": "Людина, що керує транспортним засобом", "emoji": "🚗", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "oficina",
+          "nombre": { "es": "Oficina y trabajo", "uk": "Офіс та робота" },
+          "emoji": "🏢",
+          "palabras": [
+            { "id": "ordenador", "es": "Ordenador", "uk": "Комп'ютер", "descripcion_es": "Máquina electrónica para procesar información.", "descripcion": "Електронна машина для обробки інформації", "emoji": "💻", "imagen": "", "etiquetas": ["database"] },
+            { "id": "impresora", "es": "Impresora", "uk": "Принтер", "descripcion_es": "Máquina que imprime documentos en papel.", "descripcion": "Машина для друку документів на папері", "emoji": "🖨️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "reunion", "es": "Reunión", "uk": "Нарада", "descripcion_es": "Encuentro de personas para tratar asuntos de trabajo.", "descripcion": "Зустріч людей для обговорення робочих питань", "emoji": "🤝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "correo-electronico", "es": "Correo electrónico", "uk": "Електронна пошта", "descripcion_es": "Sistema de mensajes digitales por internet.", "descripcion": "Система цифрових повідомлень через інтернет", "emoji": "📧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "telefono", "es": "Teléfono", "uk": "Телефон", "descripcion_es": "Dispositivo para comunicarse por voz.", "descripcion": "Пристрій для голосового спілкування", "emoji": "📞", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sueldo", "es": "Sueldo", "uk": "Зарплата", "descripcion_es": "Dinero que recibe un trabajador por su trabajo.", "descripcion": "Гроші, що отримує працівник за свою роботу", "emoji": "💰", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tecnologia",
+      "nombre": { "es": "Tecnología", "uk": "Технології" },
+      "emoji": "💻",
+      "subcategorias": [
+        {
+          "id": "dispositivos",
+          "nombre": { "es": "Dispositivos", "uk": "Пристрої" },
+          "emoji": "📱",
+          "palabras": [
+            { "id": "movil", "es": "Móvil", "uk": "Мобільний телефон", "descripcion_es": "Teléfono portátil que cabe en el bolsillo.", "descripcion": "Портативний телефон, що вміщується в кишені", "emoji": "📱", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tableta", "es": "Tableta", "uk": "Планшет", "descripcion_es": "Dispositivo táctil más grande que un móvil.", "descripcion": "Сенсорний пристрій більший за мобільний", "emoji": "📱", "imagen": "", "etiquetas": ["database"] },
+            { "id": "portatil", "es": "Portátil", "uk": "Ноутбук", "descripcion_es": "Ordenador que se puede llevar y usar en cualquier lugar.", "descripcion": "Комп'ютер, який можна носити з собою", "emoji": "💻", "imagen": "", "etiquetas": ["database"] },
+            { "id": "auriculares", "es": "Auriculares", "uk": "Навушники", "descripcion_es": "Dispositivo para escuchar música o llamadas.", "descripcion": "Пристрій для прослуховування музики або дзвінків", "emoji": "🎧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cargador", "es": "Cargador", "uk": "Зарядний пристрій", "descripcion_es": "Cable y adaptador para cargar la batería.", "descripcion": "Кабель та адаптер для зарядки акумулятора", "emoji": "🔌", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pantalla", "es": "Pantalla", "uk": "Екран", "descripcion_es": "Superficie donde se muestra la imagen.", "descripcion": "Поверхня, на якій відображається зображення", "emoji": "🖥️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "teclado", "es": "Teclado", "uk": "Клавіатура", "descripcion_es": "Dispositivo con teclas para escribir en el ordenador.", "descripcion": "Пристрій з клавішами для введення тексту", "emoji": "⌨️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "raton", "es": "Ratón", "uk": "Миша комп'ютерна", "descripcion_es": "Dispositivo para mover el cursor en la pantalla.", "descripcion": "Пристрій для переміщення курсора на екрані", "emoji": "🖱️", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "internet",
+          "nombre": { "es": "Internet y apps", "uk": "Інтернет та додатки" },
+          "emoji": "🌐",
+          "palabras": [
+            { "id": "wifi", "es": "Wifi", "uk": "Вайфай", "descripcion_es": "Conexión a internet sin cables.", "descripcion": "Підключення до інтернету без дротів", "emoji": "📶", "imagen": "", "etiquetas": ["database"] },
+            { "id": "aplicacion", "es": "Aplicación", "uk": "Додаток", "descripcion_es": "Programa para el móvil o el ordenador.", "descripcion": "Програма для мобільного телефону або комп'ютера", "emoji": "📲", "imagen": "", "etiquetas": ["database"] },
+            { "id": "contrasena", "es": "Contraseña", "uk": "Пароль", "descripcion_es": "Clave secreta para acceder a una cuenta o sistema.", "descripcion": "Секретний ключ для доступу до облікового запису", "emoji": "🔑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "internet", "es": "Internet", "uk": "Інтернет", "descripcion_es": "Red mundial de comunicaciones digitales.", "descripcion": "Глобальна мережа цифрових комунікацій", "emoji": "🌐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bateria", "es": "Batería", "uk": "Акумулятор", "descripcion_es": "Fuente de energía recargable del dispositivo.", "descripcion": "Перезаряджувана батарея пристрою", "emoji": "🔋", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tiempo",
+      "nombre": { "es": "Tiempo y calendario", "uk": "Час та календар" },
+      "emoji": "📅",
+      "subcategorias": [
+        {
+          "id": "dias-semana",
+          "nombre": { "es": "Días de la semana", "uk": "Дні тижня" },
+          "emoji": "📆",
+          "palabras": [
+            { "id": "lunes", "es": "Lunes", "uk": "Понеділок", "descripcion_es": "Primer día de la semana laboral.", "descripcion": "Перший робочий день тижня", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "martes", "es": "Martes", "uk": "Вівторок", "descripcion_es": "Segundo día de la semana.", "descripcion": "Другий день тижня", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "miercoles", "es": "Miércoles", "uk": "Середа", "descripcion_es": "Tercer día de la semana. Mitad de la semana.", "descripcion": "Третій день тижня, середина тижня", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jueves", "es": "Jueves", "uk": "Четвер", "descripcion_es": "Cuarto día de la semana.", "descripcion": "Четвертий день тижня", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "viernes", "es": "Viernes", "uk": "П'ятниця", "descripcion_es": "Quinto día de la semana. Empieza el fin de semana.", "descripcion": "П'ятий день тижня, початок вихідних", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sabado", "es": "Sábado", "uk": "Субота", "descripcion_es": "Sexto día. Día de descanso para muchos.", "descripcion": "Шостий день, вихідний для багатьох", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "domingo", "es": "Domingo", "uk": "Неділя", "descripcion_es": "Séptimo día. Día de descanso y familia.", "descripcion": "Сьомий день, день відпочинку та сім'ї", "emoji": "📅", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "meses",
+          "nombre": { "es": "Meses del año", "uk": "Місяці року" },
+          "emoji": "📆",
+          "palabras": [
+            { "id": "enero", "es": "Enero", "uk": "Січень", "descripcion_es": "Primer mes del año. Invierno.", "descripcion": "Перший місяць року, зима", "emoji": "❄️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "febrero", "es": "Febrero", "uk": "Лютий", "descripcion_es": "Segundo mes. El más corto del año.", "descripcion": "Другий місяць, найкоротший у році", "emoji": "❄️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "marzo", "es": "Marzo", "uk": "Березень", "descripcion_es": "Tercer mes. Empieza la primavera.", "descripcion": "Третій місяць, початок весни", "emoji": "🌱", "imagen": "", "etiquetas": ["database"] },
+            { "id": "abril", "es": "Abril", "uk": "Квітень", "descripcion_es": "Cuarto mes. Primavera con lluvias.", "descripcion": "Четвертий місяць, весна з дощами", "emoji": "🌸", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mayo", "es": "Mayo", "uk": "Травень", "descripcion_es": "Quinto mes. Primavera plena, flores y calor.", "descripcion": "П'ятий місяць, повна весна, квіти та тепло", "emoji": "🌺", "imagen": "", "etiquetas": ["database"] },
+            { "id": "junio", "es": "Junio", "uk": "Червень", "descripcion_es": "Sexto mes. Empieza el verano.", "descripcion": "Шостий місяць, початок літа", "emoji": "☀️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "julio", "es": "Julio", "uk": "Липень", "descripcion_es": "Séptimo mes. Pleno verano, vacaciones.", "descripcion": "Сьомий місяць, розпал літа, відпустки", "emoji": "🏖️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "agosto", "es": "Agosto", "uk": "Серпень", "descripcion_es": "Octavo mes. Verano y vacaciones en España.", "descripcion": "Восьмий місяць, літо та відпустки", "emoji": "🌞", "imagen": "", "etiquetas": ["database"] },
+            { "id": "septiembre", "es": "Septiembre", "uk": "Вересень", "descripcion_es": "Noveno mes. Vuelta al trabajo y al colegio.", "descripcion": "Дев'ятий місяць, повернення до школи", "emoji": "🍂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "octubre", "es": "Octubre", "uk": "Жовтень", "descripcion_es": "Décimo mes. Otoño y hojas de colores.", "descripcion": "Десятий місяць, осінь та кольорове листя", "emoji": "🍁", "imagen": "", "etiquetas": ["database"] },
+            { "id": "noviembre", "es": "Noviembre", "uk": "Листопад", "descripcion_es": "Undécimo mes. Otoño tardío y frío.", "descripcion": "Одинадцятий місяць, пізня осінь та холод", "emoji": "🍂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "diciembre", "es": "Diciembre", "uk": "Грудень", "descripcion_es": "Duodécimo mes. Navidad y fin de año.", "descripcion": "Дванадцятий місяць, Різдво та Новий рік", "emoji": "🎄", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "estaciones",
+          "nombre": { "es": "Estaciones del año", "uk": "Пори року" },
+          "emoji": "🌿",
+          "palabras": [
+            { "id": "primavera", "es": "Primavera", "uk": "Весна", "descripcion_es": "Estación cálida con flores y lluvias. Marzo-junio.", "descripcion": "Тепла пора з квітами та дощами", "emoji": "🌸", "imagen": "", "etiquetas": ["database"] },
+            { "id": "verano", "es": "Verano", "uk": "Літо", "descripcion_es": "Estación más calurosa. Vacaciones y playa. Junio-septiembre.", "descripcion": "Найспекотніша пора, відпустки та пляж", "emoji": "☀️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "otono", "es": "Otoño", "uk": "Осінь", "descripcion_es": "Estación con hojas de colores. Septiembre-diciembre.", "descripcion": "Пора з кольоровим листям", "emoji": "🍂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "invierno", "es": "Invierno", "uk": "Зима", "descripcion_es": "Estación más fría. Diciembre-marzo.", "descripcion": "Найхолодніша пора року", "emoji": "❄️", "imagen": "", "etiquetas": ["database"] }
           ]
         }
       ]
