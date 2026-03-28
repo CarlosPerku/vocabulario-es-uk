@@ -33,6 +33,7 @@ function speakBtns(text) {
 
 // ==================== STATE ====================
 let vocabBase = { categorias: [] };
+let emojiMapExternal = {};   // cargado de emoji-es.json
 let miVocabulario = [];
 let quizWords = [];
 let quizIndex = 0;
@@ -42,7 +43,7 @@ let modalTags = [];         // etiquetas del modal en edición
 
 // ==================== INIT ====================
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadVocabBase();
+  await Promise.all([loadVocabBase(), loadEmojiMapExternal()]);
 
   // Iniciar Firebase Auth — esperar a saber si hay sesión antes de cargar vocab
   initAuth(async (user) => {
@@ -112,6 +113,16 @@ async function loadVocabBase() {
   } catch (e) {
     console.warn('No se pudo cargar vocabulario.json, usando datos vacíos');
     vocabBase = { categorias: [] };
+  }
+}
+
+async function loadEmojiMapExternal() {
+  try {
+    const res = await fetch('emoji-es.json');
+    emojiMapExternal = await res.json();
+  } catch (e) {
+    console.warn('No se pudo cargar emoji-es.json');
+    emojiMapExternal = {};
   }
 }
 
@@ -1280,33 +1291,44 @@ function levenshtein(a, b) {
   return matrix[b.length][a.length];
 }
 
-function guessEmoji(word) {
-  const emojiMap = {
-    langostino: '🦐', langostinos: '🦐', gamba: '🦐', gambas: '🦐',
-    camaron: '🦐', camarones: '🦐', 'cola de langostino': '🦐',
-    bogavante: '🦞', langosta: '🦞', cangrejo: '🦀',
-    pollo: '🍗', pavo: '🦃', cerdo: '🥩', ternera: '🥩', carne: '🥩',
-    cordero: '🥩', jamon: '🥓', chorizo: '🌭',
-    chipirón: '🦑', chipirones: '🦑', calamar: '🦑', calamares: '🦑',
-    choco: '🦑', chocos: '🦑', sepia: '🦑', pulpo: '🐙',
-    zamburiña: '🐚', zamburiñas: '🐚', vieira: '🐚', vieiras: '🐚',
-    berberecho: '🐚', berberechos: '🐚', almeja: '🐚', almejas: '🐚',
-    navaja: '🪦', navajas: '🪦', mejillon: '🐚', mejillones: '🐚',
-    pescado: '🐟', salmon: '🐟', atun: '🐟', merluza: '🐟',
-    sardina: '🐟', bacalao: '🐟', lubina: '🐟', dorada: '🐟',
-    pan: '🍞', arroz: '🍚', pasta: '🍝', patata: '🥔',
-    tomate: '🍅', lechuga: '🥬', cebolla: '🧅', ajo: '🧄',
-    zanahoria: '🥕', pimiento: '🫑', limon: '🍋', naranja: '🍊',
-    manzana: '🍎', platano: '🍌', fresa: '🍓', uva: '🍇',
-    queso: '🧀', huevo: '🥚', leche: '🥛', mantequilla: '🧈',
-    aceite: '🫒', sal: '🧂', azucar: '🍬', agua: '💧',
-    vino: '🍷', cerveza: '🍺', cafe: '☕', te: '🍵',
-    sopa: '🍲', ensalada: '🥗', pizza: '🍕', hamburguesa: '🍔',
-    helado: '🍦', pastel: '🎂', chocolate: '🍫', galleta: '🍪'
-  };
+// Mapa interno de fallback (palabras específicas de alimentos/mariscos no siempre en emoji-es.json)
+const EMOJI_FALLBACK_MAP = {
+  langostino: '🦐', langostinos: '🦐', gamba: '🦐', gambas: '🦐',
+  camaron: '🦐', camarones: '🦐', 'cola de langostino': '🦐',
+  bogavante: '🦞', langosta: '🦞', cangrejo: '🦀',
+  pollo: '🍗', pavo: '🦃', cerdo: '🥩', ternera: '🥩', carne: '🥩',
+  cordero: '🥩', jamon: '🥓', chorizo: '🌭',
+  chipirón: '🦑', chipirones: '🦑', calamar: '🦑', calamares: '🦑',
+  choco: '🦑', chocos: '🦑', sepia: '🦑', pulpo: '🐙',
+  zamburiña: '🐚', zamburiñas: '🐚', vieira: '🐚', vieiras: '🐚',
+  berberecho: '🐚', berberechos: '🐚', almeja: '🐚', almejas: '🐚',
+  navaja: '🪦', navajas: '🪦', mejillon: '🐚', mejillones: '🐚',
+  pescado: '🐟', salmon: '🐟', atun: '🐟', merluza: '🐟',
+  sardina: '🐟', bacalao: '🐟', lubina: '🐟', dorada: '🐟',
+  pan: '🍞', arroz: '🍚', pasta: '🍝', patata: '🥔',
+  tomate: '🍅', lechuga: '🥬', cebolla: '🧅', ajo: '🧄',
+  zanahoria: '🥕', pimiento: '🫑', limon: '🍋', naranja: '🍊',
+  manzana: '🍎', platano: '🍌', fresa: '🍓', uva: '🍇',
+  queso: '🧀', huevo: '🥚', leche: '🥛', mantequilla: '🧈',
+  aceite: '🫒', sal: '🧂', azucar: '🍬', agua: '💧',
+  vino: '🍷', cerveza: '🍺', cafe: '☕', te: '🍵',
+  sopa: '🍲', ensalada: '🥗', pizza: '🍕', hamburguesa: '🍔',
+  helado: '🍦', pastel: '🎂', chocolate: '🍫', galleta: '🍪'
+};
 
-  const normalized = word.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  return emojiMap[normalized] || emojiMap[word.toLowerCase()] || '🍽️';
+function normalizeEmojiKey(word) {
+  return word.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+}
+
+function guessEmoji(word) {
+  const key = normalizeEmojiKey(word);
+  // 1. Buscar en emoji-es.json (externo, ~600 palabras)
+  if (emojiMapExternal[key]) return emojiMapExternal[key];
+  // 2. Buscar por primera palabra (ej: "pollo asado" → "pollo")
+  const firstWord = key.split(/\s+/)[0];
+  if (firstWord !== key && emojiMapExternal[firstWord]) return emojiMapExternal[firstWord];
+  // 3. Fallback al mapa interno
+  return EMOJI_FALLBACK_MAP[key] || EMOJI_FALLBACK_MAP[word.toLowerCase()] || '🍽️';
 }
 
 // ==================== ETIQUETAS ====================
