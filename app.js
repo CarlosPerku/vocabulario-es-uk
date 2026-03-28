@@ -741,7 +741,7 @@ function renderCategorias(filterText) {
         <div class="explorar-words-grid" id="${catId}-${slugify(subName)}">
           ${subData.words.map(w => `
             <div class="explorar-word" onclick="openWordDetail('${w.id}')">
-              <span class="explorar-word-emoji">${w.emoji || '🍽️'}</span>
+              <span class="explorar-word-emoji">${w.imagen ? `<img src="${w.imagen}" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.outerHTML='${w.emoji || '🍽️'}'">` : (w.emoji || '🍽️')}</span>
               <div class="explorar-word-text">
                 <div class="explorar-es-row"><span class="explorar-es">${w.es}</span>${speakBtns(w.es)}</div>
                 <div class="explorar-uk">${w.uk}</div>
