@@ -10,7 +10,11 @@ function speakWord(text, rate = 1.0) {
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'es-ES';
   utter.rate = rate;
-  window.speechSynthesis.speak(utter);
+  const voices = window.speechSynthesis.getVoices();
+  const esVoice = voices.find(v => v.lang.startsWith('es'));
+  if (esVoice) utter.voice = esVoice;
+  // Android Chrome necesita un pequeño delay tras cancel()
+  setTimeout(() => window.speechSynthesis.speak(utter), 50);
 }
 
 function speakBtns(text) {
@@ -932,6 +936,12 @@ function startQuizWithFilter() {
     } else if (quizSelectedFilter.startsWith('tag:')) {
       const tag = quizSelectedFilter.slice(4);
       words = words.filter(w => (w.etiquetas || []).includes(tag));
+    } else if (quizSelectedFilter.startsWith('basecat:')) {
+      const catId = quizSelectedFilter.slice(8);
+      const baseIds = new Set(miVocabulario.map(w => w.id));
+      const catWords = getAllBaseWords().filter(b => b.categoriaId === catId);
+      const extra = catWords.filter(b => !baseIds.has(b.id));
+      words = [...words.filter(w => w.categoriaId === catId), ...extra];
     }
   }
 
@@ -968,10 +978,20 @@ function showQuizCard() {
   document.getElementById('quiz-reveal').style.display = 'block';
   document.getElementById('quiz-counter').textContent = `${quizIndex + 1} / ${quizWords.length}`;
 
-  // Mostrar botón "+" si la palabra es de la base y no está en el vocabulario personal
-  let addBtn = document.getElementById('quiz-add-word-btn');
+  // Ocultar botón añadir hasta que se revele la respuesta
+  const addBtn = document.getElementById('quiz-add-word-btn');
+  if (addBtn) addBtn.remove();
+}
+
+function revealQuizAnswer() {
+  document.getElementById('quiz-answer').classList.remove('hidden');
+  document.getElementById('quiz-reveal').style.display = 'none';
+
+  // Mostrar botón "+" solo al revelar la respuesta
+  const word = quizWords[quizIndex];
   const isInMyVocab = miVocabulario.some(w => w.id === word.id);
   if (!isInMyVocab) {
+    let addBtn = document.getElementById('quiz-add-word-btn');
     if (!addBtn) {
       addBtn = document.createElement('button');
       addBtn.id = 'quiz-add-word-btn';
@@ -1001,14 +1021,7 @@ function showQuizCard() {
       }
       addBtn.remove();
     };
-  } else if (addBtn) {
-    addBtn.remove();
   }
-}
-
-function revealQuizAnswer() {
-  document.getElementById('quiz-answer').classList.remove('hidden');
-  document.getElementById('quiz-reveal').style.display = 'none';
 }
 
 function navigateQuiz(dir) {
@@ -2075,12 +2088,24 @@ function renderQuizFilterOptions() {
     html += '</div>';
   }
 
-  if (tags.length > 0) {
+  const personalTags = tags.filter(t => t !== 'database');
+  if (personalTags.length > 0) {
     html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por etiqueta / За міткою</div>`;
-    tags.forEach(tag => {
+    personalTags.forEach(tag => {
       const count = miVocabulario.filter(w => (w.etiquetas || []).includes(tag)).length;
       html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'tag:' + tag ? 'active' : ''}" onclick="setQuizFilter('tag:${tag}', this)">
         #${tag} (${count})
+      </label>`;
+    });
+    html += '</div>';
+  }
+
+  if (vocabBase.categorias.length > 0) {
+    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">📖 Por categoría de la base / Категорія бази</div>`;
+    vocabBase.categorias.forEach(cat => {
+      const count = cat.subcategorias.reduce((acc, s) => acc + s.palabras.length, 0);
+      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'basecat:' + cat.id ? 'active' : ''}" onclick="setQuizFilter('basecat:${cat.id}', this)">
+        ${cat.emoji || ''} ${cat.nombre.es} (${count})
       </label>`;
     });
     html += '</div>';
