@@ -426,6 +426,13 @@ function renderSearchResult(word, images, isAdded, isFromBase) {
   return `
     <div class="search-result-card" data-word-id="${word.id}">
       ${imgHtml}
+      <div class="card-img-tools">
+        <div class="card-img-search-row">
+          <input type="text" class="input-field card-img-search-input" placeholder="Buscar imagen / Шукати фото..." value="${word.es}">
+          <button class="btn btn-secondary card-img-search-btn" onclick="searchMoreImagesForCard('${word.id}')">🔍</button>
+        </div>
+        <button class="btn btn-secondary card-img-camera-btn" onclick="openCameraForSearchCard('${word.id}')">📷</button>
+      </div>
       <div class="result-info">
         <div class="result-es">${word.es}</div>
         <div class="result-uk">${word.uk || '<em>Sin traducción / Без перекладу</em>'}</div>
@@ -1428,6 +1435,8 @@ function checkIosInstallHint() {
 }
 
 // ==================== PHOTO FROM CAMERA/GALLERY ====================
+let cameraContext = null; // { type: 'picker' } | { type: 'search-card', wordId }
+
 function setupCameraInput() {
   const input = document.createElement('input');
   input.type = 'file';
@@ -1439,17 +1448,23 @@ function setupCameraInput() {
   input.addEventListener('change', async () => {
     const file = input.files[0];
     if (!file) return;
-    const wordId = document.getElementById('image-picker-wordid').value;
     const reader = new FileReader();
     reader.onload = (e) => {
       const dataUrl = e.target.result;
-      const word = miVocabulario.find(w => w.id === wordId);
-      if (word) {
-        word.imagen = dataUrl;
-        saveMyVocab();
+      if (cameraContext?.type === 'search-card') {
+        setCardCustomImage(cameraContext.wordId, dataUrl);
+        showToast('Foto seleccionada / Фото обрано ✓');
+      } else {
+        const wordId = document.getElementById('image-picker-wordid').value;
+        const word = miVocabulario.find(w => w.id === wordId);
+        if (word) {
+          word.imagen = dataUrl;
+          saveMyVocab();
+        }
+        closeImagePicker();
+        showToast('Foto guardada / Фото збережено ✓');
       }
-      closeImagePicker();
-      showToast('Foto guardada / Фото збережено ✓');
+      cameraContext = null;
     };
     reader.readAsDataURL(file);
     input.value = '';
@@ -1457,7 +1472,72 @@ function setupCameraInput() {
 }
 
 function openCameraInput() {
+  cameraContext = null;
   document.getElementById('camera-input').click();
+}
+
+function openCameraForSearchCard(wordId) {
+  cameraContext = { type: 'search-card', wordId };
+  document.getElementById('camera-input').click();
+}
+
+function setCardCustomImage(wordId, imageUrl) {
+  const word = searchResultData.get(wordId);
+  if (word) searchResultData.set(wordId, { ...word });
+
+  const card = document.querySelector(`.search-result-card[data-word-id="${wordId}"]`);
+  if (!card) return;
+  let imgRow = card.querySelector('.result-images');
+  if (!imgRow) {
+    imgRow = document.createElement('div');
+    imgRow.className = 'result-images';
+    card.insertBefore(imgRow, card.firstChild);
+  }
+  imgRow.querySelectorAll('.result-img').forEach(i => i.classList.remove('selected'));
+  const existing = imgRow.querySelector('.result-img-custom');
+  if (existing) {
+    existing.src = imageUrl;
+    existing.classList.add('selected');
+  } else {
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.className = 'result-img result-img-custom selected';
+    img.alt = '';
+    img.onclick = () => selectResultImage(img, wordId);
+    imgRow.prepend(img);
+  }
+}
+
+async function searchMoreImagesForCard(wordId) {
+  const card = document.querySelector(`.search-result-card[data-word-id="${wordId}"]`);
+  if (!card) return;
+  const input = card.querySelector('.card-img-search-input');
+  const query = input?.value?.trim() || '';
+  if (!query) return;
+
+  const btn = card.querySelector('.card-img-search-btn');
+  if (btn) btn.textContent = '⏳';
+
+  const newImages = await searchImages(query);
+
+  const word = searchResultData.get(wordId);
+  if (word) searchResultData.set(wordId, { ...word, _images: newImages });
+
+  let imgRow = card.querySelector('.result-images');
+  if (!imgRow) {
+    imgRow = document.createElement('div');
+    imgRow.className = 'result-images';
+    card.insertBefore(imgRow, card.firstChild);
+  }
+  if (newImages.length > 0) {
+    imgRow.innerHTML = newImages.map((url, i) =>
+      `<img src="${url}" class="result-img${i === 0 ? ' selected' : ''}" onclick="selectResultImage(this, '${wordId}')" alt="">`
+    ).join('');
+  } else {
+    imgRow.innerHTML = '<span style="color:#94a3b8;font-size:13px;padding:8px">Sin resultados / Немає результатів</span>';
+  }
+
+  if (btn) btn.textContent = '🔍';
 }
 
 // ==================== WORD DETAIL MODAL ====================
@@ -1606,6 +1686,8 @@ window.logout = logout;
 window.setQuizFilter = setQuizFilter;
 window.startQuizWithFilter = startQuizWithFilter;
 window.openCameraInput = openCameraInput;
+window.openCameraForSearchCard = openCameraForSearchCard;
+window.searchMoreImagesForCard = searchMoreImagesForCard;
 window.triggerInstall = triggerInstall;
 window.addFromSearchCard = addFromSearchCard;
 window.openWordDetail = openWordDetail;

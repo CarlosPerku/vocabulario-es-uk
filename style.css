@@ -426,6 +426,38 @@ body {
   border-color: var(--blue);
 }
 
+.card-img-tools {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  align-items: center;
+}
+
+.card-img-search-row {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.card-img-search-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  padding: 6px 10px;
+  height: 34px;
+}
+
+.card-img-search-btn,
+.card-img-camera-btn {
+  height: 34px;
+  padding: 0 10px;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
 .result-emoji-fallback {
   width: 100%;
   height: 120px;
