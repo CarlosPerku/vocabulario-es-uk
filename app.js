@@ -3,6 +3,20 @@ const MYMEMORY_URL = 'https://api.mymemory.translated.net/get';
 const GITHUB_REPO = ''; // Ej: 'usuario/repo' para crear Issues
 const IMAGE_CACHE_KEY = 'image_cache';
 
+// ==================== PRONUNCIACIÓN ====================
+function speakWord(text, rate = 1.0) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'es-ES';
+  utter.rate = rate;
+  window.speechSynthesis.speak(utter);
+}
+
+function speakBtns(text) {
+  return `<div class="speak-btns"><button class="btn-speak" onclick="event.stopPropagation();speakWord('${text.replace(/'/g, "\\'")}',1.0)" title="Pronunciar / Вимова">🔊</button><button class="btn-speak btn-speak-slow" onclick="event.stopPropagation();speakWord('${text.replace(/'/g, "\\'")}',0.5)" title="Lento / Повільно">🐢</button></div>`;
+}
+
 // ==================== STATE ====================
 let vocabBase = { categorias: [] };
 let miVocabulario = [];
@@ -51,6 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupCatModalTranslation();
   setupDetailTagsInput();
   setupDetailCatSelects();
+  setupExploreSearch();
   setupTranslatePair('detail-desc-es', 'detail-desc-uk', 'es', 'uk', detailUserEdited);
   setupTranslatePair('detail-desc-uk', 'detail-desc-es', 'uk', 'es', detailUserEdited);
   setupTranslatePair('detail-uk', 'detail-es', 'uk', 'es', detailUserEdited);
@@ -134,6 +149,7 @@ function setupTabs() {
       if (tab.dataset.view === 'vocabulario') renderMyVocab();
       if (tab.dataset.view === 'categorias') renderCategorias();
       if (tab.dataset.view === 'etiquetas') renderEtiquetas();
+      if (tab.dataset.view === 'explorar') renderExploreDatabase();
     });
   });
 }
@@ -223,7 +239,7 @@ function renderMyVocab() {
         <div class="card-image-hint">🖼️</div>
       </div>
       <div class="card-info">
-        <div class="card-es">${w.es}</div>
+        <div class="card-es-row"><span class="card-es">${w.es}</span>${speakBtns(w.es)}</div>
         <div class="card-uk">${w.uk}</div>
         ${w.descripcion_es ? `<div class="card-desc card-desc-es">${w.descripcion_es}</div>` : ''}
         ${w.descripcion ? `<div class="card-desc card-desc-uk">${w.descripcion}</div>` : ''}
@@ -416,7 +432,7 @@ function renderSearchResult(word, images, isAdded, isFromBase) {
         <button class="btn btn-secondary card-img-camera-btn" onclick="openCameraForSearchCard('${word.id}')">📷</button>
       </div>
       <div class="result-info">
-        <div class="result-es">${word.es}</div>
+        <div class="result-es-row"><span class="result-es">${word.es}</span>${speakBtns(word.es)}</div>
         <div class="result-uk">${word.uk || '<em>Sin traducción / Без перекладу</em>'}</div>
         ${word.descripcion_es ? `<div class="result-desc result-desc-es">${word.descripcion_es}</div>` : ''}
         ${word.descripcion ? `<div class="result-desc result-desc-uk">${word.descripcion}</div>` : ''}
@@ -878,8 +894,9 @@ function setupQuiz() {
 let quizSelectedFilter = 'all';
 
 function startQuiz() {
-  if (miVocabulario.length === 0) {
-    showToast('Añade palabras primero / Спочатку додай слова');
+  const totalAvailable = miVocabulario.length + getAllBaseWords().length;
+  if (totalAvailable === 0) {
+    showToast('Sin palabras disponibles / Немає доступних слів');
     return;
   }
   quizSelectedFilter = 'all';
@@ -890,55 +907,6 @@ function startQuiz() {
   renderQuizFilterOptions();
 }
 
-function renderQuizFilterOptions() {
-  const container = document.getElementById('quiz-filter-options');
-  const cats = [...new Set(miVocabulario.map(w => w.categoria).filter(Boolean))];
-  const subcats = [...new Set(miVocabulario.map(w => w.subcategoria).filter(Boolean))];
-  const tags = getAllTags();
-
-  let html = `
-    <div class="quiz-filter-group">
-      <label class="quiz-filter-opt ${quizSelectedFilter === 'all' ? 'active' : ''}" onclick="setQuizFilter('all', this)">
-        📚 Todas las palabras / Всі слова (${miVocabulario.length})
-      </label>
-    </div>`;
-
-  if (cats.length > 0) {
-    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por categoría / За категорією</div>`;
-    cats.forEach(cat => {
-      const count = miVocabulario.filter(w => w.categoria === cat).length;
-      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'cat:' + cat ? 'active' : ''}" onclick="setQuizFilter('cat:${cat}', this)">
-        📂 ${cat} (${count})
-      </label>`;
-    });
-    html += '</div>';
-  }
-
-  if (subcats.length > 0) {
-    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por subcategoría / За підкатегорією</div>`;
-    subcats.forEach(sub => {
-      const count = miVocabulario.filter(w => w.subcategoria === sub).length;
-      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'sub:' + sub ? 'active' : ''}" onclick="setQuizFilter('sub:${sub}', this)">
-        › ${sub} (${count})
-      </label>`;
-    });
-    html += '</div>';
-  }
-
-  if (tags.length > 0) {
-    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por etiqueta / За міткою</div>`;
-    tags.forEach(tag => {
-      const count = miVocabulario.filter(w => (w.etiquetas || []).includes(tag)).length;
-      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'tag:' + tag ? 'active' : ''}" onclick="setQuizFilter('tag:${tag}', this)">
-        #${tag} (${count})
-      </label>`;
-    });
-    html += '</div>';
-  }
-
-  container.innerHTML = html;
-}
-
 function setQuizFilter(filter, el) {
   quizSelectedFilter = filter;
   document.querySelectorAll('.quiz-filter-opt').forEach(o => o.classList.remove('active'));
@@ -946,16 +914,25 @@ function setQuizFilter(filter, el) {
 }
 
 function startQuizWithFilter() {
-  let words = [...miVocabulario];
-  if (quizSelectedFilter.startsWith('cat:')) {
-    const cat = quizSelectedFilter.slice(4);
-    words = words.filter(w => w.categoria === cat);
-  } else if (quizSelectedFilter.startsWith('sub:')) {
-    const sub = quizSelectedFilter.slice(4);
-    words = words.filter(w => w.subcategoria === sub);
-  } else if (quizSelectedFilter.startsWith('tag:')) {
-    const tag = quizSelectedFilter.slice(4);
-    words = words.filter(w => (w.etiquetas || []).includes(tag));
+  let words = [];
+  if (quizSelectedFilter === 'base') {
+    words = getAllBaseWords();
+  } else if (quizSelectedFilter === 'all+base') {
+    const baseIds = new Set(miVocabulario.map(w => w.id));
+    const extra = getAllBaseWords().filter(b => !baseIds.has(b.id));
+    words = [...miVocabulario, ...extra];
+  } else {
+    words = [...miVocabulario];
+    if (quizSelectedFilter.startsWith('cat:')) {
+      const cat = quizSelectedFilter.slice(4);
+      words = words.filter(w => w.categoria === cat);
+    } else if (quizSelectedFilter.startsWith('sub:')) {
+      const sub = quizSelectedFilter.slice(4);
+      words = words.filter(w => w.subcategoria === sub);
+    } else if (quizSelectedFilter.startsWith('tag:')) {
+      const tag = quizSelectedFilter.slice(4);
+      words = words.filter(w => (w.etiquetas || []).includes(tag));
+    }
   }
 
   if (words.length === 0) {
@@ -985,10 +962,48 @@ function showQuizCard() {
   // Mostrar ucraniano, ocultar español
   document.getElementById('quiz-question').textContent = word.uk;
   const answerDiv = document.getElementById('quiz-answer');
-  answerDiv.innerHTML = `${word.es}${word.descripcion ? `<div class="quiz-desc">${word.descripcion}</div>` : ''}`;
+  const safeEs = word.es.replace(/'/g, "\\'");
+  answerDiv.innerHTML = `<div class="quiz-answer-row"><span>${word.es}</span><div class="speak-btns"><button class="btn-speak" onclick="speakWord('${safeEs}',1.0)" title="Pronunciar">🔊</button><button class="btn-speak btn-speak-slow" onclick="speakWord('${safeEs}',0.5)" title="Lento">🐢</button></div></div>${word.descripcion ? `<div class="quiz-desc">${word.descripcion}</div>` : ''}`;
   answerDiv.classList.add('hidden');
   document.getElementById('quiz-reveal').style.display = 'block';
   document.getElementById('quiz-counter').textContent = `${quizIndex + 1} / ${quizWords.length}`;
+
+  // Mostrar botón "+" si la palabra es de la base y no está en el vocabulario personal
+  let addBtn = document.getElementById('quiz-add-word-btn');
+  const isInMyVocab = miVocabulario.some(w => w.id === word.id);
+  if (!isInMyVocab) {
+    if (!addBtn) {
+      addBtn = document.createElement('button');
+      addBtn.id = 'quiz-add-word-btn';
+      addBtn.className = 'btn btn-primary btn-block';
+      addBtn.style.marginTop = '8px';
+      document.getElementById('quiz-nav').before(addBtn);
+    }
+    addBtn.textContent = `+ Añadir "${word.es}" a mi vocabulario`;
+    addBtn.onclick = () => {
+      const cat = vocabBase.categorias.find(c => c.id === word.categoriaId);
+      const sub = cat?.subcategorias.find(s => s.id === word.subcategoriaId);
+      const wordToAdd = {
+        ...word,
+        categoria: word.categoria || cat?.nombre?.es || '',
+        categoriaUk: word.categoriaUk || cat?.nombre?.uk || '',
+        categoriaId: word.categoriaId || '',
+        subcategoria: word.subcategoria || sub?.nombre?.es || '',
+        subcategoriaUk: word.subcategoriaUk || sub?.nombre?.uk || '',
+        subcategoriaId: word.subcategoriaId || ''
+      };
+      if (!miVocabulario.some(w => w.id === wordToAdd.id)) {
+        miVocabulario.push(wordToAdd);
+        saveMyVocab();
+        populateCategoryFilter();
+        renderTagsBar();
+        showToast(`${word.es} añadida ✓`);
+      }
+      addBtn.remove();
+    };
+  } else if (addBtn) {
+    addBtn.remove();
+  }
 }
 
 function revealQuizAnswer() {
@@ -1794,6 +1809,286 @@ function goToTagFilter(tag) {
   setTagFilter(tag);
 }
 
+// ==================== EXPLORAR BASE DE DATOS ====================
+function renderExploreDatabase(filterText) {
+  const container = document.getElementById('explorar-tree');
+  if (!container) return;
+  const query = filterText !== undefined ? filterText : (document.getElementById('explorar-search')?.value || '').toLowerCase().trim();
+
+  let html = '';
+  let visibleCount = 0;
+
+  vocabBase.categorias.forEach(cat => {
+    let catHtml = '';
+    let catCount = 0;
+
+    cat.subcategorias.forEach(sub => {
+      const filtered = sub.palabras.filter(p =>
+        !query ||
+        normalizeStr(p.es).includes(normalizeStr(query)) ||
+        (p.uk || '').toLowerCase().includes(query)
+      );
+      if (filtered.length === 0) return;
+      catCount += filtered.length;
+      visibleCount += filtered.length;
+
+      catHtml += `<div class="explorar-subcat">
+        <div class="explorar-subcat-title">${sub.emoji || ''} ${sub.nombre.es} / ${sub.nombre.uk}
+          <span class="cat-count">${filtered.length}</span>
+        </div>
+        <div class="explorar-words-grid">
+          ${filtered.map(p => {
+            const added = miVocabulario.some(w => w.id === p.id);
+            return `<div class="explorar-word ${added ? 'explorar-word-added' : ''}">
+              <span class="explorar-word-emoji">${p.emoji || '📖'}</span>
+              <div class="explorar-word-text">
+                <div class="explorar-es-row"><span class="explorar-es">${p.es}</span>${speakBtns(p.es)}</div>
+                <div class="explorar-uk">${p.uk}</div>
+              </div>
+              <div class="explorar-word-actions">
+                <button class="btn-edit-suggestion" onclick="openCorrectionModal('${p.id}','${cat.id}','${sub.id}')" title="Sugerir corrección / Запропонувати виправлення">✏️</button>
+                ${added
+                  ? '<span class="explorar-badge">✓</span>'
+                  : `<button class="btn explorar-add-btn" onclick="importBaseWord('${cat.id}','${sub.id}','${p.id}',this)">+</button>`
+                }
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+    });
+
+    if (catHtml) {
+      const catId = `explorar-cat-${cat.id}`;
+      html += `<div class="explorar-cat">
+        <div class="explorar-cat-header" onclick="toggleExploreCat('${catId}')">
+          <span>${cat.emoji || ''} ${cat.nombre.es} / ${cat.nombre.uk}</span>
+          <span class="cat-count">${catCount}</span>
+          <span class="explorar-toggle">▾</span>
+        </div>
+        <div class="explorar-cat-body" id="${catId}">${catHtml}</div>
+      </div>`;
+    }
+  });
+
+  container.innerHTML = html || '<div class="empty-state"><span class="empty-emoji">🔍</span><p>Sin resultados / Немає результатів</p></div>';
+
+  // Update import all button
+  const btn = document.getElementById('explorar-import-all-btn');
+  if (btn) btn.textContent = `+ Importar visibles (${visibleCount})`;
+}
+
+function toggleExploreCat(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('open');
+  const header = el.previousElementSibling;
+  const toggle = header?.querySelector('.explorar-toggle');
+  if (toggle) toggle.textContent = el.classList.contains('open') ? '▴' : '▾';
+}
+
+function importBaseWord(catId, subId, wordId, btnEl) {
+  if (miVocabulario.some(w => w.id === wordId)) return;
+  const cat = vocabBase.categorias.find(c => c.id === catId);
+  const sub = cat?.subcategorias.find(s => s.id === subId);
+  const p = sub?.palabras.find(w => w.id === wordId);
+  if (!p) return;
+
+  const word = {
+    ...p,
+    categoria: cat.nombre.es,
+    categoriaUk: cat.nombre.uk,
+    categoriaId: cat.id,
+    subcategoria: sub.nombre.es,
+    subcategoriaUk: sub.nombre.uk,
+    subcategoriaId: sub.id
+  };
+
+  miVocabulario.push(word);
+  saveMyVocab();
+  populateCategoryFilter();
+  renderTagsBar();
+
+  // Update button in place
+  const cell = btnEl.closest('.explorar-word');
+  if (cell) {
+    cell.classList.add('explorar-word-added');
+    btnEl.outerHTML = '<span class="explorar-badge">✓</span>';
+  }
+  showToast(`${p.es} añadida ✓`);
+}
+
+function importAllVisible() {
+  const query = (document.getElementById('explorar-search')?.value || '').toLowerCase().trim();
+  let count = 0;
+  vocabBase.categorias.forEach(cat => {
+    cat.subcategorias.forEach(sub => {
+      sub.palabras.forEach(p => {
+        if (miVocabulario.some(w => w.id === p.id)) return;
+        if (query && !normalizeStr(p.es).includes(normalizeStr(query)) && !(p.uk || '').toLowerCase().includes(query)) return;
+        miVocabulario.push({
+          ...p,
+          categoria: cat.nombre.es,
+          categoriaUk: cat.nombre.uk,
+          categoriaId: cat.id,
+          subcategoria: sub.nombre.es,
+          subcategoriaUk: sub.nombre.uk,
+          subcategoriaId: sub.id
+        });
+        count++;
+      });
+    });
+  });
+  if (count > 0) {
+    saveMyVocab();
+    populateCategoryFilter();
+    renderTagsBar();
+    renderExploreDatabase();
+    showToast(`${count} palabras importadas ✓`);
+  } else {
+    showToast('Ya estaban todas añadidas / Всі вже додані');
+  }
+}
+
+function setupExploreSearch() {
+  const input = document.getElementById('explorar-search');
+  if (input) {
+    input.addEventListener('input', () => renderExploreDatabase(input.value.toLowerCase().trim()));
+  }
+}
+
+// ==================== SUGERENCIAS DE CORRECCIÓN ====================
+
+function openCorrectionModal(wordId, catId, subId) {
+  const cat = vocabBase.categorias.find(c => c.id === catId);
+  const sub = cat?.subcategorias.find(s => s.id === subId);
+  const p = sub?.palabras.find(w => w.id === wordId);
+  if (!p) return;
+
+  document.getElementById('corr-word-id').value = wordId;
+  document.getElementById('corr-cat-id').value = catId;
+  document.getElementById('corr-sub-id').value = subId;
+  document.getElementById('corr-es').value = p.es;
+  document.getElementById('corr-uk').value = p.uk;
+  document.getElementById('corr-desc-es').value = p.descripcion_es || '';
+  document.getElementById('corr-desc-uk').value = p.descripcion || '';
+  document.getElementById('corr-imagen').value = p.imagen || '';
+  document.getElementById('corr-comment').value = '';
+
+  document.getElementById('correction-modal').classList.remove('hidden');
+}
+
+function closeCorrectionModal() {
+  document.getElementById('correction-modal').classList.add('hidden');
+}
+
+async function submitCorrectionModal() {
+  const wordId = document.getElementById('corr-word-id').value;
+  const catId = document.getElementById('corr-cat-id').value;
+  const subId = document.getElementById('corr-sub-id').value;
+
+  const cat = vocabBase.categorias.find(c => c.id === catId);
+  const sub = cat?.subcategorias.find(s => s.id === subId);
+  const original = sub?.palabras.find(w => w.id === wordId);
+
+  const suggestion = {
+    wordId,
+    catId,
+    subId,
+    original: {
+      es: original?.es || '',
+      uk: original?.uk || '',
+      descripcion_es: original?.descripcion_es || '',
+      descripcion: original?.descripcion || '',
+      imagen: original?.imagen || ''
+    },
+    suggested: {
+      es: document.getElementById('corr-es').value.trim(),
+      uk: document.getElementById('corr-uk').value.trim(),
+      descripcion_es: document.getElementById('corr-desc-es').value.trim(),
+      descripcion: document.getElementById('corr-desc-uk').value.trim(),
+      imagen: document.getElementById('corr-imagen').value.trim()
+    },
+    comment: document.getElementById('corr-comment').value.trim()
+  };
+
+  const btn = document.querySelector('#correction-modal .btn-primary');
+  btn.disabled = true;
+  btn.textContent = 'Enviando... / Надсилається...';
+
+  const ok = await submitSuggestion(suggestion);
+
+  btn.disabled = false;
+  btn.textContent = 'Enviar / Надіслати';
+  closeCorrectionModal();
+
+  if (ok) {
+    showToast('¡Gracias por tu sugerencia! 🙏 / Дякуємо за пропозицію!');
+  } else {
+    showToast('Error al enviar. Inténtalo de nuevo.');
+  }
+}
+
+// ==================== QUIZ CON BASE DE DATOS ====================
+// Extiende el quiz para incluir palabras de la base que el usuario NO tiene
+function renderQuizFilterOptions() {
+  const container = document.getElementById('quiz-filter-options');
+  const cats = [...new Set(miVocabulario.map(w => w.categoria).filter(Boolean))];
+  const subcats = [...new Set(miVocabulario.map(w => w.subcategoria).filter(Boolean))];
+  const tags = getAllTags();
+  const baseWords = getAllBaseWords();
+  const baseNotAdded = baseWords.filter(b => !miVocabulario.some(w => w.id === b.id));
+
+  let html = `
+    <div class="quiz-filter-group">
+      <label class="quiz-filter-opt ${quizSelectedFilter === 'all' ? 'active' : ''}" onclick="setQuizFilter('all', this)">
+        📚 Mis palabras / Мої слова (${miVocabulario.length})
+      </label>
+      ${baseNotAdded.length > 0 ? `
+      <label class="quiz-filter-opt ${quizSelectedFilter === 'base' ? 'active' : ''}" onclick="setQuizFilter('base', this)">
+        📖 Base de datos / База (${baseWords.length})
+      </label>
+      <label class="quiz-filter-opt ${quizSelectedFilter === 'all+base' ? 'active' : ''}" onclick="setQuizFilter('all+base', this)">
+        🌍 Todo junto / Усе разом (${miVocabulario.length + baseNotAdded.length})
+      </label>` : ''}
+    </div>`;
+
+  if (cats.length > 0) {
+    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por categoría / За категорією</div>`;
+    cats.forEach(cat => {
+      const count = miVocabulario.filter(w => w.categoria === cat).length;
+      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'cat:' + cat ? 'active' : ''}" onclick="setQuizFilter('cat:${cat}', this)">
+        📂 ${cat} (${count})
+      </label>`;
+    });
+    html += '</div>';
+  }
+
+  if (subcats.length > 0) {
+    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por subcategoría / За підкатегорією</div>`;
+    subcats.forEach(sub => {
+      const count = miVocabulario.filter(w => w.subcategoria === sub).length;
+      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'sub:' + sub ? 'active' : ''}" onclick="setQuizFilter('sub:${sub}', this)">
+        › ${sub} (${count})
+      </label>`;
+    });
+    html += '</div>';
+  }
+
+  if (tags.length > 0) {
+    html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por etiqueta / За міткою</div>`;
+    tags.forEach(tag => {
+      const count = miVocabulario.filter(w => (w.etiquetas || []).includes(tag)).length;
+      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'tag:' + tag ? 'active' : ''}" onclick="setQuizFilter('tag:${tag}', this)">
+        #${tag} (${count})
+      </label>`;
+    });
+    html += '</div>';
+  }
+
+  container.innerHTML = html;
+}
+
 // Make functions available globally for onclick handlers
 window.doSearch = doSearch;
 window.openAddModal = openAddModal;
@@ -1827,3 +2122,11 @@ window.saveAndCloseDetail = saveAndCloseDetail;
 window.deleteWordFromDetail = deleteWordFromDetail;
 window.removeDetailTag = removeDetailTag;
 window.goToTagFilter = goToTagFilter;
+window.renderExploreDatabase = renderExploreDatabase;
+window.importBaseWord = importBaseWord;
+window.importAllVisible = importAllVisible;
+window.toggleExploreCat = toggleExploreCat;
+window.speakWord = speakWord;
+window.openCorrectionModal = openCorrectionModal;
+window.closeCorrectionModal = closeCorrectionModal;
+window.submitCorrectionModal = submitCorrectionModal;

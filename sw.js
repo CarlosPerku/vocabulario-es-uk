@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vocab-es-uk-v7';
+const CACHE_NAME = 'vocab-es-uk-v9';
 
 // Solo cachear iconos e imágenes estáticas (no JS/CSS/HTML que cambian frecuentemente)
 const STATIC_ASSETS = [

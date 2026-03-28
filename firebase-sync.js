@@ -122,3 +122,21 @@ async function saveUserCatsToCloud(data) {
     console.warn('Error guardando categorías:', e);
   }
 }
+
+// ---- FIRESTORE: SUGERENCIAS DE CORRECCIÓN ----
+
+async function submitSuggestion(suggestion) {
+  try {
+    await db.collection('suggestions').add({
+      ...suggestion,
+      submittedBy: currentUser?.uid || 'anonymous',
+      submittedByName: currentUser?.displayName || 'Anónimo',
+      submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      status: 'pending'
+    });
+    return true;
+  } catch (e) {
+    console.warn('Error enviando sugerencia:', e);
+    return false;
+  }
+}
