@@ -292,14 +292,26 @@ function isCyrillicText(str) {
 }
 
 function matchesQuery(word, query) {
+  if (!query || query.length < 2) return false;
   const q = normalizeStr(query);
   const esNorm = normalizeStr(word.es);
+  const esWords = esNorm.split(/\s+/);
   const ukLower = (word.uk || '').toLowerCase();
-  return (
-    esNorm.includes(q) ||
-    levenshtein(esNorm, q) <= 2 ||
-    ukLower.includes(query.toLowerCase())
-  );
+
+  // Alguna palabra del término empieza por la búsqueda (ej: "gam" → "gambas")
+  if (esWords.some(w => w.startsWith(q))) return true;
+
+  // Para búsquedas largas (4+ caracteres): substring y fuzzy
+  if (q.length >= 4) {
+    if (esNorm.includes(q)) return true;
+    if (levenshtein(esWords[0], q) <= 2) return true;
+    if (levenshtein(esNorm, q) <= 2) return true;
+  }
+
+  // Coincidencia en ucraniano
+  if (ukLower.includes(query.toLowerCase())) return true;
+
+  return false;
 }
 
 function showSuggestions(query) {
@@ -348,16 +360,9 @@ async function doSearch(query) {
 
   // 1. Buscar en vocabulario base (por ES normalizado o por UK)
   const allWords = getAllBaseWords();
-  const baseMatches = allWords.filter(w => {
-    const qNorm = normalizeStr(queryEs);
-    const esNorm = normalizeStr(w.es);
-    const ukLow = (w.uk || '').toLowerCase();
-    return (
-      esNorm.includes(qNorm) ||
-      levenshtein(esNorm, qNorm) <= 2 ||
-      (isUkrainian && ukLow.includes(query.toLowerCase()))
-    );
-  });
+  const baseMatches = allWords.filter(w =>
+    matchesQuery(w, queryEs) || (isUkrainian && matchesQuery(w, query))
+  );
 
   // 2. Buscar imágenes usando término en español
   let images = [];
