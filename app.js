@@ -408,8 +408,8 @@ function renderSearchResult(word, images, isAdded, isFromBase) {
       <div class="result-info">
         <div class="result-es">${word.es}</div>
         <div class="result-uk">${word.uk || '<em>Sin traducción / Без перекладу</em>'}</div>
-        ${word.descripcion ? `<div class="result-desc">${word.descripcion}</div>` : ''}
-        ${isFromBase ? `<div class="result-source">Base de datos / З бази даних</div>` : `<div class="result-source">Palabra nueva / Нове слово</div>`}
+        ${word.descripcion_es ? `<div class="result-desc result-desc-es">${word.descripcion_es}</div>` : ''}
+        ${word.descripcion ? `<div class="result-desc result-desc-uk">${word.descripcion}</div>` : ''}
         <div class="result-actions">
           ${isAdded
             ? '<span class="badge-added">✓ Añadida / Додано</span>'
@@ -441,9 +441,25 @@ function addFromSearchCard(wordId) {
 function setupModal() {
   document.getElementById('modal-cancel').addEventListener('click', closeModal);
   document.getElementById('modal-save').addEventListener('click', saveFromModal);
-
-  // Category change updates subcategory
   document.getElementById('modal-cat').addEventListener('change', updateSubcatOptions);
+
+  // Auto-traducción entre campos bilingüe
+  let timers = {};
+  function autoTranslate(srcId, dstId, from, to) {
+    clearTimeout(timers[srcId]);
+    timers[srcId] = setTimeout(async () => {
+      const val = document.getElementById(srcId).value.trim();
+      const dst = document.getElementById(dstId);
+      if (val && !dst.value.trim()) {
+        const translated = await translateText(val, from, to);
+        if (translated) dst.value = translated;
+      }
+    }, 800);
+  }
+
+  document.getElementById('modal-desc-es').addEventListener('input', () => autoTranslate('modal-desc-es', 'modal-desc', 'es', 'uk'));
+  document.getElementById('modal-desc').addEventListener('input', () => autoTranslate('modal-desc', 'modal-desc-es', 'uk', 'es'));
+  document.getElementById('modal-uk').addEventListener('input', () => autoTranslate('modal-uk', 'modal-es', 'uk', 'es'));
 }
 
 function openAddModal(wordJsonStr) {
@@ -459,19 +475,14 @@ function openAddModal(wordJsonStr) {
   modalTags = word.etiquetas ? [...word.etiquetas] : [];
   renderModalTags();
 
-  // Populate category select
+  // Populate category select — base + usuario + palabras existentes
   const catSelect = document.getElementById('modal-cat');
   catSelect.innerHTML = '<option value="">Seleccionar / Обрати...</option>';
-  vocabBase.categorias.forEach(cat => {
-    catSelect.innerHTML += `<option value="${cat.id}">${cat.emoji} ${cat.nombre.es} / ${cat.nombre.uk}</option>`;
-  });
-  // Also add user-created categories
-  const userCats = getUserCategories();
-  userCats.forEach(cat => {
-    if (!vocabBase.categorias.find(c => c.id === cat.id)) {
-      catSelect.innerHTML += `<option value="${cat.id}">${cat.nombre.es} / ${cat.nombre.uk || ''}</option>`;
-    }
-  });
+  const allCatsMap = new Map();
+  vocabBase.categorias.forEach(c => allCatsMap.set(c.id, { id: c.id, es: c.nombre.es, uk: c.nombre.uk, emoji: c.emoji || '' }));
+  getUserCategories().forEach(c => { if (!allCatsMap.has(c.id)) allCatsMap.set(c.id, { id: c.id, es: c.nombre.es, uk: c.nombre.uk || '', emoji: '' }); });
+  miVocabulario.forEach(w => { if (w.categoriaId && !allCatsMap.has(w.categoriaId)) allCatsMap.set(w.categoriaId, { id: w.categoriaId, es: w.categoria || w.categoriaId, uk: w.categoriaUk || '', emoji: '' }); });
+  allCatsMap.forEach(c => { catSelect.innerHTML += `<option value="${c.id}">${c.emoji ? c.emoji + ' ' : ''}${c.es}${c.uk ? ' / ' + c.uk : ''}</option>`; });
 
   // Pre-select category if word has one
   if (word.categoriaId) {
@@ -511,20 +522,14 @@ function updateSubcatOptions() {
   const subcatSelect = document.getElementById('modal-subcat');
   subcatSelect.innerHTML = '<option value="">Seleccionar / Обрати...</option>';
 
-  const cat = vocabBase.categorias.find(c => c.id === catId);
-  if (cat) {
-    cat.subcategorias.forEach(sub => {
-      subcatSelect.innerHTML += `<option value="${sub.id}">${sub.emoji} ${sub.nombre.es} / ${sub.nombre.uk}</option>`;
-    });
+  const allSubsMap = new Map();
+  const baseCat = vocabBase.categorias.find(c => c.id === catId);
+  if (baseCat) {
+    baseCat.subcategorias.forEach(s => allSubsMap.set(s.id, { id: s.id, es: s.nombre.es, uk: s.nombre.uk, emoji: s.emoji || '' }));
   }
-
-  // User subcategories
-  const userSubs = getUserSubcategories(catId);
-  userSubs.forEach(sub => {
-    if (!cat || !cat.subcategorias.find(s => s.id === sub.id)) {
-      subcatSelect.innerHTML += `<option value="${sub.id}">${sub.nombre.es}</option>`;
-    }
-  });
+  getUserSubcategories(catId).forEach(s => { if (!allSubsMap.has(s.id)) allSubsMap.set(s.id, { id: s.id, es: s.nombre.es, uk: s.nombre.uk || '', emoji: '' }); });
+  miVocabulario.filter(w => w.categoriaId === catId && w.subcategoriaId).forEach(w => { if (!allSubsMap.has(w.subcategoriaId)) allSubsMap.set(w.subcategoriaId, { id: w.subcategoriaId, es: w.subcategoria || w.subcategoriaId, uk: w.subcategoriaUk || '', emoji: '' }); });
+  allSubsMap.forEach(s => { subcatSelect.innerHTML += `<option value="${s.id}">${s.emoji ? s.emoji + ' ' : ''}${s.es}${s.uk ? ' / ' + s.uk : ''}</option>`; });
 }
 
 function saveFromModal() {
@@ -543,11 +548,13 @@ function saveFromModal() {
   if (newCat) {
     catId = slugify(newCat);
     catName = newCat;
-    catNameUk = newCat; // User can edit later
+    catNameUk = newCat;
   } else {
-    const cat = vocabBase.categorias.find(c => c.id === catId);
-    catName = cat ? cat.nombre.es : catId;
-    catNameUk = cat ? cat.nombre.uk : '';
+    const baseCat = vocabBase.categorias.find(c => c.id === catId);
+    const userCat = getUserCategories().find(c => c.id === catId);
+    const wordWithCat = miVocabulario.find(w => w.categoriaId === catId);
+    catName = baseCat?.nombre.es || userCat?.nombre.es || wordWithCat?.categoria || catId;
+    catNameUk = baseCat?.nombre.uk || userCat?.nombre.uk || wordWithCat?.categoriaUk || '';
   }
 
   // Handle new subcategory
@@ -557,12 +564,12 @@ function saveFromModal() {
     subcatName = newSubcat;
     subcatNameUk = newSubcat;
   } else {
-    const cat = vocabBase.categorias.find(c => c.id === catId);
-    if (cat) {
-      const sub = cat.subcategorias.find(s => s.id === subcatId);
-      subcatName = sub ? sub.nombre.es : subcatId;
-      subcatNameUk = sub ? sub.nombre.uk : '';
-    }
+    const baseCat = vocabBase.categorias.find(c => c.id === catId);
+    const baseSub = baseCat?.subcategorias.find(s => s.id === subcatId);
+    const userSub = getUserSubcategories(catId).find(s => s.id === subcatId);
+    const wordWithSub = miVocabulario.find(w => w.categoriaId === catId && w.subcategoriaId === subcatId);
+    subcatName = baseSub?.nombre.es || userSub?.nombre.es || wordWithSub?.subcategoria || subcatId;
+    subcatNameUk = baseSub?.nombre.uk || userSub?.nombre.uk || wordWithSub?.subcategoriaUk || '';
   }
 
   const desc_es = document.getElementById('modal-desc-es').value.trim();
