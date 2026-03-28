@@ -236,12 +236,23 @@
   <!-- Modal detalle de palabra -->
   <div id="word-detail-modal" class="modal hidden">
     <div class="modal-content">
-      <div id="detail-image" class="detail-image"></div>
-      <div class="detail-header">
-        <div class="detail-es" id="detail-es"></div>
-        <div class="detail-uk" id="detail-uk"></div>
+      <div id="detail-image" class="detail-image" onclick="openImagePicker(document.getElementById('detail-word-id').value)" title="Cambiar imagen"></div>
+      <div class="form-group">
+        <label>Español / Іспанська</label>
+        <input type="text" id="detail-es" class="input-field">
       </div>
-      <div id="detail-descs" class="detail-descs"></div>
+      <div class="form-group">
+        <label>Ucraniano / Українська</label>
+        <input type="text" id="detail-uk" class="input-field">
+      </div>
+      <div class="form-group">
+        <label>Descripción en español</label>
+        <input type="text" id="detail-desc-es" class="input-field" placeholder="Ej: Se sirve entero a la plancha...">
+      </div>
+      <div class="form-group">
+        <label>Опис українською / Descripción en ucraniano</label>
+        <input type="text" id="detail-desc-uk" class="input-field" placeholder="Короткий опис...">
+      </div>
       <div class="form-group" style="margin-top:12px">
         <label>Categoría / Категорія</label>
         <select id="detail-cat" class="select-field"></select>

@@ -1591,18 +1591,15 @@ function openWordDetail(wordId) {
   detailWordId = wordId;
 
   document.getElementById('detail-word-id').value = wordId;
-  document.getElementById('detail-es').textContent = word.es;
-  document.getElementById('detail-uk').textContent = word.uk;
+  document.getElementById('detail-es').value = word.es;
+  document.getElementById('detail-uk').value = word.uk || '';
+  document.getElementById('detail-desc-es').value = word.descripcion_es || '';
+  document.getElementById('detail-desc-uk').value = word.descripcion || '';
 
   const imgDiv = document.getElementById('detail-image');
   imgDiv.innerHTML = word.imagen
     ? `<img src="${word.imagen}" alt="${word.es}" onerror="this.outerHTML='<span style=font-size:56px>${word.emoji || '🍽️'}</span>'">`
     : `<span style="font-size:56px">${word.emoji || '🍽️'}</span>`;
-
-  const descsDiv = document.getElementById('detail-descs');
-  descsDiv.innerHTML = '';
-  if (word.descripcion_es) descsDiv.innerHTML += `<div class="card-desc card-desc-es">${word.descripcion_es}</div>`;
-  if (word.descripcion) descsDiv.innerHTML += `<div class="card-desc card-desc-uk">${word.descripcion}</div>`;
 
   // Poblar select de categoría
   const detailCatSelect = document.getElementById('detail-cat');
@@ -1686,6 +1683,12 @@ function setupDetailTagsInput() {
 function saveAndCloseDetail() {
   const word = miVocabulario.find(w => w.id === detailWordId);
   if (word) {
+    // Campos editables
+    word.es = document.getElementById('detail-es').value.trim() || word.es;
+    word.uk = document.getElementById('detail-uk').value.trim();
+    word.descripcion_es = document.getElementById('detail-desc-es').value.trim();
+    word.descripcion = document.getElementById('detail-desc-uk').value.trim();
+
     // Añadir etiqueta pendiente en el input (si el usuario no pulsó Enter)
     const pendingTag = document.getElementById('detail-tag-input').value.trim().toLowerCase().replace(/[^a-záéíóúñ0-9_-]/gi, '');
     if (pendingTag && !detailTags.includes(pendingTag)) detailTags.push(pendingTag);
