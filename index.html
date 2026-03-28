@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" translate="no">
+<html lang="es" translate="no" class="notranslate">
 <head>
   <meta charset="UTF-8">
   <meta name="google" content="notranslate">
@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="notranslate">
   <div id="app">
     <!-- Header -->
     <header class="header">
@@ -364,6 +364,33 @@
         });
       });
     }
+  </script>
+  <script>
+    // Bloquear Google Translate y extensiones de traducción
+    (function() {
+      // Marcar todos los elementos existentes y futuros como no-traducibles
+      document.documentElement.setAttribute('translate', 'no');
+      document.documentElement.classList.add('notranslate');
+
+      // Observar cambios del DOM: si Google Translate añade la clase 'translated-ltr'
+      // o inserta su iframe, lo eliminamos
+      const obs = new MutationObserver(mutations => {
+        mutations.forEach(m => {
+          // Si Google Translate activa la traducción, revertir
+          if (document.documentElement.classList.contains('translated-ltr') ||
+              document.documentElement.classList.contains('translated-rtl')) {
+            document.documentElement.classList.remove('translated-ltr', 'translated-rtl');
+          }
+          // Eliminar el iframe que inserta Google Translate
+          m.addedNodes.forEach(node => {
+            if (node.nodeName === 'IFRAME' && node.id && node.id.includes('google_translate')) {
+              node.remove();
+            }
+          });
+        });
+      });
+      obs.observe(document.documentElement, { attributes: true, childList: true, subtree: false });
+    })();
   </script>
 </body>
 </html>
