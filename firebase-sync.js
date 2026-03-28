@@ -19,14 +19,7 @@ let currentUser = null;
 // ---- AUTH ----
 
 function initAuth(onUserChange) {
-  // Fix iOS Safari bfcache: cuando Safari restaura la página desde caché
-  // después del redirect de Google, Firebase no re-ejecuta onAuthStateChanged.
-  // Forzar recarga para que Firebase lea el estado desde IndexedDB.
-  window.addEventListener('pageshow', (e) => {
-    if (e.persisted) window.location.reload();
-  });
-
-  // Procesar resultado del redirect si venimos de Google
+  // Procesar resultado del redirect si venimos de Google (fallback)
   auth.getRedirectResult().then(result => {
     if (result && result.user) {
       console.log('Login via redirect OK:', result.user.displayName);
@@ -42,26 +35,21 @@ function initAuth(onUserChange) {
 async function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  // En Safari PWA (standalone), el popup no funciona porque abre en un
-  // proceso de Safari separado. Usar redirect directamente.
-  const isStandalone = window.navigator.standalone === true ||
-    window.matchMedia('(display-mode: standalone)').matches;
-
-  if (isStandalone) {
-    return auth.signInWithRedirect(provider);
-  }
-
-  // En navegador normal: intentar popup primero, fallback a redirect
+  // Intentar popup siempre (funciona en iOS 16.4+ incluso en PWA standalone).
+  // signInWithRedirect falla en iOS Safari por ITP (bloquea cookies cross-domain
+  // de firebaseapp.com). Solo usar redirect como último recurso.
   try {
     await auth.signInWithPopup(provider);
   } catch (e) {
     if (e.code === 'auth/popup-blocked' ||
-        e.code === 'auth/popup-closed-by-user' ||
-        e.code === 'auth/operation-not-supported-in-this-environment' ||
-        e.code === 'auth/cancelled-popup-request') {
+        e.code === 'auth/operation-not-supported-in-this-environment') {
       return auth.signInWithRedirect(provider);
     }
-    console.warn('Login error:', e.code, e.message);
+    // popup-closed-by-user / cancelled: el usuario canceló, no hacer nada
+    if (e.code !== 'auth/popup-closed-by-user' &&
+        e.code !== 'auth/cancelled-popup-request') {
+      console.warn('Login error:', e.code, e.message);
+    }
   }
 }
 
