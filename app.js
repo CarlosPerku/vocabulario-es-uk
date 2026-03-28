@@ -469,7 +469,24 @@ function addFromSearchCard(wordId) {
 function setupModal() {
   document.getElementById('modal-cancel').addEventListener('click', closeModal);
   document.getElementById('modal-save').addEventListener('click', saveFromModal);
-  document.getElementById('modal-cat').addEventListener('change', updateSubcatOptions);
+  document.getElementById('modal-cat').addEventListener('change', () => {
+    const isNew = document.getElementById('modal-cat').value === '__new__';
+    document.getElementById('new-cat-group').classList.toggle('hidden', !isNew);
+    if (isNew) {
+      document.getElementById('modal-new-cat').value = '';
+      document.getElementById('modal-new-cat').focus();
+    }
+    updateSubcatOptions();
+  });
+
+  document.getElementById('modal-subcat').addEventListener('change', () => {
+    const isNew = document.getElementById('modal-subcat').value === '__new__';
+    document.getElementById('new-subcat-group').classList.toggle('hidden', !isNew);
+    if (isNew) {
+      document.getElementById('modal-new-subcat').value = '';
+      document.getElementById('modal-new-subcat').focus();
+    }
+  });
 
   // Auto-traducción entre campos bilingüe
   let timers = {};
@@ -511,6 +528,7 @@ function openAddModal(wordJsonStr) {
   getUserCategories().forEach(c => { if (!allCatsMap.has(c.id)) allCatsMap.set(c.id, { id: c.id, es: c.nombre.es, uk: c.nombre.uk || '', emoji: '' }); });
   miVocabulario.forEach(w => { if (w.categoriaId && !allCatsMap.has(w.categoriaId)) allCatsMap.set(w.categoriaId, { id: w.categoriaId, es: w.categoria || w.categoriaId, uk: w.categoriaUk || '', emoji: '' }); });
   allCatsMap.forEach(c => { catSelect.innerHTML += `<option value="${c.id}">${c.emoji ? c.emoji + ' ' : ''}${c.es}${c.uk ? ' / ' + c.uk : ''}</option>`; });
+  catSelect.innerHTML += `<option value="__new__">+ Nueva categoría / Нова категорія</option>`;
 
   // Pre-select category if word has one
   if (word.categoriaId) {
@@ -518,6 +536,8 @@ function openAddModal(wordJsonStr) {
   } else if (vocabBase.categorias.length > 0) {
     catSelect.value = vocabBase.categorias[0].id;
   }
+  document.getElementById('new-cat-group').classList.add('hidden');
+  document.getElementById('new-subcat-group').classList.add('hidden');
   updateSubcatOptions();
 
   // Images in modal
@@ -558,6 +578,8 @@ function updateSubcatOptions() {
   getUserSubcategories(catId).forEach(s => { if (!allSubsMap.has(s.id)) allSubsMap.set(s.id, { id: s.id, es: s.nombre.es, uk: s.nombre.uk || '', emoji: '' }); });
   miVocabulario.filter(w => w.categoriaId === catId && w.subcategoriaId).forEach(w => { if (!allSubsMap.has(w.subcategoriaId)) allSubsMap.set(w.subcategoriaId, { id: w.subcategoriaId, es: w.subcategoria || w.subcategoriaId, uk: w.subcategoriaUk || '', emoji: '' }); });
   allSubsMap.forEach(s => { subcatSelect.innerHTML += `<option value="${s.id}">${s.emoji ? s.emoji + ' ' : ''}${s.es}${s.uk ? ' / ' + s.uk : ''}</option>`; });
+  subcatSelect.innerHTML += `<option value="__new__">+ Nueva subcategoría / Нова підкатегорія</option>`;
+  document.getElementById('new-subcat-group').classList.add('hidden');
 }
 
 function saveFromModal() {
@@ -571,12 +593,15 @@ function saveFromModal() {
 
   if (!es) return;
 
-  // Handle new category
+  // Handle new category (from dropdown __new__ or legacy text field)
+  const isNewCat = catId === '__new__' || !!newCat;
+  const newCatName = newCat || (catId === '__new__' ? document.getElementById('modal-new-cat').value.trim() : '');
+
   let catName = '', catNameUk = '';
-  if (newCat) {
-    catId = slugify(newCat);
-    catName = newCat;
-    catNameUk = newCat;
+  if (isNewCat && newCatName) {
+    catId = slugify(newCatName);
+    catName = newCatName;
+    catNameUk = newCatName;
   } else {
     const baseCat = vocabBase.categorias.find(c => c.id === catId);
     const userCat = getUserCategories().find(c => c.id === catId);
@@ -585,12 +610,15 @@ function saveFromModal() {
     catNameUk = baseCat?.nombre.uk || userCat?.nombre.uk || wordWithCat?.categoriaUk || '';
   }
 
-  // Handle new subcategory
+  // Handle new subcategory (from dropdown __new__ or legacy text field)
+  const isNewSubcat = subcatId === '__new__' || !!newSubcat;
+  const newSubcatName = newSubcat || (subcatId === '__new__' ? document.getElementById('modal-new-subcat').value.trim() : '');
+
   let subcatName = '', subcatNameUk = '';
-  if (newSubcat) {
-    subcatId = slugify(newSubcat);
-    subcatName = newSubcat;
-    subcatNameUk = newSubcat;
+  if (isNewSubcat && newSubcatName) {
+    subcatId = slugify(newSubcatName);
+    subcatName = newSubcatName;
+    subcatNameUk = newSubcatName;
   } else {
     const baseCat = vocabBase.categorias.find(c => c.id === catId);
     const baseSub = baseCat?.subcategorias.find(s => s.id === subcatId);
