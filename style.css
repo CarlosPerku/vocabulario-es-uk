@@ -973,6 +973,25 @@ body {
   opacity: 1;
 }
 
+/* Image picker search */
+.image-picker-search {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.image-picker-search .input-field {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 15px;
+}
+
+.image-picker-search .btn {
+  padding: 10px 14px;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
 /* Image picker grid */
 .image-picker-grid {
   display: grid;

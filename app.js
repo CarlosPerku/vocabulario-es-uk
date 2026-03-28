@@ -998,15 +998,19 @@ async function openImagePicker(wordId) {
     } catch (e) { /* silencioso */ }
   }
 
+  renderPickerGrid(wordId, images, word.imagen);
+}
+
+function renderPickerGrid(wordId, images, selectedUrl) {
+  const grid = document.getElementById('image-picker-grid');
   if (images.length === 0) {
     grid.innerHTML = '<p style="text-align:center;color:#64748b;padding:20px">No se encontraron imágenes / Зображень не знайдено</p>';
     return;
   }
-
-  grid.innerHTML = images.map((url, i) => `
-    <div class="picker-img-wrap ${word.imagen === url ? 'selected' : ''}" onclick="selectPickerImage('${wordId}', '${url}', this)">
-      <img src="${url}" alt="${word.es}" onerror="this.parentElement.style.display='none'">
-      ${word.imagen === url ? '<div class="picker-check">✓</div>' : ''}
+  grid.innerHTML = images.map(url => `
+    <div class="picker-img-wrap ${selectedUrl === url ? 'selected' : ''}" onclick="selectPickerImage('${wordId}', '${url}', this)">
+      <img src="${url}" alt="" onerror="this.parentElement.style.display='none'">
+      ${selectedUrl === url ? '<div class="picker-check">✓</div>' : ''}
     </div>
   `).join('');
 }
@@ -1035,6 +1039,38 @@ function setupImagePicker() {
   document.getElementById('image-picker-close').addEventListener('click', closeImagePicker);
   document.getElementById('image-picker-modal').addEventListener('click', e => {
     if (e.target === document.getElementById('image-picker-modal')) closeImagePicker();
+  });
+
+  const searchBtn = document.getElementById('image-picker-search-btn');
+  const searchInput = document.getElementById('image-picker-query');
+
+  const doPickerSearch = async () => {
+    const query = searchInput.value.trim();
+    if (!query) return;
+    const wordId = document.getElementById('image-picker-wordid').value;
+    const word = miVocabulario.find(w => w.id === wordId);
+    const grid = document.getElementById('image-picker-grid');
+    grid.innerHTML = '<div class="loading"><div class="spinner"></div>Buscando / Шукаю...</div>';
+    // Buscar sin usar la caché, para obtener resultados frescos
+    let images = [];
+    try {
+      const [esImgs, enImgs, commonsImgs] = await Promise.all([
+        fetchWikipediaImages(query, 'es'),
+        fetchWikipediaImages(query, 'en'),
+        fetchCommonsImages(query)
+      ]);
+      const seen = new Set();
+      [...esImgs, ...enImgs, ...commonsImgs].forEach(url => {
+        if (!seen.has(url)) { seen.add(url); images.push(url); }
+      });
+      images = images.slice(0, 12);
+    } catch (e) { /* silencioso */ }
+    renderPickerGrid(wordId, images, word?.imagen || '');
+  };
+
+  searchBtn.addEventListener('click', doPickerSearch);
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doPickerSearch();
   });
 }
 
