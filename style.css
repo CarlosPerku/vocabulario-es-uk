@@ -62,6 +62,9 @@ body {
 
 #auth-area {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .btn-auth {

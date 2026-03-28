@@ -14,7 +14,7 @@ function speakWord(text, rate = 1.0) {
 }
 
 function speakBtns(text) {
-  return `<div class="speak-btns"><button class="btn-speak" onclick="event.stopPropagation();speakWord('${text.replace(/'/g, "\\'")}',1.0)" title="Pronunciar / Вимова">🔊</button><button class="btn-speak btn-speak-slow" onclick="event.stopPropagation();speakWord('${text.replace(/'/g, "\\'")}',0.5)" title="Lento / Повільно">🐢</button></div>`;
+  return `<div class="speak-btns"><button class="btn-speak" onclick="event.stopPropagation();speakWord('${text.replace(/'/g, "\\'")}',1.0)" title="Pronunciar / Вимова">🔊</button><button class="btn-speak btn-speak-slow" onclick="event.stopPropagation();speakWord('${text.replace(/'/g, "\\'")}',0.25)" title="Lento / Повільно">🐢</button></div>`;
 }
 
 // ==================== STATE ====================
@@ -963,7 +963,7 @@ function showQuizCard() {
   document.getElementById('quiz-question').textContent = word.uk;
   const answerDiv = document.getElementById('quiz-answer');
   const safeEs = word.es.replace(/'/g, "\\'");
-  answerDiv.innerHTML = `<div class="quiz-answer-row"><span>${word.es}</span><div class="speak-btns"><button class="btn-speak" onclick="speakWord('${safeEs}',1.0)" title="Pronunciar">🔊</button><button class="btn-speak btn-speak-slow" onclick="speakWord('${safeEs}',0.5)" title="Lento">🐢</button></div></div>${word.descripcion ? `<div class="quiz-desc">${word.descripcion}</div>` : ''}`;
+  answerDiv.innerHTML = `<div class="quiz-answer-row"><span>${word.es}</span><div class="speak-btns"><button class="btn-speak" onclick="speakWord('${safeEs}',1.0)" title="Pronunciar">🔊</button><button class="btn-speak btn-speak-slow" onclick="speakWord('${safeEs}',0.25)" title="Lento">🐢</button></div></div>${word.descripcion ? `<div class="quiz-desc">${word.descripcion}</div>` : ''}`;
   answerDiv.classList.add('hidden');
   document.getElementById('quiz-reveal').style.display = 'block';
   document.getElementById('quiz-counter').textContent = `${quizIndex + 1} / ${quizWords.length}`;
