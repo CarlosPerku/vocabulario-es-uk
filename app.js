@@ -237,9 +237,9 @@ function renderMyVocab() {
   list.innerHTML = words.map(w => `
     <div class="word-card" data-id="${w.id}" onclick="openWordDetail('${w.id}')">
       <div class="card-image" onclick="event.stopPropagation(); openImagePicker('${w.id}')" title="Cambiar imagen / Змінити зображення">
-        ${w.imagen
-          ? `<img src="${w.imagen}" alt="${w.es}" onerror="this.parentElement.innerHTML='${w.emoji || '🍽️'}'">`
-          : (w.emoji || '🍽️')}
+        ${w.emoji
+          ? w.emoji
+          : (w.imagen ? `<img src="${w.imagen}" alt="${w.es}" onerror="this.parentElement.innerHTML='🍽️'">` : '🍽️')}
         <div class="card-image-hint">🖼️</div>
       </div>
       <div class="card-info">
@@ -964,10 +964,12 @@ function endQuiz() {
 function showQuizCard() {
   const word = quizWords[quizIndex];
   const imageDiv = document.getElementById('quiz-image');
-  if (word.imagen) {
-    imageDiv.innerHTML = `<img src="${word.imagen}" onerror="this.outerHTML='<span style=font-size:80px>${word.emoji || '🍽️'}</span>'">`;
+  if (word.emoji) {
+    imageDiv.innerHTML = `<span style="font-size:80px">${word.emoji}</span>`;
+  } else if (word.imagen) {
+    imageDiv.innerHTML = `<img src="${word.imagen}" onerror="this.outerHTML='<span style=font-size:80px>🍽️</span>'">`;
   } else {
-    imageDiv.innerHTML = word.emoji || '🍽️';
+    imageDiv.innerHTML = '🍽️';
   }
   // Mostrar ucraniano, ocultar español
   document.getElementById('quiz-question').textContent = word.uk;
