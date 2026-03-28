@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a56db">
+  <title>Vocabulario ES-UK</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header-title">
+        <span class="flag">🇪🇸</span> Vocabulario <span class="flag">🇺🇦</span>
+      </h1>
+      <nav class="tabs">
+        <button class="tab active" data-view="vocabulario">📚 Palabras<br><small>Слова</small></button>
+        <button class="tab" data-view="buscar">🔍 Buscar<br><small>Шукати</small></button>
+        <button class="tab" data-view="categorias">📂 Categorías<br><small>Категорії</small></button>
+      </nav>
+    </header>
+
+    <!-- Vista: Mi Vocabulario -->
+    <main id="view-vocabulario" class="view active">
+      <div class="filter-bar">
+        <input type="text" id="filter-input" placeholder="Filtrar / Фільтрувати..." class="input-field">
+        <select id="filter-categoria" class="select-field">
+          <option value="">Todas / Усі категорії</option>
+        </select>
+      </div>
+      <div id="vocab-list" class="card-grid"></div>
+      <div id="vocab-empty" class="empty-state">
+        <span class="empty-emoji">📖</span>
+        <p>Todavía no tienes palabras<br><small>У тебе ще немає слів</small></p>
+        <p class="empty-hint">Ve a <strong>Buscar / Шукати</strong> para añadir palabras</p>
+      </div>
+    </main>
+
+    <!-- Vista: Buscar -->
+    <main id="view-buscar" class="view">
+      <div class="search-section">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Escribe una palabra / Напиши слово..." class="input-field search-input" autocomplete="off" autocorrect="off">
+          <button id="search-btn" class="btn btn-primary">Buscar / Шукати</button>
+        </div>
+        <div id="suggestions" class="suggestions"></div>
+      </div>
+
+      <div id="search-results" class="search-results">
+        <!-- Resultados de búsqueda -->
+      </div>
+
+      <div id="search-empty" class="empty-state">
+        <span class="empty-emoji">🔍</span>
+        <p>Escribe una palabra en español<br><small>Напиши слово іспанською</small></p>
+        <p class="empty-hint">Imágenes + traducción + descripción<br><small>Зображення + переклад + опис</small></p>
+      </div>
+
+      <!-- Modal para añadir palabra nueva -->
+      <div id="add-modal" class="modal hidden">
+        <div class="modal-content">
+          <h3 class="modal-title">Añadir al vocabulario<br><small>Додати до словника</small></h3>
+          <div class="modal-images" id="modal-images"></div>
+          <div class="form-group">
+            <label>Español / Іспанська</label>
+            <input type="text" id="modal-es" class="input-field" readonly>
+          </div>
+          <div class="form-group">
+            <label>Ucraniano / Українська</label>
+            <input type="text" id="modal-uk" class="input-field" placeholder="Traducción / Переклад...">
+          </div>
+          <div class="form-group">
+            <label>Descripción / Опис</label>
+            <input type="text" id="modal-desc" class="input-field" placeholder="Breve descripción / Короткий опис...">
+          </div>
+          <div class="form-group">
+            <label>Categoría / Категорія</label>
+            <select id="modal-cat" class="select-field"></select>
+          </div>
+          <div class="form-group">
+            <label>Subcategoría / Підкатегорія</label>
+            <select id="modal-subcat" class="select-field"></select>
+          </div>
+          <div class="form-group">
+            <label>Nueva categoría / Нова категорія (opcional)</label>
+            <input type="text" id="modal-new-cat" class="input-field" placeholder="Ej: Ropa, Casa...">
+          </div>
+          <div class="form-group">
+            <label>Nueva subcategoría / Нова підкатегорія (opcional)</label>
+            <input type="text" id="modal-new-subcat" class="input-field" placeholder="Ej: Camisetas, Cocina...">
+          </div>
+          <div class="modal-actions">
+            <button id="modal-cancel" class="btn btn-secondary">Cancelar / Скасувати</button>
+            <button id="modal-save" class="btn btn-primary">Guardar / Зберегти</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Vista: Categorías -->
+    <main id="view-categorias" class="view">
+      <div id="categorias-tree" class="categorias-tree"></div>
+    </main>
+
+    <!-- Quiz mode overlay -->
+    <div id="quiz-overlay" class="quiz-overlay hidden">
+      <div class="quiz-card">
+        <button id="quiz-close" class="quiz-close">✕</button>
+        <div id="quiz-image" class="quiz-image"></div>
+        <div id="quiz-question" class="quiz-question"></div>
+        <div id="quiz-answer" class="quiz-answer hidden"></div>
+        <button id="quiz-reveal" class="btn btn-primary btn-block">Mostrar / Показати</button>
+        <div id="quiz-nav" class="quiz-nav">
+          <button id="quiz-prev" class="btn btn-secondary">← Anterior / Назад</button>
+          <span id="quiz-counter" class="quiz-counter"></span>
+          <button id="quiz-next" class="btn btn-secondary">Siguiente / Далі →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating quiz button -->
+    <button id="quiz-btn" class="fab" title="Modo Quiz">🧠</button>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>
