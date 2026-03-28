@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupCameraInput();
   setupCatModalTranslation();
   setupDetailTagsInput();
+  setupDetailCatSelects();
   checkIosInstallHint();
 });
 
@@ -540,12 +541,19 @@ function openAddModal(wordJsonStr) {
   document.getElementById('new-subcat-group').classList.add('hidden');
   updateSubcatOptions();
 
-  // Images in modal
+  // Images in modal — marcar como seleccionada la que el usuario eligió
   const modalImages = document.getElementById('modal-images');
   if (word._images && word._images.length > 0) {
-    modalImages.innerHTML = word._images.map((url, i) =>
-      `<img src="${url}" class="${i === 0 ? 'selected' : ''}" onclick="selectModalImage(this, '${url}')">`
-    ).join('');
+    modalImages.innerHTML = word._images.map(url => {
+      const isSelected = url === word.imagen || (!word.imagen && url === word._images[0]);
+      if (isSelected) selectedImageUrl = url;
+      return `<img src="${url}" class="${isSelected ? 'selected' : ''}" onclick="selectModalImage(this, '${url}')">`;
+    }).join('');
+    // Si la imagen seleccionada no está en _images (p.ej. foto de cámara), añadirla
+    if (word.imagen && !word._images.includes(word.imagen)) {
+      modalImages.innerHTML = `<img src="${word.imagen}" class="selected" onclick="selectModalImage(this, '${word.imagen}')">` + modalImages.innerHTML;
+      selectedImageUrl = word.imagen;
+    }
   } else if (word.imagen) {
     modalImages.innerHTML = `<img src="${word.imagen}" class="selected" onclick="selectModalImage(this, '${word.imagen}')">`;
   } else {
@@ -1591,9 +1599,19 @@ function openWordDetail(wordId) {
   if (word.descripcion_es) descsDiv.innerHTML += `<div class="card-desc card-desc-es">${word.descripcion_es}</div>`;
   if (word.descripcion) descsDiv.innerHTML += `<div class="card-desc card-desc-uk">${word.descripcion}</div>`;
 
-  document.getElementById('detail-cat').textContent = word.categoria
-    ? `${word.categoria}${word.subcategoria ? ' › ' + word.subcategoria : ''}`
-    : '';
+  // Poblar select de categoría
+  const detailCatSelect = document.getElementById('detail-cat');
+  detailCatSelect.innerHTML = '<option value="">Seleccionar / Обрати...</option>';
+  const allCatsMap = new Map();
+  vocabBase.categorias.forEach(c => allCatsMap.set(c.id, { id: c.id, es: c.nombre.es, uk: c.nombre.uk, emoji: c.emoji || '' }));
+  getUserCategories().forEach(c => { if (!allCatsMap.has(c.id)) allCatsMap.set(c.id, { id: c.id, es: c.nombre.es, uk: c.nombre.uk || '', emoji: '' }); });
+  miVocabulario.forEach(w => { if (w.categoriaId && !allCatsMap.has(w.categoriaId)) allCatsMap.set(w.categoriaId, { id: w.categoriaId, es: w.categoria || w.categoriaId, uk: w.categoriaUk || '', emoji: '' }); });
+  allCatsMap.forEach(c => { detailCatSelect.innerHTML += `<option value="${c.id}">${c.emoji ? c.emoji + ' ' : ''}${c.es}${c.uk ? ' / ' + c.uk : ''}</option>`; });
+  detailCatSelect.innerHTML += `<option value="__new__">+ Nueva categoría / Нова категорія</option>`;
+  if (word.categoriaId) detailCatSelect.value = word.categoriaId;
+  document.getElementById('detail-new-cat-group').classList.add('hidden');
+  document.getElementById('detail-new-subcat-group').classList.add('hidden');
+  updateDetailSubcatOptions(word.subcategoriaId);
 
   detailTags = word.etiquetas ? [...word.etiquetas] : [];
   renderDetailTags();
@@ -1616,6 +1634,35 @@ function removeDetailTag(tag) {
   renderDetailTags();
 }
 
+function updateDetailSubcatOptions(preselectedId) {
+  const catId = document.getElementById('detail-cat').value;
+  const subcatSelect = document.getElementById('detail-subcat');
+  subcatSelect.innerHTML = '<option value="">Seleccionar / Обрати...</option>';
+  const allSubsMap = new Map();
+  const baseCat = vocabBase.categorias.find(c => c.id === catId);
+  if (baseCat) baseCat.subcategorias.forEach(s => allSubsMap.set(s.id, { id: s.id, es: s.nombre.es, uk: s.nombre.uk, emoji: s.emoji || '' }));
+  getUserSubcategories(catId).forEach(s => { if (!allSubsMap.has(s.id)) allSubsMap.set(s.id, { id: s.id, es: s.nombre.es, uk: s.nombre.uk || '', emoji: '' }); });
+  miVocabulario.filter(w => w.categoriaId === catId && w.subcategoriaId).forEach(w => { if (!allSubsMap.has(w.subcategoriaId)) allSubsMap.set(w.subcategoriaId, { id: w.subcategoriaId, es: w.subcategoria || w.subcategoriaId, uk: w.subcategoriaUk || '', emoji: '' }); });
+  allSubsMap.forEach(s => { subcatSelect.innerHTML += `<option value="${s.id}">${s.emoji ? s.emoji + ' ' : ''}${s.es}${s.uk ? ' / ' + s.uk : ''}</option>`; });
+  subcatSelect.innerHTML += `<option value="__new__">+ Nueva subcategoría / Нова підкатегорія</option>`;
+  if (preselectedId) subcatSelect.value = preselectedId;
+  document.getElementById('detail-new-subcat-group').classList.add('hidden');
+}
+
+function setupDetailCatSelects() {
+  document.getElementById('detail-cat').addEventListener('change', () => {
+    const isNew = document.getElementById('detail-cat').value === '__new__';
+    document.getElementById('detail-new-cat-group').classList.toggle('hidden', !isNew);
+    if (isNew) { document.getElementById('detail-new-cat').value = ''; document.getElementById('detail-new-cat').focus(); }
+    updateDetailSubcatOptions(null);
+  });
+  document.getElementById('detail-subcat').addEventListener('change', () => {
+    const isNew = document.getElementById('detail-subcat').value === '__new__';
+    document.getElementById('detail-new-subcat-group').classList.toggle('hidden', !isNew);
+    if (isNew) { document.getElementById('detail-new-subcat').value = ''; document.getElementById('detail-new-subcat').focus(); }
+  });
+}
+
 function setupDetailTagsInput() {
   const input = document.getElementById('detail-tag-input');
   input.addEventListener('keydown', e => {
@@ -1635,7 +1682,47 @@ function saveAndCloseDetail() {
   const word = miVocabulario.find(w => w.id === detailWordId);
   if (word) {
     word.etiquetas = [...detailTags];
+
+    // Guardar categoría
+    let catId = document.getElementById('detail-cat').value;
+    const newCatName = catId === '__new__' ? document.getElementById('detail-new-cat').value.trim() : '';
+    if (newCatName) catId = slugify(newCatName);
+
+    let subcatId = document.getElementById('detail-subcat').value;
+    const newSubcatName = subcatId === '__new__' ? document.getElementById('detail-new-subcat').value.trim() : '';
+    if (newSubcatName) subcatId = slugify(newSubcatName);
+
+    if (catId && catId !== '__new__') {
+      const allCatsMap = new Map();
+      vocabBase.categorias.forEach(c => allCatsMap.set(c.id, c));
+      getUserCategories().forEach(c => { if (!allCatsMap.has(c.id)) allCatsMap.set(c.id, { id: c.id, nombre: { es: c.nombre.es, uk: c.nombre.uk || '' } }); });
+      miVocabulario.forEach(w => { if (w.categoriaId && !allCatsMap.has(w.categoriaId)) allCatsMap.set(w.categoriaId, { id: w.categoriaId, nombre: { es: w.categoria || w.categoriaId, uk: w.categoriaUk || '' } }); });
+      const cat = allCatsMap.get(catId);
+      word.categoriaId = catId;
+      word.categoria = newCatName || cat?.nombre?.es || catId;
+      word.categoriaUk = cat?.nombre?.uk || '';
+      if (newCatName) saveUserCategory(catId, newCatName, newCatName);
+    }
+
+    if (subcatId && subcatId !== '__new__') {
+      const allSubsMap = new Map();
+      const baseCat = vocabBase.categorias.find(c => c.id === catId);
+      if (baseCat) baseCat.subcategorias.forEach(s => allSubsMap.set(s.id, s));
+      getUserSubcategories(catId).forEach(s => { if (!allSubsMap.has(s.id)) allSubsMap.set(s.id, s); });
+      miVocabulario.filter(w => w.categoriaId === catId && w.subcategoriaId).forEach(w => { if (!allSubsMap.has(w.subcategoriaId)) allSubsMap.set(w.subcategoriaId, { id: w.subcategoriaId, nombre: { es: w.subcategoria || w.subcategoriaId, uk: w.subcategoriaUk || '' } }); });
+      const sub = allSubsMap.get(subcatId);
+      word.subcategoriaId = subcatId;
+      word.subcategoria = newSubcatName || sub?.nombre?.es || subcatId;
+      word.subcategoriaUk = sub?.nombre?.uk || '';
+      if (newSubcatName) saveUserSubcategory(catId, subcatId, newSubcatName, newSubcatName);
+    } else if (!subcatId || subcatId === '__new__') {
+      word.subcategoriaId = '';
+      word.subcategoria = '';
+      word.subcategoriaUk = '';
+    }
+
     saveMyVocab();
+    populateCategoryFilter();
     renderTagsBar();
     renderMyVocab();
     renderEtiquetas();
