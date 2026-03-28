@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupDetailTagsInput();
   setupDetailCatSelects();
   setupExploreSearch();
+  setupCategoriasSearch();
   setupTranslatePair('detail-desc-es', 'detail-desc-uk', 'es', 'uk', detailUserEdited);
   setupTranslatePair('detail-desc-uk', 'detail-desc-es', 'uk', 'es', detailUserEdited);
   setupTranslatePair('detail-uk', 'detail-es', 'uk', 'es', detailUserEdited);
@@ -237,9 +238,9 @@ function renderMyVocab() {
   list.innerHTML = words.map(w => `
     <div class="word-card" data-id="${w.id}" onclick="openWordDetail('${w.id}')">
       <div class="card-image" onclick="event.stopPropagation(); openImagePicker('${w.id}')" title="Cambiar imagen / Змінити зображення">
-        ${w.emoji
-          ? w.emoji
-          : (w.imagen ? `<img src="${w.imagen}" alt="${w.es}" onerror="this.parentElement.innerHTML='🍽️'">` : '🍽️')}
+        ${w.imagen
+          ? `<img src="${w.imagen}" alt="${w.es}" onerror="this.parentElement.innerHTML='${w.emoji || '🍽️'}'">`
+          : (w.emoji || '🍽️')}
         <div class="card-image-hint">🖼️</div>
       </div>
       <div class="card-info">
@@ -706,20 +707,17 @@ function saveFromModal() {
 }
 
 // ==================== CATEGORIES VIEW ====================
-function renderCategorias() {
+function renderCategorias(filterText) {
   const container = document.getElementById('categorias-tree');
+  const query = filterText !== undefined ? filterText : (document.getElementById('categorias-search')?.value || '').toLowerCase().trim();
 
-  // Group words by category and subcategory
   const catMap = new Map();
   miVocabulario.forEach(w => {
+    if (query && !normalizeStr(w.es).includes(normalizeStr(query)) && !(w.uk || '').toLowerCase().includes(query)) return;
     const catKey = w.categoria || 'Sin categoría';
-    if (!catMap.has(catKey)) {
-      catMap.set(catKey, { uk: w.categoriaUk || '', subs: new Map() });
-    }
+    if (!catMap.has(catKey)) catMap.set(catKey, { uk: w.categoriaUk || '', subs: new Map() });
     const subKey = w.subcategoria || 'General';
-    if (!catMap.get(catKey).subs.has(subKey)) {
-      catMap.get(catKey).subs.set(subKey, { uk: w.subcategoriaUk || '', words: [] });
-    }
+    if (!catMap.get(catKey).subs.has(subKey)) catMap.get(catKey).subs.set(subKey, { uk: w.subcategoriaUk || '', words: [] });
     catMap.get(catKey).subs.get(subKey).words.push(w);
   });
 
@@ -731,47 +729,49 @@ function renderCategorias() {
   let html = '';
   catMap.forEach((catData, catName) => {
     const totalWords = Array.from(catData.subs.values()).reduce((sum, s) => sum + s.words.length, 0);
-    const catId = slugify(catName);
+    const catId = 'mycat-' + slugify(catName);
 
-    html += `<div class="cat-group">
-      <div class="cat-header">
-        <span onclick="toggleCat('${catId}')" style="flex:1;cursor:pointer">
-          ${catName}${catData.uk ? ' / ' + catData.uk : ''}
-          <span class="cat-count">${totalWords}</span>
-        </span>
-        <div class="cat-actions">
-          <button class="cat-action-btn" onclick="openSubcatModal('${catName}')" title="Nueva subcategoría / Нова підкатегорія">+</button>
-          <button class="cat-action-btn cat-action-del" onclick="deleteCategoria('${catName}')" title="Eliminar categoría / Видалити категорію">✕</button>
-        </div>
-      </div>`;
-
+    let subcatHtml = '';
     catData.subs.forEach((subData, subName) => {
-      const subId = `${catId}-${slugify(subName)}`;
-      html += `
-        <div class="subcat-header">
-          <span onclick="toggleSubcat('${subId}')" style="flex:1;cursor:pointer">
-            ${subName}${subData.uk ? ' / ' + subData.uk : ''}
-            <span class="cat-count">${subData.words.length}</span>
-          </span>
-          <button class="cat-action-btn cat-action-del" onclick="deleteSubcategoria('${catName}', '${subName}')" title="Eliminar subcategoría / Видалити підкатегорію">✕</button>
+      subcatHtml += `<div class="explorar-subcat">
+        <div class="explorar-subcat-title">
+          <span style="flex:1" onclick="toggleExploreCat('${catId}-${slugify(subName)}')">${subName}${subData.uk ? ' / ' + subData.uk : ''} <span class="cat-count">${subData.words.length}</span></span>
+          <button class="cat-action-btn cat-action-del" onclick="deleteSubcategoria('${catName}','${subName}')" title="Eliminar">✕</button>
         </div>
-        <div class="subcat-words" id="subcat-${subId}">
+        <div class="explorar-words-grid" id="${catId}-${slugify(subName)}">
           ${subData.words.map(w => `
-            <div class="subcat-word">
-              <span class="subcat-word-emoji">${w.imagen ? `<img src="${w.imagen}" style="width:36px;height:36px;border-radius:8px;object-fit:cover;" onerror="this.outerHTML='${w.emoji || '🍽️'}'">` : (w.emoji || '🍽️')}</span>
-              <div class="subcat-word-text">
-                <div class="subcat-word-es">${w.es}</div>
-                <div class="subcat-word-uk">${w.uk}</div>
+            <div class="explorar-word" onclick="openWordDetail('${w.id}')">
+              <span class="explorar-word-emoji">${w.emoji || '🍽️'}</span>
+              <div class="explorar-word-text">
+                <div class="explorar-es-row"><span class="explorar-es">${w.es}</span>${speakBtns(w.es)}</div>
+                <div class="explorar-uk">${w.uk}</div>
               </div>
             </div>
           `).join('')}
-        </div>`;
+        </div>
+      </div>`;
     });
 
-    html += '</div>';
+    html += `<div class="explorar-cat">
+      <div class="explorar-cat-header" onclick="toggleExploreCat('${catId}')">
+        <span>📂 ${catName}${catData.uk ? ' / ' + catData.uk : ''}</span>
+        <span class="cat-count">${totalWords}</span>
+        <div class="cat-actions" onclick="event.stopPropagation()">
+          <button class="cat-action-btn" onclick="openSubcatModal('${catName}')" title="Nueva subcategoría">+</button>
+          <button class="cat-action-btn cat-action-del" onclick="deleteCategoria('${catName}')" title="Eliminar">✕</button>
+        </div>
+        <span class="explorar-toggle">▾</span>
+      </div>
+      <div class="explorar-cat-body" id="${catId}">${subcatHtml}</div>
+    </div>`;
   });
 
   container.innerHTML = html;
+}
+
+function setupCategoriasSearch() {
+  const input = document.getElementById('categorias-search');
+  if (input) input.addEventListener('input', () => renderCategorias(input.value.toLowerCase().trim()));
 }
 
 // ==================== GESTIÓN DE CATEGORÍAS ====================
@@ -964,12 +964,10 @@ function endQuiz() {
 function showQuizCard() {
   const word = quizWords[quizIndex];
   const imageDiv = document.getElementById('quiz-image');
-  if (word.emoji) {
-    imageDiv.innerHTML = `<span style="font-size:80px">${word.emoji}</span>`;
-  } else if (word.imagen) {
-    imageDiv.innerHTML = `<img src="${word.imagen}" onerror="this.outerHTML='<span style=font-size:80px>🍽️</span>'">`;
+  if (word.imagen) {
+    imageDiv.innerHTML = `<img src="${word.imagen}" onerror="this.outerHTML='<span style=font-size:80px>${word.emoji || '🍽️'}</span>'">`;
   } else {
-    imageDiv.innerHTML = '🍽️';
+    imageDiv.innerHTML = `<span style="font-size:80px">${word.emoji || '🍽️'}</span>`;
   }
   // Mostrar ucraniano, ocultar español
   document.getElementById('quiz-question').textContent = word.uk;

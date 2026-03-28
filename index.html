@@ -150,10 +150,11 @@
 
     <!-- Vista: Categorías -->
     <main id="view-categorias" class="view">
-      <button class="btn btn-primary" style="width:100%;margin-bottom:14px" onclick="openCatModal()">
-        + Nueva categoría / Нова категорія
-      </button>
-      <div id="categorias-tree" class="categorias-tree"></div>
+      <div class="explorar-header">
+        <input type="text" id="categorias-search" placeholder="Filtrar palabras / Фільтрувати..." class="input-field">
+        <button class="btn btn-primary" onclick="openCatModal()" title="Nueva categoría">+</button>
+      </div>
+      <div id="categorias-tree" class="explorar-tree"></div>
     </main>
 
     <!-- Vista: Explorar base de datos -->
