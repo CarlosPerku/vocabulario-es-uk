@@ -19,6 +19,9 @@ let currentUser = null;
 // ---- AUTH ----
 
 function initAuth(onUserChange) {
+  // Gestionar el resultado del redirect al volver de Google
+  auth.getRedirectResult().catch(e => console.warn('Redirect result error:', e));
+
   auth.onAuthStateChanged(user => {
     currentUser = user;
     onUserChange(user);
@@ -27,7 +30,7 @@ function initAuth(onUserChange) {
 
 function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  return auth.signInWithPopup(provider);
+  return auth.signInWithRedirect(provider);
 }
 
 function logout() {
