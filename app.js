@@ -1001,18 +1001,33 @@ async function openImagePicker(wordId) {
   renderPickerGrid(wordId, images, word.imagen);
 }
 
+let pickerImages = []; // imágenes actualmente visibles en el picker
+
 function renderPickerGrid(wordId, images, selectedUrl) {
+  pickerImages = [...images];
   const grid = document.getElementById('image-picker-grid');
-  if (images.length === 0) {
+  if (pickerImages.length === 0) {
     grid.innerHTML = '<p style="text-align:center;color:#64748b;padding:20px">No se encontraron imágenes / Зображень не знайдено</p>';
     return;
   }
-  grid.innerHTML = images.map(url => `
-    <div class="picker-img-wrap ${selectedUrl === url ? 'selected' : ''}" onclick="selectPickerImage('${wordId}', '${url}', this)">
-      <img src="${url}" alt="" onerror="this.parentElement.style.display='none'">
+  grid.innerHTML = pickerImages.map(url => `
+    <div class="picker-img-wrap ${selectedUrl === url ? 'selected' : ''}" data-url="${url}">
+      <img src="${url}" alt="" onerror="this.parentElement.style.display='none'" onclick="selectPickerImage('${wordId}', '${url}', this.parentElement)">
       ${selectedUrl === url ? '<div class="picker-check">✓</div>' : ''}
+      <button class="picker-discard" onclick="discardPickerImage('${wordId}', '${url}')" title="Descartar / Відхилити">✕</button>
     </div>
   `).join('');
+}
+
+function discardPickerImage(wordId, url) {
+  pickerImages = pickerImages.filter(u => u !== url);
+  const word = miVocabulario.find(w => w.id === wordId);
+  // Si la imagen descartada era la seleccionada, limpiarla
+  if (word && word.imagen === url) {
+    word.imagen = pickerImages[0] || '';
+    saveMyVocab();
+  }
+  renderPickerGrid(wordId, pickerImages, word?.imagen || '');
 }
 
 function selectPickerImage(wordId, url, el) {
@@ -1085,6 +1100,7 @@ window.toggleSubcat = toggleSubcat;
 window.openImagePicker = openImagePicker;
 window.selectPickerImage = selectPickerImage;
 window.closeImagePicker = closeImagePicker;
+window.discardPickerImage = discardPickerImage;
 window.setTagFilter = setTagFilter;
 window.removeModalTag = removeModalTag;
 window.loginWithGoogle = loginWithGoogle;
