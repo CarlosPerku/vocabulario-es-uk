@@ -383,7 +383,9 @@
           }
           // Eliminar el iframe que inserta Google Translate
           m.addedNodes.forEach(node => {
-            if (node.nodeName === 'IFRAME' && node.id && node.id.includes('google_translate')) {
+            if (node.nodeName === 'IFRAME' &&
+                node.id && node.id.includes('google_translate') &&
+                !node.src.includes('/__/auth/')) {
               node.remove();
             }
           });
