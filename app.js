@@ -636,6 +636,11 @@ function saveFromModal() {
     subcatNameUk = baseSub?.nombre.uk || userSub?.nombre.uk || wordWithSub?.subcategoriaUk || '';
   }
 
+  // Añadir etiqueta pendiente si el usuario no pulsó Enter
+  const pendingModalTag = document.getElementById('modal-tag-input').value.trim().toLowerCase().replace(/[^a-záéíóúñ0-9_-]/gi, '');
+  if (pendingModalTag && !modalTags.includes(pendingModalTag)) modalTags.push(pendingModalTag);
+  document.getElementById('modal-tag-input').value = '';
+
   const desc_es = document.getElementById('modal-desc-es').value.trim();
 
   const word = {
@@ -1681,6 +1686,11 @@ function setupDetailTagsInput() {
 function saveAndCloseDetail() {
   const word = miVocabulario.find(w => w.id === detailWordId);
   if (word) {
+    // Añadir etiqueta pendiente en el input (si el usuario no pulsó Enter)
+    const pendingTag = document.getElementById('detail-tag-input').value.trim().toLowerCase().replace(/[^a-záéíóúñ0-9_-]/gi, '');
+    if (pendingTag && !detailTags.includes(pendingTag)) detailTags.push(pendingTag);
+    document.getElementById('detail-tag-input').value = '';
+
     word.etiquetas = [...detailTags];
 
     // Guardar categoría
