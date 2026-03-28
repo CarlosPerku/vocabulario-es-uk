@@ -19,8 +19,12 @@ let currentUser = null;
 // ---- AUTH ----
 
 function initAuth(onUserChange) {
-  // Gestionar el resultado del redirect al volver de Google
-  auth.getRedirectResult().catch(e => console.warn('Redirect result error:', e));
+  // Procesar resultado del redirect si venimos de Google
+  auth.getRedirectResult().then(result => {
+    if (result && result.user) {
+      console.log('Login via redirect OK:', result.user.displayName);
+    }
+  }).catch(e => console.warn('Redirect result error:', e));
 
   auth.onAuthStateChanged(user => {
     currentUser = user;
@@ -28,9 +32,23 @@ function initAuth(onUserChange) {
   });
 }
 
-function loginWithGoogle() {
+async function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  return auth.signInWithRedirect(provider);
+  // Intentar popup primero (funciona mejor en la mayoría de dispositivos)
+  // Si está bloqueado, caer en redirect
+  try {
+    await auth.signInWithPopup(provider);
+  } catch (e) {
+    if (e.code === 'auth/popup-blocked' || e.code === 'auth/popup-closed-by-user') {
+      return auth.signInWithRedirect(provider);
+    }
+    // En iOS WebKit el popup puede fallar con otros códigos
+    if (e.code === 'auth/operation-not-supported-in-this-environment' ||
+        e.code === 'auth/cancelled-popup-request') {
+      return auth.signInWithRedirect(provider);
+    }
+    console.warn('Login error:', e.code, e.message);
+  }
 }
 
 function logout() {
