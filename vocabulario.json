@@ -1066,6 +1066,242 @@
           ]
         }
       ]
+    },
+    {
+      "id": "tramites",
+      "nombre": { "es": "Trámites y documentos", "uk": "Документи і процедури" },
+      "emoji": "📄",
+      "subcategorias": [
+        {
+          "id": "documentos",
+          "nombre": { "es": "Documentos importantes", "uk": "Важливі документи" },
+          "emoji": "📄",
+          "palabras": [
+            { "id": "pasaporte", "es": "Pasaporte", "uk": "Паспорт", "descripcion_es": "Documento oficial para viajar al extranjero.", "descripcion": "Офіційний документ для поїздок за кордон", "emoji": "🛂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nie", "es": "NIE", "uk": "НІЄ (номер іноземця)", "descripcion_es": "Número de Identidad de Extranjero. Necesario para trabajar y vivir en España.", "descripcion": "Ідентифікаційний номер іноземця, необхідний для роботи та проживання", "emoji": "🪪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dni", "es": "DNI", "uk": "Посвідчення особи", "descripcion_es": "Documento Nacional de Identidad español.", "descripcion": "Іспанське національне посвідчення особи", "emoji": "🪪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tarjeta-residencia", "es": "Tarjeta de residencia", "uk": "Посвідка на проживання", "descripcion_es": "Documento que permite vivir legalmente en España.", "descripcion": "Документ що дозволяє легально проживати в Іспанії", "emoji": "💳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "permiso-trabajo", "es": "Permiso de trabajo", "uk": "Дозвіл на роботу", "descripcion_es": "Autorización para trabajar legalmente en España.", "descripcion": "Дозвіл на законну роботу в Іспанії", "emoji": "💼", "imagen": "", "etiquetas": ["database"] },
+            { "id": "padron", "es": "Padrón municipal", "uk": "Реєстрація за місцем проживання", "descripcion_es": "Registro oficial en el ayuntamiento donde vives. Obligatorio para acceder a servicios.", "descripcion": "Офіційна реєстрація в муніципалітеті, обов'язкова для доступу до послуг", "emoji": "🏛️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "contrato", "es": "Contrato", "uk": "Контракт / Договір", "descripcion_es": "Documento legal que fija las condiciones de trabajo o alquiler.", "descripcion": "Юридичний документ що фіксує умови роботи або оренди", "emoji": "📝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nomina", "es": "Nómina", "uk": "Розрахунковий листок", "descripcion_es": "Documento mensual del salario que recibe un trabajador.", "descripcion": "Щомісячний документ з розрахунком зарплати", "emoji": "💰", "imagen": "", "etiquetas": ["database"] },
+            { "id": "numero-seguridad-social", "es": "Número de la Seguridad Social", "uk": "Номер соціального страхування", "descripcion_es": "Número necesario para acceder a sanidad y prestaciones.", "descripcion": "Номер необхідний для доступу до медицини та допомоги", "emoji": "🏥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "certificado", "es": "Certificado", "uk": "Сертифікат / Довідка", "descripcion_es": "Documento oficial que acredita algo.", "descripcion": "Офіційний документ що підтверджує щось", "emoji": "📜", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "instituciones",
+          "nombre": { "es": "Instituciones y gestiones", "uk": "Установи і процедури" },
+          "emoji": "🏛️",
+          "palabras": [
+            { "id": "ayuntamiento", "es": "Ayuntamiento", "uk": "Мерія / Міська рада", "descripcion_es": "Institución que gobierna un municipio. Donde se empadrona.", "descripcion": "Установа що управляє містом, де реєструються", "emoji": "🏛️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "oficina-extranjeria", "es": "Oficina de extranjería", "uk": "Відділ у справах іноземців", "descripcion_es": "Oficina donde se tramita el NIE y los permisos de residencia.", "descripcion": "Офіс де оформляють НІЄ та дозволи на проживання", "emoji": "🏢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "consulado", "es": "Consulado", "uk": "Консульство", "descripcion_es": "Representación oficial de un país en el extranjero.", "descripcion": "Офіційне представництво країни за кордоном", "emoji": "🏳️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cita-previa", "es": "Cita previa", "uk": "Попередній запис", "descripcion_es": "Reserva de hora para ser atendido en una oficina.", "descripcion": "Запис на прийом до установи", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "formulario", "es": "Formulario", "uk": "Бланк / Анкета", "descripcion_es": "Impreso con preguntas que hay que rellenar.", "descripcion": "Бланк з питаннями який треба заповнити", "emoji": "📋", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sello", "es": "Sello", "uk": "Печатка / Штамп", "descripcion_es": "Marca oficial que valida un documento.", "descripcion": "Офіційна позначка що підтверджує документ", "emoji": "🔏", "imagen": "", "etiquetas": ["database"] },
+            { "id": "firma", "es": "Firma", "uk": "Підпис", "descripcion_es": "Nombre escrito a mano para validar un documento.", "descripcion": "Рукописний підпис для підтвердження документа", "emoji": "✍️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fotocopia", "es": "Fotocopia", "uk": "Фотокопія / Ксерокопія", "descripcion_es": "Copia de un documento original.", "descripcion": "Копія оригінального документа", "emoji": "🖨️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "traduccion-jurada", "es": "Traducción jurada", "uk": "Засвідчений переклад", "descripcion_es": "Traducción oficial de documentos firmada por un traductor jurado.", "descripcion": "Офіційний переклад документів підписаний присяжним перекладачем", "emoji": "📄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "abogado-tram", "es": "Abogado / Gestor", "uk": "Адвокат / Посередник", "descripcion_es": "Profesional que ayuda con trámites legales y administrativos.", "descripcion": "Фахівець що допомагає з юридичними та адміністративними питаннями", "emoji": "👨‍💼", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vivienda",
+      "nombre": { "es": "Vivienda y alquiler", "uk": "Житло і оренда" },
+      "emoji": "🏠",
+      "subcategorias": [
+        {
+          "id": "tipos-vivienda",
+          "nombre": { "es": "Tipos de vivienda", "uk": "Типи житла" },
+          "emoji": "🏘️",
+          "palabras": [
+            { "id": "piso", "es": "Piso", "uk": "Квартира", "descripcion_es": "Vivienda en un edificio de varios pisos. Lo más común en España.", "descripcion": "Квартира в багатоквартирному будинку, найпоширеніше в Іспанії", "emoji": "🏢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "casa", "es": "Casa", "uk": "Будинок", "descripcion_es": "Vivienda independiente con su propia entrada.", "descripcion": "Окремий будинок зі своїм входом", "emoji": "🏠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "habitacion", "es": "Habitación", "uk": "Кімната", "descripcion_es": "Cuarto individual dentro de un piso compartido.", "descripcion": "Окрема кімната у спільній квартирі", "emoji": "🛏️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "estudio", "es": "Estudio", "uk": "Студія", "descripcion_es": "Piso pequeño de una sola habitación.", "descripcion": "Маленька квартира з однією кімнатою", "emoji": "🏠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "alquiler", "es": "Alquiler", "uk": "Оренда", "descripcion_es": "Pagar mensualmente por vivir en una vivienda.", "descripcion": "Щомісячна плата за проживання у житлі", "emoji": "🔑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "propietario", "es": "Propietario", "uk": "Власник", "descripcion_es": "Persona dueña de la vivienda.", "descripcion": "Власник житла", "emoji": "👤", "imagen": "", "etiquetas": ["database"] },
+            { "id": "inquilino", "es": "Inquilino", "uk": "Орендар", "descripcion_es": "Persona que vive de alquiler en una vivienda.", "descripcion": "Людина що живе в орендованому житлі", "emoji": "🧑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fianza", "es": "Fianza", "uk": "Застава / Депозит", "descripcion_es": "Dinero que se da al inicio del alquiler como garantía.", "descripcion": "Гроші що дають на початку оренди як гарантія", "emoji": "💰", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "servicios-hogar",
+          "nombre": { "es": "Servicios del hogar", "uk": "Комунальні послуги" },
+          "emoji": "💡",
+          "palabras": [
+            { "id": "luz", "es": "Luz / Electricidad", "uk": "Електрика / Світло", "descripcion_es": "Servicio de electricidad en el hogar.", "descripcion": "Послуга електропостачання", "emoji": "💡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "agua-servicio", "es": "Agua", "uk": "Вода (послуга)", "descripcion_es": "Servicio de suministro de agua corriente.", "descripcion": "Послуга водопостачання", "emoji": "🚰", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gas", "es": "Gas", "uk": "Газ", "descripcion_es": "Combustible usado para cocinar y calentar.", "descripcion": "Паливо для готування та опалення", "emoji": "🔥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "internet-servicio", "es": "Internet", "uk": "Інтернет", "descripcion_es": "Servicio de conexión a la red.", "descripcion": "Послуга підключення до мережі", "emoji": "📡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "calefaccion", "es": "Calefacción", "uk": "Опалення", "descripcion_es": "Sistema para calentar el hogar en invierno.", "descripcion": "Система для обігріву житла взимку", "emoji": "🌡️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ascensor", "es": "Ascensor", "uk": "Ліфт", "descripcion_es": "Aparato para subir y bajar entre pisos.", "descripcion": "Пристрій для переміщення між поверхами", "emoji": "🛗", "imagen": "", "etiquetas": ["database"] },
+            { "id": "portero", "es": "Portero / Conserje", "uk": "Консьєрж / Охоронник", "descripcion_es": "Persona que cuida el edificio.", "descripcion": "Людина що доглядає за будинком", "emoji": "👮", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vecino", "es": "Vecino", "uk": "Сусід", "descripcion_es": "Persona que vive cerca, en el mismo edificio o calle.", "descripcion": "Людина що живе поруч, у тому ж будинку", "emoji": "🧑‍🤝‍🧑", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salud-ampliada",
+      "nombre": { "es": "Salud y emergencias", "uk": "Здоров'я і надзвичайні ситуації" },
+      "emoji": "🏥",
+      "subcategorias": [
+        {
+          "id": "sintomas",
+          "nombre": { "es": "Síntomas y dolencias", "uk": "Симптоми і недуги" },
+          "emoji": "🤒",
+          "palabras": [
+            { "id": "dolor", "es": "Dolor", "uk": "Біль", "descripcion_es": "Sensación molesta en una parte del cuerpo.", "descripcion": "Неприємне відчуття в частині тіла", "emoji": "🤕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dolor-cabeza", "es": "Dolor de cabeza", "uk": "Головний біль", "descripcion_es": "Dolor localizado en la cabeza.", "descripcion": "Біль у голові", "emoji": "🤕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dolor-espalda", "es": "Dolor de espalda", "uk": "Біль у спині", "descripcion_es": "Dolor en la zona de la espalda.", "descripcion": "Біль у ділянці спини", "emoji": "🤕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dolor-garganta", "es": "Dolor de garganta", "uk": "Біль у горлі", "descripcion_es": "Molestia o ardor en la garganta.", "descripcion": "Дискомфорт або печіння в горлі", "emoji": "🤒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fiebre-sint", "es": "Fiebre", "uk": "Температура / Жар", "descripcion_es": "Temperatura corporal alta, por encima de 37,5 °C.", "descripcion": "Висока температура тіла, вище 37,5 °C", "emoji": "🌡️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tos-sint", "es": "Tos", "uk": "Кашель", "descripcion_es": "Expulsión brusca de aire por la boca.", "descripcion": "Різке виштовхування повітря через рот", "emoji": "😮‍💨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mocos", "es": "Mocos / Resfriado", "uk": "Нежить / Застуда", "descripcion_es": "Mucosidad nasal producida por un catarro.", "descripcion": "Виділення з носа при застуді", "emoji": "🤧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mareo", "es": "Mareo", "uk": "Запаморочення", "descripcion_es": "Sensación de inestabilidad o nauseas.", "descripcion": "Відчуття нестабільності або нудоти", "emoji": "😵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vomito", "es": "Vómito", "uk": "Блювання", "descripcion_es": "Expulsión del contenido del estómago por la boca.", "descripcion": "Виштовхування вмісту шлунка через рот", "emoji": "🤮", "imagen": "", "etiquetas": ["database"] },
+            { "id": "diarrea", "es": "Diarrea", "uk": "Діарея", "descripcion_es": "Deposiciones líquidas y frecuentes.", "descripcion": "Часті рідкі випорожнення", "emoji": "🚽", "imagen": "", "etiquetas": ["database"] },
+            { "id": "herida", "es": "Herida", "uk": "Рана", "descripcion_es": "Lesión en la piel causada por un golpe o corte.", "descripcion": "Ушкодження шкіри від удару або порізу", "emoji": "🩹", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fractura", "es": "Fractura", "uk": "Перелом", "descripcion_es": "Rotura de un hueso.", "descripcion": "Зламана кістка", "emoji": "🦴", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "medicamentos-medicos",
+          "nombre": { "es": "Medicamentos y atención médica", "uk": "Ліки і медична допомога" },
+          "emoji": "💊",
+          "palabras": [
+            { "id": "pastilla-med", "es": "Pastilla / Comprimido", "uk": "Таблетка", "descripcion_es": "Medicamento sólido que se toma por la boca.", "descripcion": "Тверді ліки які приймають через рот", "emoji": "💊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jarabe", "es": "Jarabe", "uk": "Сироп", "descripcion_es": "Medicamento líquido. Frecuente en niños.", "descripcion": "Рідкі ліки, часто для дітей", "emoji": "🍶", "imagen": "", "etiquetas": ["database"] },
+            { "id": "antibiotico", "es": "Antibiótico", "uk": "Антибіотик", "descripcion_es": "Medicamento para combatir infecciones bacterianas.", "descripcion": "Ліки для боротьби з бактеріальними інфекціями", "emoji": "💊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "antiinflamatorio", "es": "Antiinflamatorio", "uk": "Протизапальний засіб", "descripcion_es": "Medicamento que reduce la inflamación y el dolor.", "descripcion": "Ліки що зменшують запалення та біль", "emoji": "💊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "receta-med", "es": "Receta médica", "uk": "Рецепт лікаря", "descripcion_es": "Documento del médico para comprar medicamentos.", "descripcion": "Документ лікаря для купівлі ліків", "emoji": "📋", "imagen": "", "etiquetas": ["database"] },
+            { "id": "urgencias", "es": "Urgencias", "uk": "Швидка допомога / Приймальний покій", "descripcion_es": "Servicio de atención médica inmediata en el hospital.", "descripcion": "Служба термінової медичної допомоги в лікарні", "emoji": "🆘", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ambulancia", "es": "Ambulancia", "uk": "Швидка / Карета", "descripcion_es": "Vehículo para transportar enfermos o heridos.", "descripcion": "Транспортний засіб для перевезення хворих", "emoji": "🚑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "medico-cabecera", "es": "Médico de cabecera", "uk": "Дільничний лікар", "descripcion_es": "Médico general asignado a cada ciudadano.", "descripcion": "Загальний лікар прикріплений до кожного громадянина", "emoji": "👨‍⚕️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "especialista", "es": "Especialista", "uk": "Лікар-спеціаліст", "descripcion_es": "Médico con formación en un área concreta.", "descripcion": "Лікар з підготовкою у конкретній галузі", "emoji": "🩺", "imagen": "", "etiquetas": ["database"] },
+            { "id": "centro-salud", "es": "Centro de salud", "uk": "Поліклініка / Медичний центр", "descripcion_es": "Consulta médica local, primer nivel de atención sanitaria.", "descripcion": "Місцева медична консультація, перший рівень медичної допомоги", "emoji": "🏥", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deportes",
+      "nombre": { "es": "Deporte y ocio", "uk": "Спорт і дозвілля" },
+      "emoji": "⚽",
+      "subcategorias": [
+        {
+          "id": "deportes-tipos",
+          "nombre": { "es": "Deportes", "uk": "Види спорту" },
+          "emoji": "🏅",
+          "palabras": [
+            { "id": "futbol", "es": "Fútbol", "uk": "Футбол", "descripcion_es": "Deporte rey en España. Se juega con pelota entre dos equipos de 11.", "descripcion": "Головний спорт Іспанії, грають команди по 11 гравців", "emoji": "⚽", "imagen": "", "etiquetas": ["database"] },
+            { "id": "baloncesto", "es": "Baloncesto", "uk": "Баскетбол", "descripcion_es": "Deporte de equipo con canastas. España tiene gran tradición.", "descripcion": "Командний вид спорту з кошиками", "emoji": "🏀", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tenis", "es": "Tenis", "uk": "Теніс", "descripcion_es": "Deporte de raqueta individual o por parejas.", "descripcion": "Ракетний вид спорту один на один або парами", "emoji": "🎾", "imagen": "", "etiquetas": ["database"] },
+            { "id": "natacion", "es": "Natación", "uk": "Плавання", "descripcion_es": "Deporte que se practica en la piscina o el mar.", "descripcion": "Вид спорту що практикується в басейні або морі", "emoji": "🏊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ciclismo", "es": "Ciclismo", "uk": "Велоспорт", "descripcion_es": "Deporte de bicicleta. Muy popular en España.", "descripcion": "Вид спорту на велосипеді, дуже популярний в Іспанії", "emoji": "🚴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "atletismo", "es": "Atletismo", "uk": "Легка атлетика", "descripcion_es": "Deportes de correr, saltar y lanzar.", "descripcion": "Спорт що включає біг, стрибки та метання", "emoji": "🏃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "padel", "es": "Pádel", "uk": "Падель", "descripcion_es": "Deporte de raqueta muy popular en España, parecido al tenis.", "descripcion": "Ракетний вид спорту дуже популярний в Іспанії", "emoji": "🎾", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gimnasio", "es": "Gimnasio", "uk": "Спортзал", "descripcion_es": "Lugar donde se hace ejercicio con máquinas.", "descripcion": "Місце де займаються спортом з тренажерами", "emoji": "🏋️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "yoga", "es": "Yoga", "uk": "Йога", "descripcion_es": "Práctica de posturas y respiración para el bienestar.", "descripcion": "Практика поз та дихання для самопочуття", "emoji": "🧘", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "ocio-tiempo-libre",
+          "nombre": { "es": "Tiempo libre y entretenimiento", "uk": "Вільний час і розваги" },
+          "emoji": "🎭",
+          "palabras": [
+            { "id": "cine", "es": "Cine", "uk": "Кіно", "descripcion_es": "Lugar donde se ven películas en pantalla grande.", "descripcion": "Місце де дивляться фільми на великому екрані", "emoji": "🎬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "teatro", "es": "Teatro", "uk": "Театр", "descripcion_es": "Lugar donde actores representan obras en directo.", "descripcion": "Місце де актори виступають наживо", "emoji": "🎭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "concierto", "es": "Concierto", "uk": "Концерт", "descripcion_es": "Actuación musical en directo.", "descripcion": "Музичний виступ наживо", "emoji": "🎵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "museo-ocio", "es": "Museo", "uk": "Музей", "descripcion_es": "Lugar donde se exponen obras de arte o historia.", "descripcion": "Місце де виставляють твори мистецтва або історії", "emoji": "🏛️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "playa-ocio", "es": "Playa", "uk": "Пляж", "descripcion_es": "Zona de arena junto al mar. Muy popular en España.", "descripcion": "Піщана зона біля моря, дуже популярна в Іспанії", "emoji": "🏖️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "piscina", "es": "Piscina", "uk": "Басейн", "descripcion_es": "Instalación con agua para nadar.", "descripcion": "Споруда з водою для плавання", "emoji": "🏊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "parque-ocio", "es": "Parque", "uk": "Парк", "descripcion_es": "Zona verde para pasear y descansar.", "descripcion": "Зелена зона для прогулянок та відпочинку", "emoji": "🌳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "juego", "es": "Juego", "uk": "Гра", "descripcion_es": "Actividad recreativa para divertirse.", "descripcion": "Розважальна діяльність для розваги", "emoji": "🎮", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vacaciones", "es": "Vacaciones", "uk": "Відпустка / Канікули", "descripcion_es": "Período de descanso del trabajo o colegio.", "descripcion": "Період відпочинку від роботи або школи", "emoji": "✈️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fiesta", "es": "Fiesta", "uk": "Свято / Вечірка", "descripcion_es": "Celebración festiva con gente.", "descripcion": "Святкування з людьми", "emoji": "🥳", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clima",
+      "nombre": { "es": "Clima y tiempo", "uk": "Клімат і погода" },
+      "emoji": "🌦️",
+      "subcategorias": [
+        {
+          "id": "tiempo-meteorologico",
+          "nombre": { "es": "El tiempo", "uk": "Погода" },
+          "emoji": "🌤️",
+          "palabras": [
+            { "id": "hace-calor", "es": "Hace calor", "uk": "Жарко", "descripcion_es": "Temperatura alta, típica del verano español.", "descripcion": "Висока температура, типова для іспанського літа", "emoji": "🌡️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hace-frio", "es": "Hace frío", "uk": "Холодно", "descripcion_es": "Temperatura baja.", "descripcion": "Низька температура", "emoji": "🥶", "imagen": "", "etiquetas": ["database"] },
+            { "id": "llueve", "es": "Llueve", "uk": "Йде дощ", "descripcion_es": "Cae agua del cielo.", "descripcion": "З неба падає вода", "emoji": "🌧️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nieva", "es": "Nieva", "uk": "Іде сніг", "descripcion_es": "Cae nieve del cielo.", "descripcion": "З неба падає сніг", "emoji": "❄️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nublado", "es": "Nublado", "uk": "Хмарно", "descripcion_es": "El cielo está cubierto de nubes.", "descripcion": "Небо вкрите хмарами", "emoji": "☁️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "soleado", "es": "Soleado", "uk": "Сонячно", "descripcion_es": "Hay sol y el cielo está despejado.", "descripcion": "Є сонце і небо чисте", "emoji": "☀️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tormenta-clima", "es": "Tormenta", "uk": "Гроза", "descripcion_es": "Lluvia intensa con rayos y truenos.", "descripcion": "Сильний дощ з блискавками і громом", "emoji": "⛈️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "viento-clima", "es": "Viento", "uk": "Вітер", "descripcion_es": "Movimiento del aire.", "descripcion": "Рух повітря", "emoji": "💨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "humedad", "es": "Humedad", "uk": "Вологість", "descripcion_es": "Cantidad de agua en el aire. Alta en las costas.", "descripcion": "Кількість вологи у повітрі, висока на узбережжі", "emoji": "💧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "temperatura", "es": "Temperatura", "uk": "Температура", "descripcion_es": "Medida del calor o frío. En España en grados Celsius.", "descripcion": "Міра тепла або холоду, в Іспанії у градусах Цельсія", "emoji": "🌡️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "paraguas", "es": "Paraguas", "uk": "Парасолька", "descripcion_es": "Objeto para protegerse de la lluvia.", "descripcion": "Предмет для захисту від дощу", "emoji": "☂️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "protector-solar", "es": "Protector solar", "uk": "Сонцезахисний крем", "descripcion_es": "Crema para proteger la piel del sol. Imprescindible en España.", "descripcion": "Крем для захисту шкіри від сонця, необхідний в Іспанії", "emoji": "🧴", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "regiones-clima",
+          "nombre": { "es": "Regiones y geografía española", "uk": "Регіони та іспанська географія" },
+          "emoji": "🗺️",
+          "palabras": [
+            { "id": "espana", "es": "España", "uk": "Іспанія", "descripcion_es": "País del sur de Europa. Segundo país más grande de la UE.", "descripcion": "Країна на півдні Європи, друга за величиною в ЄС", "emoji": "🇪🇸", "imagen": "", "etiquetas": ["database"] },
+            { "id": "madrid", "es": "Madrid", "uk": "Мадрид", "descripcion_es": "Capital de España. Ciudad más grande.", "descripcion": "Столиця Іспанії, найбільше місто", "emoji": "🏙️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "barcelona", "es": "Barcelona", "uk": "Барселона", "descripcion_es": "Segunda ciudad de España, en Cataluña. Junto al mar.", "descripcion": "Друге місто Іспанії, в Каталонії, біля моря", "emoji": "🏖️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "comunidad-autonoma", "es": "Comunidad autónoma", "uk": "Автономна спільнота", "descripcion_es": "División administrativa de España. Hay 17 comunidades.", "descripcion": "Адміністративний поділ Іспанії, 17 спільнот", "emoji": "🗺️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "norte-sur", "es": "Norte / Sur", "uk": "Північ / Південь", "descripcion_es": "El norte es lluvioso y frío; el sur es cálido y seco.", "descripcion": "Північ дощова і холодна, південь теплий і сухий", "emoji": "🧭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "costa", "es": "Costa", "uk": "Узбережжя", "descripcion_es": "Zona junto al mar. España tiene 8.000 km de costa.", "descripcion": "Зона біля моря, Іспанія має 8000 км узбережжя", "emoji": "🌊", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transporte-ampliado",
+      "nombre": { "es": "Transporte y carretera", "uk": "Транспорт і дороги" },
+      "emoji": "🚗",
+      "subcategorias": [
+        {
+          "id": "conduccion",
+          "nombre": { "es": "Conducción y carretera", "uk": "Водіння та дороги" },
+          "emoji": "🛣️",
+          "palabras": [
+            { "id": "carnet-conducir", "es": "Carnet de conducir", "uk": "Водійське посвідчення", "descripcion_es": "Documento que permite conducir un vehículo.", "descripcion": "Документ що дозволяє керувати транспортним засобом", "emoji": "🪪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gasolina", "es": "Gasolina", "uk": "Бензин", "descripcion_es": "Combustible para los coches.", "descripcion": "Паливо для автомобілів", "emoji": "⛽", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gasolinera", "es": "Gasolinera", "uk": "Автозаправна станція", "descripcion_es": "Lugar donde se pone combustible al coche.", "descripcion": "Місце де заправляють автомобіль", "emoji": "⛽", "imagen": "", "etiquetas": ["database"] },
+            { "id": "semaforo", "es": "Semáforo", "uk": "Світлофор", "descripcion_es": "Señal luminosa que regula el tráfico.", "descripcion": "Світловий сигнал що регулює рух", "emoji": "🚦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "parking", "es": "Parking / Aparcamiento", "uk": "Парковка", "descripcion_es": "Lugar donde se aparcan los coches.", "descripcion": "Місце де паркують автомобілі", "emoji": "🅿️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "autopista", "es": "Autopista", "uk": "Автострада / Трасса", "descripcion_es": "Carretera de alta velocidad con varios carriles.", "descripcion": "Скоростна дорога з кількома смугами", "emoji": "🛣️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "peaje", "es": "Peaje", "uk": "Платна дорога / Міто", "descripcion_es": "Pago por usar una autopista.", "descripcion": "Плата за використання автостради", "emoji": "🏦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "multa", "es": "Multa", "uk": "Штраф", "descripcion_es": "Sanción económica por infringir las normas de tráfico.", "descripcion": "Грошовий штраф за порушення правил руху", "emoji": "🚔", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "transporte-publico-ampliado",
+          "nombre": { "es": "Viajes y transporte público", "uk": "Подорожі та громадський транспорт" },
+          "emoji": "🚉",
+          "palabras": [
+            { "id": "billete-transporte", "es": "Billete / Ticket", "uk": "Квиток", "descripcion_es": "Documento para viajar en transporte público.", "descripcion": "Документ для поїздки у громадському транспорті", "emoji": "🎫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "andén", "es": "Andén", "uk": "Перон", "descripcion_es": "Plataforma donde se espera el tren o metro.", "descripcion": "Платформа де чекають потяг або метро", "emoji": "🚉", "imagen": "", "etiquetas": ["database"] },
+            { "id": "parada", "es": "Parada", "uk": "Зупинка", "descripcion_es": "Lugar donde para el autobús o metro.", "descripcion": "Місце де зупиняється автобус або метро", "emoji": "🚏", "imagen": "", "etiquetas": ["database"] },
+            { "id": "linea", "es": "Línea", "uk": "Маршрут / Лінія", "descripcion_es": "Recorrido fijo de un medio de transporte.", "descripcion": "Фіксований маршрут транспортного засобу", "emoji": "🗺️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "retraso", "es": "Retraso", "uk": "Запізнення", "descripcion_es": "Cuando el transporte llega después de la hora prevista.", "descripcion": "Коли транспорт прибуває пізніше запланованого", "emoji": "⏰", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vuelo", "es": "Vuelo", "uk": "Рейс / Проліт", "descripcion_es": "Viaje en avión.", "descripcion": "Поїздка на літаку", "emoji": "✈️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "maleta", "es": "Maleta", "uk": "Валіза", "descripcion_es": "Bolsa rígida para transportar ropa en viajes.", "descripcion": "Тверда сумка для перевезення одягу у поїздках", "emoji": "🧳", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
     }
   ]
 }
