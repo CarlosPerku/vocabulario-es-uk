@@ -358,15 +358,27 @@ async function doSearch(query) {
     try { queryUk = await translateToUkrainian(query); } catch (e) {}
   }
 
-  // 1. Buscar en vocabulario base (por ES normalizado o por UK)
+  // 1. Buscar en vocabulario base y ordenar: exacto primero, luego starts-with, luego el resto
   const allWords = getAllBaseWords();
-  const baseMatches = allWords.filter(w =>
-    matchesQuery(w, queryEs) || (isUkrainian && matchesQuery(w, query))
-  );
+  const qNorm = normalizeStr(queryEs);
 
-  // 2. Buscar imágenes usando término en español
+  function matchScore(w) {
+    const esNorm = normalizeStr(w.es);
+    if (esNorm === qNorm) return 0;                          // coincidencia exacta
+    if (esNorm.split(/\s+/)[0] === qNorm) return 1;         // primera palabra exacta
+    if (esNorm.startsWith(qNorm)) return 2;                 // empieza por la búsqueda
+    if (esNorm.split(/\s+/).some(w => w.startsWith(qNorm))) return 3; // alguna palabra empieza
+    return 4;                                                // otros
+  }
+
+  const baseMatches = allWords
+    .filter(w => matchesQuery(w, queryEs) || (isUkrainian && matchesQuery(w, query)))
+    .sort((a, b) => matchScore(a) - matchScore(b));
+
+  // 2. Buscar imágenes usando el término más relevante
+  const imageQuery = baseMatches.length > 0 ? baseMatches[0].es : queryEs;
   let images = [];
-  try { images = await searchImages(queryEs); } catch (e) {}
+  try { images = await searchImages(imageQuery); } catch (e) {}
 
   // Construir resultados
   let html = '';
@@ -376,7 +388,9 @@ async function doSearch(query) {
     html += renderSearchResult(match, images, isAdded, true);
   });
 
-  if (baseMatches.length === 0) {
+  // Si no hay coincidencia exacta en la base, mostrar como palabra nueva al final
+  const hasExact = baseMatches.length > 0 && normalizeStr(baseMatches[0].es) === qNorm;
+  if (!hasExact) {
     const newWord = {
       id: slugify(queryEs),
       es: capitalizeFirst(isUkrainian ? queryEs : query),
@@ -385,8 +399,10 @@ async function doSearch(query) {
       emoji: guessEmoji(queryEs),
       imagen: images.length > 0 ? images[0] : ''
     };
-    const isAdded = miVocabulario.some(w => w.id === newWord.id);
-    html += renderSearchResult(newWord, images, isAdded, false);
+    if (!miVocabulario.some(w => w.id === newWord.id) || baseMatches.length === 0) {
+      const isAdded = miVocabulario.some(w => w.id === newWord.id);
+      html += renderSearchResult(newWord, images, isAdded, false);
+    }
   }
 
   if (html) {
