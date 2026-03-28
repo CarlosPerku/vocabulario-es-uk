@@ -51,6 +51,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupCatModalTranslation();
   setupDetailTagsInput();
   setupDetailCatSelects();
+  setupTranslatePair('detail-desc-es', 'detail-desc-uk', 'es', 'uk', detailUserEdited);
+  setupTranslatePair('detail-desc-uk', 'detail-desc-es', 'uk', 'es', detailUserEdited);
+  setupTranslatePair('detail-uk', 'detail-es', 'uk', 'es', detailUserEdited);
+  setupTranslatePair('detail-es', 'detail-uk', 'es', 'uk', detailUserEdited);
   checkIosInstallHint();
 });
 
@@ -136,31 +140,8 @@ function setupTabs() {
 
 // ==================== AUTO-TRANSLATE CATEGORY MODAL ====================
 function setupCatModalTranslation() {
-  let esTimer, ukTimer;
-
-  document.getElementById('cat-modal-es').addEventListener('input', () => {
-    clearTimeout(esTimer);
-    esTimer = setTimeout(async () => {
-      const val = document.getElementById('cat-modal-es').value.trim();
-      const ukField = document.getElementById('cat-modal-uk');
-      if (val && !ukField.value.trim()) {
-        const translated = await translateText(val, 'es', 'uk');
-        if (translated) ukField.value = translated;
-      }
-    }, 800);
-  });
-
-  document.getElementById('cat-modal-uk').addEventListener('input', () => {
-    clearTimeout(ukTimer);
-    ukTimer = setTimeout(async () => {
-      const val = document.getElementById('cat-modal-uk').value.trim();
-      const esField = document.getElementById('cat-modal-es');
-      if (val && !esField.value.trim()) {
-        const translated = await translateText(val, 'uk', 'es');
-        if (translated) esField.value = translated;
-      }
-    }, 800);
-  });
+  setupTranslatePair('cat-modal-es', 'cat-modal-uk', 'es', 'uk', catModalUserEdited);
+  setupTranslatePair('cat-modal-uk', 'cat-modal-es', 'uk', 'es', catModalUserEdited);
 }
 
 async function translateText(text, from, to) {
@@ -466,6 +447,39 @@ function addFromSearchCard(wordId) {
   openAddModal(JSON.stringify(wordWithImage));
 }
 
+// ==================== AUTO-TRANSLATE HELPERS ====================
+// Traduce al salir del campo fuente (blur).
+// No sobreescribe el campo destino si el usuario lo editó manualmente.
+// Si el campo destino se vacía, vuelve a permitir la auto-traducción.
+function setupTranslatePair(srcId, dstId, from, to, userEditedSet) {
+  const src = document.getElementById(srcId);
+  const dst = document.getElementById(dstId);
+  if (!src || !dst) return;
+
+  // Marcar destino como editado manualmente cuando el usuario escribe en él
+  dst.addEventListener('input', () => {
+    if (dst.value.trim()) {
+      userEditedSet.add(dstId);
+    } else {
+      userEditedSet.delete(dstId); // vacío = permitir auto-translate de nuevo
+    }
+  });
+
+  // Traducir al salir del campo fuente
+  src.addEventListener('blur', async () => {
+    const val = src.value.trim();
+    if (!val) return;
+    if (userEditedSet.has(dstId)) return; // el usuario editó manualmente, no tocar
+    const translated = await translateText(val, from, to);
+    if (translated && !userEditedSet.has(dstId)) dst.value = translated;
+  });
+}
+
+// Sets de campos editados manualmente — se resetean al abrir cada modal
+const modalUserEdited = new Set();
+const catModalUserEdited = new Set();
+const detailUserEdited = new Set();
+
 // ==================== ADD MODAL ====================
 function setupModal() {
   document.getElementById('modal-cancel').addEventListener('click', closeModal);
@@ -489,23 +503,10 @@ function setupModal() {
     }
   });
 
-  // Auto-traducción entre campos bilingüe
-  let timers = {};
-  function autoTranslate(srcId, dstId, from, to) {
-    clearTimeout(timers[srcId]);
-    timers[srcId] = setTimeout(async () => {
-      const val = document.getElementById(srcId).value.trim();
-      const dst = document.getElementById(dstId);
-      if (val && !dst.value.trim()) {
-        const translated = await translateText(val, from, to);
-        if (translated) dst.value = translated;
-      }
-    }, 800);
-  }
-
-  document.getElementById('modal-desc-es').addEventListener('input', () => autoTranslate('modal-desc-es', 'modal-desc', 'es', 'uk'));
-  document.getElementById('modal-desc').addEventListener('input', () => autoTranslate('modal-desc', 'modal-desc-es', 'uk', 'es'));
-  document.getElementById('modal-uk').addEventListener('input', () => autoTranslate('modal-uk', 'modal-es', 'uk', 'es'));
+  // Auto-traducción al salir del campo (blur), sin sobreescribir ediciones manuales
+  setupTranslatePair('modal-desc-es', 'modal-desc', 'es', 'uk', modalUserEdited);
+  setupTranslatePair('modal-desc', 'modal-desc-es', 'uk', 'es', modalUserEdited);
+  setupTranslatePair('modal-uk', 'modal-es', 'uk', 'es', modalUserEdited);
 }
 
 function openAddModal(wordJsonStr) {
@@ -560,6 +561,7 @@ function openAddModal(wordJsonStr) {
     modalImages.innerHTML = '';
   }
 
+  modalUserEdited.clear();
   document.getElementById('add-modal').classList.remove('hidden');
 }
 
@@ -771,6 +773,7 @@ function openCatModal(mode = 'cat') {
     subcatSection.classList.add('hidden');
   }
 
+  catModalUserEdited.clear();
   document.getElementById('cat-modal').classList.remove('hidden');
 }
 
@@ -1618,6 +1621,7 @@ function openWordDetail(wordId) {
   detailTags = word.etiquetas ? [...word.etiquetas] : [];
   renderDetailTags();
 
+  detailUserEdited.clear();
   document.getElementById('word-detail-modal').classList.remove('hidden');
 }
 
