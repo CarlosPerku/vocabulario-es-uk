@@ -36,6 +36,8 @@
           <option value="">Todas / Усі категорії</option>
         </select>
       </div>
+      <!-- Barra de etiquetas -->
+      <div id="tags-bar" class="tags-bar"></div>
       <div id="vocab-list" class="card-grid"></div>
       <div id="vocab-empty" class="empty-state">
         <span class="empty-emoji">📖</span>
@@ -97,6 +99,13 @@
             <label>Nueva subcategoría / Нова підкатегорія (opcional)</label>
             <input type="text" id="modal-new-subcat" class="input-field" placeholder="Ej: Camisetas, Cocina...">
           </div>
+          <div class="form-group">
+            <label>Etiquetas / Мітки (ej: trabajo, restaurante)</label>
+            <div class="tags-input-wrap">
+              <div id="modal-tags-list" class="tags-input-list"></div>
+              <input type="text" id="modal-tag-input" class="input-field" placeholder="Escribe y pulsa Enter / Введи та Enter">
+            </div>
+          </div>
           <div class="modal-actions">
             <button id="modal-cancel" class="btn btn-secondary">Cancelar / Скасувати</button>
             <button id="modal-save" class="btn btn-primary">Guardar / Зберегти</button>
@@ -122,6 +131,22 @@
           <button id="quiz-prev" class="btn btn-secondary">← Anterior / Назад</button>
           <span id="quiz-counter" class="quiz-counter"></span>
           <button id="quiz-next" class="btn btn-secondary">Siguiente / Далі →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Picker Modal -->
+    <div id="image-picker-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3 class="modal-title" id="image-picker-title"></h3>
+        <p style="text-align:center;font-size:13px;color:#64748b;margin-bottom:12px">
+          Toca una imagen para seleccionarla<br>
+          <small>Натисни на зображення, щоб обрати</small>
+        </p>
+        <div id="image-picker-grid" class="image-picker-grid"></div>
+        <input type="hidden" id="image-picker-wordid">
+        <div class="modal-actions" style="margin-top:16px">
+          <button id="image-picker-close" class="btn btn-primary btn-block">Listo / Готово</button>
         </div>
       </div>
     </div>

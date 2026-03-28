@@ -9,6 +9,8 @@ let miVocabulario = [];
 let quizWords = [];
 let quizIndex = 0;
 let selectedImageUrl = '';
+let activeTagFilter = '';   // etiqueta activa para filtrar
+let modalTags = [];         // etiquetas del modal en edición
 
 // ==================== INIT ====================
 document.addEventListener('DOMContentLoaded', async () => {
@@ -21,6 +23,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupFilter();
   renderMyVocab();
   renderCategorias();
+  setupImagePicker();
+  setupTagsInput();
+  renderTagsBar();
   // Fetch real images for words that don't have one yet
   enrichVocabWithImages();
 });
@@ -129,6 +134,10 @@ function renderMyVocab() {
     words = words.filter(w => w.categoria === filterCat);
   }
 
+  if (activeTagFilter) {
+    words = words.filter(w => w.etiquetas && w.etiquetas.includes(activeTagFilter));
+  }
+
   if (words.length === 0) {
     list.innerHTML = '';
     empty.style.display = 'block';
@@ -138,16 +147,20 @@ function renderMyVocab() {
   empty.style.display = 'none';
   list.innerHTML = words.map(w => `
     <div class="word-card" data-id="${w.id}">
-      <div class="card-image">
+      <div class="card-image" onclick="openImagePicker('${w.id}')" title="Cambiar imagen / Змінити зображення">
         ${w.imagen
           ? `<img src="${w.imagen}" alt="${w.es}" onerror="this.parentElement.innerHTML='${w.emoji || '🍽️'}'">`
           : (w.emoji || '🍽️')}
+        <div class="card-image-hint">🖼️</div>
       </div>
       <div class="card-info">
         <div class="card-es">${w.es}</div>
         <div class="card-uk">${w.uk}</div>
         ${w.descripcion ? `<div class="card-desc">${w.descripcion}</div>` : ''}
         <span class="card-category">${w.categoria || ''}${w.subcategoria ? ' › ' + w.subcategoria : ''}</span>
+        ${w.etiquetas && w.etiquetas.length > 0
+          ? `<div class="card-tags">${w.etiquetas.map(t => `<span class="tag-badge">#${t}</span>`).join('')}</div>`
+          : ''}
       </div>
       <div class="card-actions">
         <button class="btn btn-remove" onclick="removeWord('${w.id}')">✕</button>
@@ -320,6 +333,8 @@ function openAddModal(wordJsonStr) {
   document.getElementById('modal-desc').value = word.descripcion || '';
   document.getElementById('modal-new-cat').value = '';
   document.getElementById('modal-new-subcat').value = '';
+  modalTags = [];
+  renderModalTags();
 
   // Populate category select
   const catSelect = document.getElementById('modal-cat');
@@ -439,7 +454,8 @@ function saveFromModal() {
     categoriaId: catId,
     subcategoria: subcatName,
     subcategoriaUk: subcatNameUk,
-    subcategoriaId: subcatId
+    subcategoriaId: subcatId,
+    etiquetas: [...modalTags]
   };
 
   // Check if already exists
@@ -454,6 +470,7 @@ function saveFromModal() {
   saveUserCategory(catId, catName, catNameUk);
   saveUserSubcategory(catId, subcatId, subcatName, subcatNameUk);
   populateCategoryFilter();
+  renderTagsBar();
   closeModal();
   showToast('Añadida / Додано ✓');
 
@@ -568,9 +585,10 @@ function showQuizCard() {
   } else {
     imageDiv.innerHTML = word.emoji || '🍽️';
   }
-  document.getElementById('quiz-question').textContent = word.es;
+  // Mostrar ucraniano, ocultar español
+  document.getElementById('quiz-question').textContent = word.uk;
   const answerDiv = document.getElementById('quiz-answer');
-  answerDiv.innerHTML = `${word.uk}${word.descripcion ? `<div class="quiz-desc">${word.descripcion}</div>` : ''}`;
+  answerDiv.innerHTML = `${word.es}${word.descripcion ? `<div class="quiz-desc">${word.descripcion}</div>` : ''}`;
   answerDiv.classList.add('hidden');
   document.getElementById('quiz-reveal').style.display = 'block';
   document.getElementById('quiz-counter').textContent = `${quizIndex + 1} / ${quizWords.length}`;
@@ -855,6 +873,131 @@ function guessEmoji(word) {
   return emojiMap[normalized] || emojiMap[word.toLowerCase()] || '🍽️';
 }
 
+// ==================== ETIQUETAS ====================
+function getAllTags() {
+  const tags = new Set();
+  miVocabulario.forEach(w => (w.etiquetas || []).forEach(t => tags.add(t)));
+  return [...tags].sort();
+}
+
+function renderTagsBar() {
+  const bar = document.getElementById('tags-bar');
+  const allTags = getAllTags();
+  if (allTags.length === 0) {
+    bar.innerHTML = '';
+    return;
+  }
+  bar.innerHTML = `
+    <button class="tag-filter all-tag ${!activeTagFilter ? 'active' : ''}" onclick="setTagFilter('')">
+      Todas / Усі
+    </button>
+    ${allTags.map(t => `
+      <button class="tag-filter ${activeTagFilter === t ? 'active' : ''}" onclick="setTagFilter('${t}')">
+        #${t}
+      </button>
+    `).join('')}
+  `;
+}
+
+function setTagFilter(tag) {
+  activeTagFilter = tag;
+  renderTagsBar();
+  renderMyVocab();
+}
+
+function setupTagsInput() {
+  const input = document.getElementById('modal-tag-input');
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = input.value.trim().toLowerCase().replace(/[^a-záéíóúñ0-9_-]/gi, '');
+      if (val && !modalTags.includes(val)) {
+        modalTags.push(val);
+        renderModalTags();
+      }
+      input.value = '';
+    }
+  });
+}
+
+function renderModalTags() {
+  const list = document.getElementById('modal-tags-list');
+  list.innerHTML = modalTags.map(t => `
+    <span class="tag-chip">
+      #${t}
+      <button class="tag-chip-remove" onclick="removeModalTag('${t}')">×</button>
+    </span>
+  `).join('');
+}
+
+function removeModalTag(tag) {
+  modalTags = modalTags.filter(t => t !== tag);
+  renderModalTags();
+}
+
+// ==================== IMAGE PICKER ====================
+async function openImagePicker(wordId) {
+  const word = miVocabulario.find(w => w.id === wordId);
+  if (!word) return;
+
+  // Mostrar modal de carga
+  const modal = document.getElementById('image-picker-modal');
+  const grid = document.getElementById('image-picker-grid');
+  const title = document.getElementById('image-picker-title');
+  title.textContent = word.es;
+  grid.innerHTML = '<div class="loading"><div class="spinner"></div>Buscando imágenes...</div>';
+  modal.classList.remove('hidden');
+  document.getElementById('image-picker-wordid').value = wordId;
+
+  // Obtener imágenes: primero caché, luego Wikipedia
+  let images = getCachedImages(word.es.toLowerCase()) || [];
+  if (images.length < 3) {
+    try {
+      const fresh = await searchImages(word.es);
+      images = fresh;
+    } catch (e) { /* silencioso */ }
+  }
+
+  if (images.length === 0) {
+    grid.innerHTML = '<p style="text-align:center;color:#64748b;padding:20px">No se encontraron imágenes / Зображень не знайдено</p>';
+    return;
+  }
+
+  grid.innerHTML = images.map((url, i) => `
+    <div class="picker-img-wrap ${word.imagen === url ? 'selected' : ''}" onclick="selectPickerImage('${wordId}', '${url}', this)">
+      <img src="${url}" alt="${word.es}" onerror="this.parentElement.style.display='none'">
+      ${word.imagen === url ? '<div class="picker-check">✓</div>' : ''}
+    </div>
+  `).join('');
+}
+
+function selectPickerImage(wordId, url, el) {
+  document.querySelectorAll('.picker-img-wrap').forEach(w => {
+    w.classList.remove('selected');
+    w.querySelector('.picker-check')?.remove();
+  });
+  el.classList.add('selected');
+  el.insertAdjacentHTML('beforeend', '<div class="picker-check">✓</div>');
+
+  const word = miVocabulario.find(w => w.id === wordId);
+  if (word) {
+    word.imagen = url;
+    saveMyVocab();
+  }
+}
+
+function closeImagePicker() {
+  document.getElementById('image-picker-modal').classList.add('hidden');
+  renderMyVocab();
+}
+
+function setupImagePicker() {
+  document.getElementById('image-picker-close').addEventListener('click', closeImagePicker);
+  document.getElementById('image-picker-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('image-picker-modal')) closeImagePicker();
+  });
+}
+
 // Make functions available globally for onclick handlers
 window.removeWord = removeWord;
 window.doSearch = doSearch;
@@ -863,3 +1006,8 @@ window.selectResultImage = selectResultImage;
 window.selectModalImage = selectModalImage;
 window.toggleCat = toggleCat;
 window.toggleSubcat = toggleSubcat;
+window.openImagePicker = openImagePicker;
+window.selectPickerImage = selectPickerImage;
+window.closeImagePicker = closeImagePicker;
+window.setTagFilter = setTagFilter;
+window.removeModalTag = removeModalTag;
