@@ -603,6 +603,7 @@ function openAddModal(wordJsonStr) {
 
   modalUserEdited.clear();
   document.getElementById('add-modal').classList.remove('hidden');
+  pushModalState();
 }
 
 function closeModal() {
@@ -817,6 +818,7 @@ function openCatModal(mode = 'cat') {
 
   catModalUserEdited.clear();
   document.getElementById('cat-modal').classList.remove('hidden');
+  pushModalState();
 }
 
 function openSubcatModal(catName) {
@@ -929,6 +931,7 @@ function startQuiz() {
   // Mostrar pantalla de filtro
   document.getElementById('quiz-overlay').classList.remove('hidden');
   document.getElementById('quiz-filter-screen').classList.remove('hidden');
+  pushModalState();
   document.getElementById('quiz-card-screen').classList.add('hidden');
   renderQuizFilterOptions();
 }
@@ -1687,6 +1690,7 @@ function openWordDetail(wordId) {
 
   detailUserEdited.clear();
   document.getElementById('word-detail-modal').classList.remove('hidden');
+  pushModalState();
 }
 
 function renderDetailTags() {
@@ -2025,6 +2029,7 @@ function openCorrectionModal(wordId, catId, subId) {
   document.getElementById('corr-comment').value = '';
 
   document.getElementById('correction-modal').classList.remove('hidden');
+  pushModalState();
 }
 
 function closeCorrectionModal() {
@@ -2151,6 +2156,34 @@ function renderQuizFilterOptions() {
 }
 
 // Make functions available globally for onclick handlers
+// ==================== BOTÓN ATRÁS ANDROID ====================
+function pushModalState() {
+  history.pushState({ modal: true }, '');
+}
+
+function closeTopModal() {
+  const modals = [
+    { id: 'image-picker-modal', close: () => closeImagePicker() },
+    { id: 'correction-modal',   close: () => closeCorrectionModal() },
+    { id: 'word-detail-modal',  close: () => { document.getElementById('word-detail-modal').classList.add('hidden'); } },
+    { id: 'cat-modal',          close: () => closeCatModal() },
+    { id: 'add-modal',          close: () => closeModal() },
+    { id: 'quiz-overlay',       close: () => endQuiz() },
+  ];
+  for (const m of modals) {
+    const el = document.getElementById(m.id);
+    if (el && !el.classList.contains('hidden')) {
+      m.close();
+      return true;
+    }
+  }
+  return false;
+}
+
+window.addEventListener('popstate', () => {
+  closeTopModal();
+});
+
 window.doSearch = doSearch;
 window.openAddModal = openAddModal;
 window.selectResultImage = selectResultImage;
