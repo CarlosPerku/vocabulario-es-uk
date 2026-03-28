@@ -1302,6 +1302,248 @@
           ]
         }
       ]
+    },
+    {
+      "id": "cocina",
+      "nombre": { "es": "Cocina y recetas", "uk": "Кухня і рецепти" },
+      "emoji": "👨‍🍳",
+      "subcategorias": [
+        {
+          "id": "metodos-coccion",
+          "nombre": { "es": "Cómo cocinar", "uk": "Як готувати" },
+          "emoji": "🔥",
+          "palabras": [
+            { "id": "hervir", "es": "Hervir", "uk": "Варити", "descripcion_es": "Cocinar en agua a 100 °C. Para pasta, arroz, huevos...", "descripcion": "Готувати у воді при 100°C", "emoji": "♨️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "freir", "es": "Freír", "uk": "Смажити у фритюрі", "descripcion_es": "Cocinar sumergido en aceite caliente.", "descripcion": "Готувати занурюючи в гарячу олію", "emoji": "🍳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hornear", "es": "Hornear", "uk": "Пекти / Запікати", "descripcion_es": "Cocinar en el horno. Pan, pasteles, pollo...", "descripcion": "Готувати в духовці, хліб, торти, курка", "emoji": "🫓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "asar", "es": "Asar", "uk": "Смажити на грилі", "descripcion_es": "Cocinar a la brasa o al grill.", "descripcion": "Готувати на вугіллі або грилі", "emoji": "🍖", "imagen": "", "etiquetas": ["database"] },
+            { "id": "saltear", "es": "Saltear", "uk": "Пасерувати", "descripcion_es": "Cocinar a fuego alto con poco aceite, removiendo.", "descripcion": "Готувати на сильному вогні з малою кількістю олії", "emoji": "🥘", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cocer-vapor", "es": "Cocer al vapor", "uk": "Варити на парі", "descripcion_es": "Cocinar con el vapor del agua hirviendo. Muy sano.", "descripcion": "Готувати парою від киплячої води, дуже корисно", "emoji": "💨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "guisar", "es": "Guisar", "uk": "Тушкувати", "descripcion_es": "Cocinar lentamente en líquido.", "descripcion": "Готувати повільно в рідині", "emoji": "🍲", "imagen": "", "etiquetas": ["database"] },
+            { "id": "picar", "es": "Picar", "uk": "Рубати / Дрібно різати", "descripcion_es": "Cortar en trozos muy pequeños.", "descripcion": "Різати на дуже дрібні шматочки", "emoji": "🔪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pelar", "es": "Pelar", "uk": "Чистити", "descripcion_es": "Quitar la piel a frutas o verduras.", "descripcion": "Знімати шкірку з фруктів або овочів", "emoji": "🥕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mezclar", "es": "Mezclar", "uk": "Змішувати", "descripcion_es": "Combinar ingredientes juntos.", "descripcion": "Поєднувати інгредієнти разом", "emoji": "🥣", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "especias-condimentos",
+          "nombre": { "es": "Especias y condimentos", "uk": "Спеції і приправи" },
+          "emoji": "🌶️",
+          "palabras": [
+            { "id": "pimienta", "es": "Pimienta", "uk": "Перець (чорний)", "descripcion_es": "Especia negra picante. La más usada del mundo.", "descripcion": "Чорна гостра спеція, найвживаніша у світі", "emoji": "🫙", "imagen": "", "etiquetas": ["database"] },
+            { "id": "oregano", "es": "Orégano", "uk": "Орегано", "descripcion_es": "Hierba aromática usada en pizza y pasta.", "descripcion": "Ароматна трава для піци та пасти", "emoji": "🌿", "imagen": "", "etiquetas": ["database"] },
+            { "id": "laurel", "es": "Laurel", "uk": "Лавровий лист", "descripcion_es": "Hoja seca aromática para guisos y sopas.", "descripcion": "Суха ароматна листя для рагу та супів", "emoji": "🌿", "imagen": "", "etiquetas": ["database"] },
+            { "id": "perejil", "es": "Perejil", "uk": "Петрушка", "descripcion_es": "Hierba verde muy usada en España para decorar y dar sabor.", "descripcion": "Зелена трава широко використовувана в Іспанії", "emoji": "🌿", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pimenton", "es": "Pimentón", "uk": "Паприка", "descripcion_es": "Polvo rojo de pimiento seco. Ingrediente clave del chorizo.", "descripcion": "Червоний порошок із сухого перцю, ключовий для чорісо", "emoji": "🌶️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "comino", "es": "Comino", "uk": "Кмин", "descripcion_es": "Especia con sabor intenso. Usada en carnes y legumbres.", "descripcion": "Спеція з інтенсивним смаком для м'яса та бобових", "emoji": "🫙", "imagen": "", "etiquetas": ["database"] },
+            { "id": "azafran", "es": "Azafrán", "uk": "Шафран", "descripcion_es": "Especia amarilla carísima. Ingrediente de la paella.", "descripcion": "Дорога жовта спеція, інгредієнт паельї", "emoji": "🌼", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vinagre", "es": "Vinagre", "uk": "Оцет", "descripcion_es": "Líquido ácido para aderezar ensaladas.", "descripcion": "Кисла рідина для заправки салатів", "emoji": "🫙", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mayonesa", "es": "Mayonesa", "uk": "Майонез", "descripcion_es": "Salsa cremosa de huevo y aceite. Muy usada en bocadillos.", "descripcion": "Кремовий соус з яйця та олії", "emoji": "🥚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ketchup", "es": "Kétchup", "uk": "Кетчуп", "descripcion_es": "Salsa de tomate dulce.", "descripcion": "Солодкий томатний соус", "emoji": "🍅", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "musica-arte",
+      "nombre": { "es": "Música y arte", "uk": "Музика і мистецтво" },
+      "emoji": "🎨",
+      "subcategorias": [
+        {
+          "id": "instrumentos",
+          "nombre": { "es": "Instrumentos musicales", "uk": "Музичні інструменти" },
+          "emoji": "🎸",
+          "palabras": [
+            { "id": "guitarra", "es": "Guitarra", "uk": "Гітара", "descripcion_es": "Instrumento de cuerda. El más popular en España.", "descripcion": "Струнний інструмент, найпопулярніший в Іспанії", "emoji": "🎸", "imagen": "", "etiquetas": ["database"] },
+            { "id": "piano", "es": "Piano", "uk": "Піаніно / Рояль", "descripcion_es": "Instrumento de teclas grande.", "descripcion": "Великий клавішний інструмент", "emoji": "🎹", "imagen": "", "etiquetas": ["database"] },
+            { "id": "violin", "es": "Violín", "uk": "Скрипка", "descripcion_es": "Instrumento de cuerda pequeño que se toca con arco.", "descripcion": "Маленький струнний інструмент що грають смичком", "emoji": "🎻", "imagen": "", "etiquetas": ["database"] },
+            { "id": "flauta", "es": "Flauta", "uk": "Флейта", "descripcion_es": "Instrumento de viento que se sopla.", "descripcion": "Духовий інструмент у який дмуть", "emoji": "🪈", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bateria", "es": "Batería", "uk": "Ударні", "descripcion_es": "Conjunto de tambores y platillos que se golpean.", "descripcion": "Набір барабанів та тарілок", "emoji": "🥁", "imagen": "", "etiquetas": ["database"] },
+            { "id": "trompeta", "es": "Trompeta", "uk": "Труба", "descripcion_es": "Instrumento de viento de metal.", "descripcion": "Металевий духовий інструмент", "emoji": "🎺", "imagen": "", "etiquetas": ["database"] },
+            { "id": "saxofon", "es": "Saxofón", "uk": "Саксофон", "descripcion_es": "Instrumento de viento con caña.", "descripcion": "Духовий інструмент з тростиною", "emoji": "🎷", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "arte-cultura",
+          "nombre": { "es": "Arte y cultura", "uk": "Мистецтво і культура" },
+          "emoji": "🖼️",
+          "palabras": [
+            { "id": "pintura", "es": "Pintura", "uk": "Живопис / Малювання", "descripcion_es": "Arte de crear imágenes con pinturas.", "descripcion": "Мистецтво створення зображень фарбами", "emoji": "🎨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "escultura", "es": "Escultura", "uk": "Скульптура", "descripcion_es": "Arte de crear figuras en tres dimensiones.", "descripcion": "Мистецтво створення об'ємних фігур", "emoji": "🗿", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fotografia", "es": "Fotografía", "uk": "Фотографія", "descripcion_es": "Arte de capturar imágenes con una cámara.", "descripcion": "Мистецтво фіксування зображень камерою", "emoji": "📷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "flamenco", "es": "Flamenco", "uk": "Фламенко", "descripcion_es": "Baile y música tradicional del sur de España. Patrimonio UNESCO.", "descripcion": "Традиційний танець і музика півдня Іспанії", "emoji": "💃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "danza", "es": "Danza / Baile", "uk": "Танець", "descripcion_es": "Arte de moverse al ritmo de la música.", "descripcion": "Мистецтво рухатися під ритм музики", "emoji": "💃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cancion", "es": "Canción", "uk": "Пісня", "descripcion_es": "Composición musical con letra.", "descripcion": "Музична композиція з текстом", "emoji": "🎵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pelicula", "es": "Película", "uk": "Фільм", "descripcion_es": "Obra audiovisual de larga duración.", "descripcion": "Аудіовізуальний твір великої тривалості", "emoji": "🎬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "libro", "es": "Libro", "uk": "Книга", "descripcion_es": "Obra escrita publicada en papel o digital.", "descripcion": "Письмовий твір опублікований на папері або цифрово", "emoji": "📚", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fiestas",
+      "nombre": { "es": "Fiestas y celebraciones", "uk": "Свята і урочистості" },
+      "emoji": "🎉",
+      "subcategorias": [
+        {
+          "id": "fiestas-espanolas",
+          "nombre": { "es": "Fiestas españolas", "uk": "Іспанські свята" },
+          "emoji": "🇪🇸",
+          "palabras": [
+            { "id": "navidad", "es": "Navidad", "uk": "Різдво", "descripcion_es": "Fiesta cristiana del 25 de diciembre. Reunión familiar y regalos.", "descripcion": "Різдвяне свято 25 грудня, сімейні збори та подарунки", "emoji": "🎄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "reyes-magos", "es": "Reyes Magos", "uk": "День трьох королів", "descripcion_es": "El 6 de enero los niños reciben regalos. Más importante que Navidad.", "descripcion": "6 січня діти отримують подарунки, важливіше за Різдво", "emoji": "👑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "semana-santa", "es": "Semana Santa", "uk": "Страсний тиждень", "descripcion_es": "Semana de procesiones religiosas. Muy importante en Andalucía.", "descripcion": "Тиждень релігійних процесій, дуже важливий в Андалусії", "emoji": "✝️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "san-juan", "es": "San Juan", "uk": "День Святого Хуана", "descripcion_es": "Noche del 23 de junio con hogueras en la playa. Noche de San Juan.", "descripcion": "Ніч 23 червня з вогнищами на пляжі", "emoji": "🔥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "feria", "es": "Feria", "uk": "Ярмарок / Феєрія", "descripcion_es": "Fiesta popular de varios días con música, baile y atracciones.", "descripcion": "Народне свято кількох днів з музикою та танцями", "emoji": "🎡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tomatina", "es": "La Tomatina", "uk": "Томатіна", "descripcion_es": "Fiesta en Buñol (Valencia) donde se lanzan tomates.", "descripcion": "Свято у Буньолі де кидаються помідорами", "emoji": "🍅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "san-fermin", "es": "San Fermín", "uk": "Сан-Фермін", "descripcion_es": "Fiestas de Pamplona con el encierro de toros. Julio.", "descripcion": "Свято в Памплоні з бігом биків у липні", "emoji": "🐂", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "celebraciones-personales",
+          "nombre": { "es": "Celebraciones personales", "uk": "Особисті урочистості" },
+          "emoji": "🥳",
+          "palabras": [
+            { "id": "cumpleanos", "es": "Cumpleaños", "uk": "День народження", "descripcion_es": "Celebración anual del día en que naciste.", "descripcion": "Щорічне святкування дня народження", "emoji": "🎂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "boda", "es": "Boda", "uk": "Весілля", "descripcion_es": "Ceremonia de matrimonio entre dos personas.", "descripcion": "Церемонія одруження двох людей", "emoji": "💒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bautizo", "es": "Bautizo", "uk": "Хрещення", "descripcion_es": "Ceremonia religiosa de bienvenida de un bebé.", "descripcion": "Релігійна церемонія привітання дитини", "emoji": "👶", "imagen": "", "etiquetas": ["database"] },
+            { "id": "comunion", "es": "Comunión", "uk": "Перше причастя", "descripcion_es": "Celebración religiosa católica para niños de unos 9 años.", "descripcion": "Католицька релігійна церемонія для дітей близько 9 років", "emoji": "⛪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "regalo", "es": "Regalo", "uk": "Подарунок", "descripcion_es": "Objeto que se da a alguien en una celebración.", "descripcion": "Предмет що дарують комусь на свято", "emoji": "🎁", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tarta-cumple", "es": "Tarta de cumpleaños", "uk": "Святковий торт", "descripcion_es": "Pastel con velas que se apaga pidiendo un deseo.", "descripcion": "Торт зі свічками які гасять загадуючи бажання", "emoji": "🎂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "brindis", "es": "Brindis", "uk": "Тост", "descripcion_es": "Acción de chocar copas y beber juntos en una celebración.", "descripcion": "Дія підняття бокалів і спільного пиття на святі", "emoji": "🥂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "invitado", "es": "Invitado", "uk": "Гість", "descripcion_es": "Persona que es invitada a una celebración.", "descripcion": "Людина яку запрошують на святкування", "emoji": "🙋", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paises-idiomas",
+      "nombre": { "es": "Países e idiomas", "uk": "Країни і мови" },
+      "emoji": "🌍",
+      "subcategorias": [
+        {
+          "id": "paises-europa",
+          "nombre": { "es": "Países de Europa", "uk": "Країни Європи" },
+          "emoji": "🌍",
+          "palabras": [
+            { "id": "ucrania", "es": "Ucrania", "uk": "Україна", "descripcion_es": "País de Europa del Este. Capital: Kiev.", "descripcion": "Країна Східної Європи. Столиця: Київ", "emoji": "🇺🇦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "espana-pais", "es": "España", "uk": "Іспанія", "descripcion_es": "País del sur de Europa. Capital: Madrid.", "descripcion": "Країна Південної Європи. Столиця: Мадрид", "emoji": "🇪🇸", "imagen": "", "etiquetas": ["database"] },
+            { "id": "francia", "es": "Francia", "uk": "Франція", "descripcion_es": "País vecino al norte de España. Capital: París.", "descripcion": "Сусідня країна на північ від Іспанії. Столиця: Париж", "emoji": "🇫🇷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "alemania", "es": "Alemania", "uk": "Німеччина", "descripcion_es": "País del centro de Europa. Capital: Berlín.", "descripcion": "Країна Центральної Європи. Столиця: Берлін", "emoji": "🇩🇪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "italia", "es": "Italia", "uk": "Італія", "descripcion_es": "País del sur de Europa. Capital: Roma.", "descripcion": "Країна Південної Європи. Столиця: Рим", "emoji": "🇮🇹", "imagen": "", "etiquetas": ["database"] },
+            { "id": "portugal", "es": "Portugal", "uk": "Португалія", "descripcion_es": "País vecino al oeste de España. Capital: Lisboa.", "descripcion": "Сусідня країна на захід від Іспанії. Столиця: Лісабон", "emoji": "🇵🇹", "imagen": "", "etiquetas": ["database"] },
+            { "id": "polonia", "es": "Polonia", "uk": "Польща", "descripcion_es": "País de Europa del Este, vecino de Ucrania. Capital: Varsovia.", "descripcion": "Країна Східної Європи, сусід України. Столиця: Варшава", "emoji": "🇵🇱", "imagen": "", "etiquetas": ["database"] },
+            { "id": "reino-unido", "es": "Reino Unido", "uk": "Велика Британія", "descripcion_es": "País insular al norte de Europa. Capital: Londres.", "descripcion": "Острівна країна на північ Європи. Столиця: Лондон", "emoji": "🇬🇧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "rusia", "es": "Rusia", "uk": "Росія", "descripcion_es": "País más grande del mundo.", "descripcion": "Найбільша країна у світі", "emoji": "🇷🇺", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "idiomas",
+          "nombre": { "es": "Idiomas", "uk": "Мови" },
+          "emoji": "🗣️",
+          "palabras": [
+            { "id": "espanol-idioma", "es": "Español / Castellano", "uk": "Іспанська мова", "descripcion_es": "Idioma oficial de España. Hablado por 500 millones de personas.", "descripcion": "Офіційна мова Іспанії, якою розмовляють 500 млн людей", "emoji": "🇪🇸", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ucraniano-idioma", "es": "Ucraniano", "uk": "Українська мова", "descripcion_es": "Idioma oficial de Ucrania. Lengua eslava.", "descripcion": "Офіційна мова України, слов'янська мова", "emoji": "🇺🇦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ingles-idioma", "es": "Inglés", "uk": "Англійська мова", "descripcion_es": "Idioma más hablado del mundo. Lingua franca internacional.", "descripcion": "Найпоширеніша мова у світі, міжнародна лінгва франка", "emoji": "🇬🇧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "frances-idioma", "es": "Francés", "uk": "Французька мова", "descripcion_es": "Idioma de Francia. También muy hablado en África.", "descripcion": "Мова Франції, також поширена в Африці", "emoji": "🇫🇷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "catalan", "es": "Catalán", "uk": "Каталонська мова", "descripcion_es": "Idioma cooficial de Cataluña, Valencia y Baleares.", "descripcion": "Співофіційна мова Каталонії, Валенсії та Балеар", "emoji": "🏴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "traductor", "es": "Traductor", "uk": "Перекладач", "descripcion_es": "Persona que traduce entre dos idiomas.", "descripcion": "Людина яка перекладає між двома мовами", "emoji": "🌐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "interprete", "es": "Intérprete", "uk": "Усний перекладач", "descripcion_es": "Persona que traduce oralmente en tiempo real.", "descripcion": "Людина що перекладає усно в реальному часі", "emoji": "🎧", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ropa-ampliada",
+      "nombre": { "es": "Más ropa y complementos", "uk": "Більше одягу та аксесуарів" },
+      "emoji": "👗",
+      "subcategorias": [
+        {
+          "id": "ropa-interior-mas",
+          "nombre": { "es": "Ropa interior y de descanso", "uk": "Білизна та домашній одяг" },
+          "emoji": "🩲",
+          "palabras": [
+            { "id": "ropa-interior", "es": "Ropa interior", "uk": "Нижня білизна", "descripcion_es": "Ropa que se lleva debajo de la ropa exterior.", "descripcion": "Одяг що носять під верхнім одягом", "emoji": "🩲", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pijama", "es": "Pijama", "uk": "Піжама", "descripcion_es": "Ropa cómoda para dormir.", "descripcion": "Зручний одяг для сну", "emoji": "😴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "banador", "es": "Bañador / Bikini", "uk": "Купальник", "descripcion_es": "Ropa para bañarse en la playa o piscina.", "descripcion": "Одяг для купання на пляжі або в басейні", "emoji": "👙", "imagen": "", "etiquetas": ["database"] },
+            { "id": "chubasquero", "es": "Chubasquero", "uk": "Дощовик", "descripcion_es": "Ropa impermeable para la lluvia.", "descripcion": "Водонепроникний одяг для дощу", "emoji": "🌧️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "chaleco", "es": "Chaleco", "uk": "Жилет", "descripcion_es": "Prenda sin mangas que cubre el torso.", "descripcion": "Безрукавний одяг що покриває тулуб", "emoji": "🦺", "imagen": "", "etiquetas": ["database"] },
+            { "id": "guantes", "es": "Guantes", "uk": "Рукавички", "descripcion_es": "Prenda para abrigar las manos en invierno.", "descripcion": "Одяг для утеплення рук взимку", "emoji": "🧤", "imagen": "", "etiquetas": ["database"] },
+            { "id": "calcetines", "es": "Calcetines", "uk": "Шкарпетки", "descripcion_es": "Prenda que cubre el pie y el tobillo.", "descripcion": "Одяг що покриває стопу та щиколотку", "emoji": "🧦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cinturon", "es": "Cinturón", "uk": "Пояс / Ремінь", "descripcion_es": "Tira de cuero o tela para sujetar el pantalón.", "descripcion": "Шкіряна або тканинна смуга для тримання штанів", "emoji": "👔", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "tallas-colores-ropa",
+          "nombre": { "es": "Tallas y cuidado de ropa", "uk": "Розміри і догляд за одягом" },
+          "emoji": "📏",
+          "palabras": [
+            { "id": "talla", "es": "Talla", "uk": "Розмір", "descripcion_es": "Medida estándar de la ropa: XS, S, M, L, XL.", "descripcion": "Стандартний розмір одягу: XS, S, M, L, XL", "emoji": "📏", "imagen": "", "etiquetas": ["database"] },
+            { "id": "probador", "es": "Probador", "uk": "Примірочна", "descripcion_es": "Cabina en una tienda para probarse ropa.", "descripcion": "Кабінка в магазині для примірки одягу", "emoji": "🚪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lavadora-ropa", "es": "Lavar a máquina", "uk": "Прати в машині", "descripcion_es": "Limpiar la ropa en la lavadora.", "descripcion": "Прати одяг у пральній машині", "emoji": "🫧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "planchar", "es": "Planchar", "uk": "Прасувати", "descripcion_es": "Eliminar arrugas de la ropa con la plancha.", "descripcion": "Прибирати зморшки з одягу праскою", "emoji": "👔", "imagen": "", "etiquetas": ["database"] },
+            { "id": "plancha", "es": "Plancha", "uk": "Праска", "descripcion_es": "Aparato eléctrico para planchar la ropa.", "descripcion": "Електричний прилад для прасування одягу", "emoji": "🔌", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cuerpo-ampliado",
+      "nombre": { "es": "Cuerpo y salud ampliado", "uk": "Тіло і здоров'я детально" },
+      "emoji": "🫀",
+      "subcategorias": [
+        {
+          "id": "organos-internos",
+          "nombre": { "es": "Órganos internos", "uk": "Внутрішні органи" },
+          "emoji": "🫀",
+          "palabras": [
+            { "id": "corazon", "es": "Corazón", "uk": "Серце", "descripcion_es": "Órgano que bombea la sangre por el cuerpo.", "descripcion": "Орган що качає кров по тілу", "emoji": "❤️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pulmones", "es": "Pulmones", "uk": "Легені", "descripcion_es": "Órganos que permiten respirar.", "descripcion": "Органи що дозволяють дихати", "emoji": "🫁", "imagen": "", "etiquetas": ["database"] },
+            { "id": "estomago-org", "es": "Estómago", "uk": "Шлунок", "descripcion_es": "Órgano que digiere los alimentos.", "descripcion": "Орган що перетравлює їжу", "emoji": "🫃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "higado", "es": "Hígado", "uk": "Печінка", "descripcion_es": "Órgano que filtra la sangre y produce bilis.", "descripcion": "Орган що фільтрує кров і виробляє жовч", "emoji": "🫀", "imagen": "", "etiquetas": ["database"] },
+            { "id": "rinon", "es": "Riñón", "uk": "Нирка", "descripcion_es": "Órgano que filtra los desechos de la sangre.", "descripcion": "Орган що фільтрує відходи з крові", "emoji": "🫘", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cerebro", "es": "Cerebro", "uk": "Мозок", "descripcion_es": "Órgano principal del sistema nervioso. Centro de pensamientos.", "descripcion": "Головний орган нервової системи, центр думок", "emoji": "🧠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "columna", "es": "Columna vertebral", "uk": "Хребет", "descripcion_es": "Estructura ósea que sostiene el cuerpo.", "descripcion": "Кісткова структура що підтримує тіло", "emoji": "🦴", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "mas-partes-cuerpo",
+          "nombre": { "es": "Más partes del cuerpo", "uk": "Більше частин тіла" },
+          "emoji": "🖐️",
+          "palabras": [
+            { "id": "codo", "es": "Codo", "uk": "Лікоть", "descripcion_es": "Articulación que dobla el brazo.", "descripcion": "Суглоб що згинає руку", "emoji": "💪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "muneca", "es": "Muñeca", "uk": "Зап'ясток", "descripcion_es": "Articulación entre el brazo y la mano.", "descripcion": "Суглоб між рукою та кистю", "emoji": "⌚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tobillo", "es": "Tobillo", "uk": "Щиколотка", "descripcion_es": "Articulación entre la pierna y el pie.", "descripcion": "Суглоб між ногою та стопою", "emoji": "🦶", "imagen": "", "etiquetas": ["database"] },
+            { "id": "talon", "es": "Talón", "uk": "П'ята", "descripcion_es": "Parte posterior del pie.", "descripcion": "Задня частина стопи", "emoji": "🦶", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pecho", "es": "Pecho", "uk": "Груди", "descripcion_es": "Parte delantera del torso.", "descripcion": "Передня частина тулуба", "emoji": "🫀", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cadera", "es": "Cadera", "uk": "Стегно / Тазостегновий суглоб", "descripcion_es": "Zona lateral entre el abdomen y el muslo.", "descripcion": "Бокова зона між животом і стегном", "emoji": "🦴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pulgar", "es": "Pulgar", "uk": "Великий палець", "descripcion_es": "El dedo más grueso de la mano.", "descripcion": "Найтовстіший палець руки", "emoji": "👍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "una", "es": "Uña", "uk": "Ніготь", "descripcion_es": "Lámina dura que cubre la punta de los dedos.", "descripcion": "Тверда пластина що покриває кінчики пальців", "emoji": "💅", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familia-ampliada",
+      "nombre": { "es": "Relaciones personales", "uk": "Особисті стосунки" },
+      "emoji": "👫",
+      "subcategorias": [
+        {
+          "id": "pareja-amigos",
+          "nombre": { "es": "Pareja y amistades", "uk": "Партнер і друзі" },
+          "emoji": "❤️",
+          "palabras": [
+            { "id": "novio", "es": "Novio", "uk": "Хлопець / Наречений", "descripcion_es": "Pareja masculina en una relación romántica.", "descripcion": "Чоловіча пара в романтичних стосунках", "emoji": "💑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "novia", "es": "Novia", "uk": "Дівчина / Наречена", "descripcion_es": "Pareja femenina en una relación romántica.", "descripcion": "Жіноча пара в романтичних стосунках", "emoji": "💑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pareja", "es": "Pareja", "uk": "Партнер / Пара", "descripcion_es": "Compañero romántico de vida.", "descripcion": "Романтичний супутник життя", "emoji": "👫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "amigo", "es": "Amigo", "uk": "Друг", "descripcion_es": "Persona con quien tienes una relación de amistad.", "descripcion": "Людина з якою маєш дружні стосунки", "emoji": "🤝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "conocido", "es": "Conocido", "uk": "Знайомий", "descripcion_es": "Persona que conoces pero no es un amigo cercano.", "descripcion": "Людина яку знаєш але не близький друг", "emoji": "👋", "imagen": "", "etiquetas": ["database"] },
+            { "id": "companero", "es": "Compañero", "uk": "Колега / Товариш", "descripcion_es": "Persona con quien compartes trabajo, clase o actividad.", "descripcion": "Людина з якою ділиш роботу, клас або діяльність", "emoji": "🧑‍🤝‍🧑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cuñado", "es": "Cuñado / Cuñada", "uk": "Шурин / Невістка / Своячка", "descripcion_es": "Hermano o hermana del cónyuge.", "descripcion": "Брат або сестра чоловіка/дружини", "emoji": "👨‍👩‍👦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "suegro", "es": "Suegro / Suegra", "uk": "Свекор / Свекруха / Тесть / Теща", "descripcion_es": "Padre o madre del cónyuge.", "descripcion": "Батько або мати чоловіка/дружини", "emoji": "👴", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
     }
   ]
 }
