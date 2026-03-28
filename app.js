@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupImagePicker();
   setupTagsInput();
   setupCameraInput();
+  setupCatModalTranslation();
+  setupDetailTagsInput();
   checkIosInstallHint();
 });
 
@@ -126,8 +128,53 @@ function setupTabs() {
 
       if (tab.dataset.view === 'vocabulario') renderMyVocab();
       if (tab.dataset.view === 'categorias') renderCategorias();
+      if (tab.dataset.view === 'etiquetas') renderEtiquetas();
     });
   });
+}
+
+// ==================== AUTO-TRANSLATE CATEGORY MODAL ====================
+function setupCatModalTranslation() {
+  let esTimer, ukTimer;
+
+  document.getElementById('cat-modal-es').addEventListener('input', () => {
+    clearTimeout(esTimer);
+    esTimer = setTimeout(async () => {
+      const val = document.getElementById('cat-modal-es').value.trim();
+      const ukField = document.getElementById('cat-modal-uk');
+      if (val && !ukField.value.trim()) {
+        const translated = await translateText(val, 'es', 'uk');
+        if (translated) ukField.value = translated;
+      }
+    }, 800);
+  });
+
+  document.getElementById('cat-modal-uk').addEventListener('input', () => {
+    clearTimeout(ukTimer);
+    ukTimer = setTimeout(async () => {
+      const val = document.getElementById('cat-modal-uk').value.trim();
+      const esField = document.getElementById('cat-modal-es');
+      if (val && !esField.value.trim()) {
+        const translated = await translateText(val, 'uk', 'es');
+        if (translated) esField.value = translated;
+      }
+    }, 800);
+  });
+}
+
+async function translateText(text, from, to) {
+  if (!text.trim()) return '';
+  const url = `${MYMEMORY_URL}?q=${encodeURIComponent(text)}&langpair=${from}|${to}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.responseStatus === 200 && data.responseData.translatedText) {
+      let t = data.responseData.translatedText;
+      if (t === t.toUpperCase() && t.length > 3) t = capitalizeFirst(t.toLowerCase());
+      return t;
+    }
+  } catch (e) { /* silencioso */ }
+  return '';
 }
 
 // ==================== FILTER ====================
@@ -186,8 +233,8 @@ function renderMyVocab() {
 
   empty.style.display = 'none';
   list.innerHTML = words.map(w => `
-    <div class="word-card" data-id="${w.id}">
-      <div class="card-image" onclick="openImagePicker('${w.id}')" title="Cambiar imagen / Змінити зображення">
+    <div class="word-card" data-id="${w.id}" onclick="openWordDetail('${w.id}')">
+      <div class="card-image" onclick="event.stopPropagation(); openImagePicker('${w.id}')" title="Cambiar imagen / Змінити зображення">
         ${w.imagen
           ? `<img src="${w.imagen}" alt="${w.es}" onerror="this.parentElement.innerHTML='${w.emoji || '🍽️'}'">`
           : (w.emoji || '🍽️')}
@@ -202,9 +249,6 @@ function renderMyVocab() {
         ${w.etiquetas && w.etiquetas.length > 0
           ? `<div class="card-tags">${w.etiquetas.map(t => `<span class="tag-badge">#${t}</span>`).join('')}</div>`
           : ''}
-      </div>
-      <div class="card-actions">
-        <button class="btn btn-remove" onclick="removeWord('${w.id}')">✕</button>
       </div>
     </div>
   `).join('');
@@ -1286,63 +1330,36 @@ function setupImagePicker() {
   });
 }
 
-// ==================== PWA INSTALL BANNER ====================
+// ==================== PWA INSTALL (Chrome nativo) ====================
 let deferredInstallPrompt = null;
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  showInstallBanner();
+  // Mostrar botón de instalar en el header
+  const btn = document.getElementById('btn-install');
+  if (btn) btn.classList.remove('hidden');
 });
 
-function showInstallBanner() {
-  if (document.getElementById('install-banner')) return;
-  const banner = document.createElement('div');
-  banner.id = 'install-banner';
-  banner.className = 'install-banner';
-  banner.innerHTML = `
-    <span>📲 Instalar app / Встановити додаток</span>
-    <div class="install-banner-actions">
-      <button id="install-btn" class="btn btn-primary btn-sm">Instalar</button>
-      <button id="install-dismiss" class="btn btn-secondary btn-sm">✕</button>
-    </div>
-  `;
-  document.getElementById('app').prepend(banner);
-  document.getElementById('install-btn').addEventListener('click', async () => {
-    if (deferredInstallPrompt) {
-      deferredInstallPrompt.prompt();
-      const { outcome } = await deferredInstallPrompt.userChoice;
-      if (outcome === 'accepted') banner.remove();
-      deferredInstallPrompt = null;
-    }
-  });
-  document.getElementById('install-dismiss').addEventListener('click', () => banner.remove());
-}
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('btn-install');
+  if (btn) btn.classList.add('hidden');
+  deferredInstallPrompt = null;
+});
 
-function checkIosInstallHint() {
-  const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  const isInStandalone = window.navigator.standalone === true;
-  const dismissed = localStorage.getItem('ios_install_dismissed');
-  if (isIos && !isInStandalone && !dismissed) {
-    showIosInstallBanner();
+async function triggerInstall() {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  const { outcome } = await deferredInstallPrompt.userChoice;
+  if (outcome === 'accepted') {
+    document.getElementById('btn-install')?.classList.add('hidden');
+    deferredInstallPrompt = null;
   }
 }
 
-function showIosInstallBanner() {
-  if (document.getElementById('install-banner')) return;
-  const banner = document.createElement('div');
-  banner.id = 'install-banner';
-  banner.className = 'install-banner install-banner-ios';
-  banner.innerHTML = `
-    <span>📲 Para instalar: toca <strong>Compartir</strong> y luego <strong>"Añadir a inicio"</strong><br>
-    <small>Щоб встановити: натисни «Поділитися» → «На екран "Домів"»</small></span>
-    <button id="install-dismiss" class="btn btn-secondary btn-sm" style="flex-shrink:0">✕</button>
-  `;
-  document.getElementById('app').prepend(banner);
-  document.getElementById('install-dismiss').addEventListener('click', () => {
-    banner.remove();
-    localStorage.setItem('ios_install_dismissed', '1');
-  });
+function checkIosInstallHint() {
+  // En iOS no existe beforeinstallprompt, no hacemos nada
+  // El usuario puede instalar manualmente con Compartir → Añadir a inicio
 }
 
 // ==================== PHOTO FROM CAMERA/GALLERY ====================
@@ -1378,8 +1395,129 @@ function openCameraInput() {
   document.getElementById('camera-input').click();
 }
 
+// ==================== WORD DETAIL MODAL ====================
+let detailTags = [];
+let detailWordId = '';
+
+function openWordDetail(wordId) {
+  const word = miVocabulario.find(w => w.id === wordId);
+  if (!word) return;
+  detailWordId = wordId;
+
+  document.getElementById('detail-word-id').value = wordId;
+  document.getElementById('detail-es').textContent = word.es;
+  document.getElementById('detail-uk').textContent = word.uk;
+
+  const imgDiv = document.getElementById('detail-image');
+  imgDiv.innerHTML = word.imagen
+    ? `<img src="${word.imagen}" alt="${word.es}" onerror="this.outerHTML='<span style=font-size:56px>${word.emoji || '🍽️'}</span>'">`
+    : `<span style="font-size:56px">${word.emoji || '🍽️'}</span>`;
+
+  const descsDiv = document.getElementById('detail-descs');
+  descsDiv.innerHTML = '';
+  if (word.descripcion_es) descsDiv.innerHTML += `<div class="card-desc card-desc-es">${word.descripcion_es}</div>`;
+  if (word.descripcion) descsDiv.innerHTML += `<div class="card-desc card-desc-uk">${word.descripcion}</div>`;
+
+  document.getElementById('detail-cat').textContent = word.categoria
+    ? `${word.categoria}${word.subcategoria ? ' › ' + word.subcategoria : ''}`
+    : '';
+
+  detailTags = word.etiquetas ? [...word.etiquetas] : [];
+  renderDetailTags();
+
+  document.getElementById('word-detail-modal').classList.remove('hidden');
+}
+
+function renderDetailTags() {
+  const list = document.getElementById('detail-tags-list');
+  list.innerHTML = detailTags.map(t => `
+    <span class="tag-chip">
+      #${t}
+      <button class="tag-chip-remove" onclick="removeDetailTag('${t}')">×</button>
+    </span>
+  `).join('');
+}
+
+function removeDetailTag(tag) {
+  detailTags = detailTags.filter(t => t !== tag);
+  renderDetailTags();
+}
+
+function setupDetailTagsInput() {
+  const input = document.getElementById('detail-tag-input');
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = input.value.trim().toLowerCase().replace(/[^a-záéíóúñ0-9_-]/gi, '');
+      if (val && !detailTags.includes(val)) {
+        detailTags.push(val);
+        renderDetailTags();
+      }
+      input.value = '';
+    }
+  });
+}
+
+function saveAndCloseDetail() {
+  const word = miVocabulario.find(w => w.id === detailWordId);
+  if (word) {
+    word.etiquetas = [...detailTags];
+    saveMyVocab();
+    renderTagsBar();
+    renderMyVocab();
+    renderEtiquetas();
+  }
+  document.getElementById('word-detail-modal').classList.add('hidden');
+}
+
+function deleteWordFromDetail() {
+  const word = miVocabulario.find(w => w.id === detailWordId);
+  if (!word) return;
+  if (!confirm(`¿Eliminar "${word.es}"?\nВидалити "${word.uk}"?`)) return;
+  miVocabulario = miVocabulario.filter(w => w.id !== detailWordId);
+  saveMyVocab();
+  populateCategoryFilter();
+  renderTagsBar();
+  renderMyVocab();
+  renderEtiquetas();
+  document.getElementById('word-detail-modal').classList.add('hidden');
+  showToast('Eliminada / Видалено');
+}
+
+// ==================== ETIQUETAS VIEW ====================
+function renderEtiquetas() {
+  const grid = document.getElementById('etiquetas-grid');
+  const empty = document.getElementById('etiquetas-empty');
+  if (!grid) return;
+  const tags = getAllTags();
+
+  if (tags.length === 0) {
+    grid.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+
+  empty.classList.add('hidden');
+  grid.innerHTML = tags.map(tag => {
+    const count = miVocabulario.filter(w => (w.etiquetas || []).includes(tag)).length;
+    return `
+      <div class="etiqueta-card" onclick="goToTagFilter('${tag}')">
+        <span class="etiqueta-name">#${tag}</span>
+        <span class="etiqueta-count">${count} ${count === 1 ? 'palabra / слово' : 'palabras / слів'}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function goToTagFilter(tag) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelector('[data-view="vocabulario"]').classList.add('active');
+  document.getElementById('view-vocabulario').classList.add('active');
+  setTagFilter(tag);
+}
+
 // Make functions available globally for onclick handlers
-window.removeWord = removeWord;
 window.doSearch = doSearch;
 window.openAddModal = openAddModal;
 window.selectResultImage = selectResultImage;
@@ -1403,3 +1541,9 @@ window.logout = logout;
 window.setQuizFilter = setQuizFilter;
 window.startQuizWithFilter = startQuizWithFilter;
 window.openCameraInput = openCameraInput;
+window.triggerInstall = triggerInstall;
+window.openWordDetail = openWordDetail;
+window.saveAndCloseDetail = saveAndCloseDetail;
+window.deleteWordFromDetail = deleteWordFromDetail;
+window.removeDetailTag = removeDetailTag;
+window.goToTagFilter = goToTagFilter;

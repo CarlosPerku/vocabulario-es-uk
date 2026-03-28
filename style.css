@@ -1211,3 +1211,103 @@ body {
   font-size: 12px;
   font-weight: 600;
 }
+
+/* Word card clickable */
+.word-card {
+  cursor: pointer;
+}
+
+.word-card:active {
+  transform: scale(0.98);
+}
+
+/* Word detail modal */
+.detail-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 140px;
+  margin-bottom: 12px;
+}
+
+.detail-image img {
+  height: 140px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.detail-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.detail-es {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.detail-uk {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.detail-descs {
+  margin-bottom: 8px;
+}
+
+.detail-cat {
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* Etiquetas view */
+.etiquetas-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.etiqueta-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.etiqueta-card:hover {
+  border-color: var(--primary);
+  background: #eff6ff;
+}
+
+.etiqueta-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.etiqueta-count {
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+/* Btn danger */
+.btn-danger {
+  background: #ef4444;
+  color: white;
+  border: none;
+}
+
+.btn-danger:active {
+  background: #dc2626;
+}
