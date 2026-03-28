@@ -81,10 +81,6 @@ async function loadVocabBase() {
 function loadMyVocabLocal() {
   const saved = localStorage.getItem('mi_vocabulario');
   miVocabulario = saved ? JSON.parse(saved) : [];
-  if (!saved) {
-    getAllBaseWords().forEach(w => miVocabulario.push({ ...w }));
-    saveMyVocabLocal();
-  }
 }
 
 function saveMyVocabLocal() {
