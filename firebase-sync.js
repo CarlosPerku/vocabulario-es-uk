@@ -19,6 +19,13 @@ let currentUser = null;
 // ---- AUTH ----
 
 function initAuth(onUserChange) {
+  // Fix iOS Safari bfcache: cuando Safari restaura la página desde caché
+  // después del redirect de Google, Firebase no re-ejecuta onAuthStateChanged.
+  // Forzar recarga para que Firebase lea el estado desde IndexedDB.
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) window.location.reload();
+  });
+
   // Procesar resultado del redirect si venimos de Google
   auth.getRedirectResult().then(result => {
     if (result && result.user) {
@@ -34,16 +41,23 @@ function initAuth(onUserChange) {
 
 async function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  // Intentar popup primero (funciona mejor en la mayoría de dispositivos)
-  // Si está bloqueado, caer en redirect
+
+  // En Safari PWA (standalone), el popup no funciona porque abre en un
+  // proceso de Safari separado. Usar redirect directamente.
+  const isStandalone = window.navigator.standalone === true ||
+    window.matchMedia('(display-mode: standalone)').matches;
+
+  if (isStandalone) {
+    return auth.signInWithRedirect(provider);
+  }
+
+  // En navegador normal: intentar popup primero, fallback a redirect
   try {
     await auth.signInWithPopup(provider);
   } catch (e) {
-    if (e.code === 'auth/popup-blocked' || e.code === 'auth/popup-closed-by-user') {
-      return auth.signInWithRedirect(provider);
-    }
-    // En iOS WebKit el popup puede fallar con otros códigos
-    if (e.code === 'auth/operation-not-supported-in-this-environment' ||
+    if (e.code === 'auth/popup-blocked' ||
+        e.code === 'auth/popup-closed-by-user' ||
+        e.code === 'auth/operation-not-supported-in-this-environment' ||
         e.code === 'auth/cancelled-popup-request') {
       return auth.signInWithRedirect(provider);
     }
