@@ -1544,6 +1544,218 @@
           ]
         }
       ]
+    },
+    {
+      "id": "palabras-esenciales",
+      "nombre": { "es": "Palabras esenciales", "uk": "Основні слова" },
+      "emoji": "💡",
+      "subcategorias": [
+        {
+          "id": "interrogativas",
+          "nombre": { "es": "Palabras interrogativas", "uk": "Питальні слова" },
+          "emoji": "❓",
+          "palabras": [
+            { "id": "que", "es": "¿Qué?", "uk": "Що? / Який?", "descripcion_es": "Pregunta por la cosa o el tipo.", "descripcion": "Запитує про річ або вид", "emoji": "❓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "quien", "es": "¿Quién?", "uk": "Хто?", "descripcion_es": "Pregunta por una persona.", "descripcion": "Запитує про особу", "emoji": "🙋", "imagen": "", "etiquetas": ["database"] },
+            { "id": "donde", "es": "¿Dónde?", "uk": "Де?", "descripcion_es": "Pregunta por el lugar.", "descripcion": "Запитує про місце", "emoji": "📍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cuando", "es": "¿Cuándo?", "uk": "Коли?", "descripcion_es": "Pregunta por el momento o la fecha.", "descripcion": "Запитує про час або дату", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "como", "es": "¿Cómo?", "uk": "Як?", "descripcion_es": "Pregunta por la manera o el estado.", "descripcion": "Запитує про спосіб або стан", "emoji": "🤔", "imagen": "", "etiquetas": ["database"] },
+            { "id": "por-que", "es": "¿Por qué?", "uk": "Чому?", "descripcion_es": "Pregunta por la causa o razón.", "descripcion": "Запитує про причину", "emoji": "🤷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cuanto", "es": "¿Cuánto?", "uk": "Скільки?", "descripcion_es": "Pregunta por la cantidad o el precio.", "descripcion": "Запитує про кількість або ціну", "emoji": "🔢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cual", "es": "¿Cuál?", "uk": "Який? / Котрий?", "descripcion_es": "Pregunta para elegir entre varias opciones.", "descripcion": "Запитує для вибору серед кількох варіантів", "emoji": "👉", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "preposiciones",
+          "nombre": { "es": "Preposiciones y conectores", "uk": "Прийменники і сполучники" },
+          "emoji": "🔗",
+          "palabras": [
+            { "id": "en", "es": "En", "uk": "В / На / У", "descripcion_es": "Indica ubicación o tiempo. 'Estoy en casa', 'en enero'.", "descripcion": "Вказує на місце або час", "emoji": "📍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "de", "es": "De", "uk": "З / Від / Про", "descripcion_es": "Indica origen, posesión o materia. 'Soy de España'.", "descripcion": "Вказує на походження, належність або матеріал", "emoji": "↩️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "a", "es": "A", "uk": "До / В / На", "descripcion_es": "Indica dirección o destinatario. 'Voy a Madrid'.", "descripcion": "Вказує на напрямок або адресата", "emoji": "➡️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "con", "es": "Con", "uk": "З (разом)", "descripcion_es": "Indica compañía o instrumento. 'Voy con mi amigo'.", "descripcion": "Вказує на супровід або інструмент", "emoji": "🤝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sin", "es": "Sin", "uk": "Без", "descripcion_es": "Indica ausencia. 'Café sin azúcar'.", "descripcion": "Вказує на відсутність", "emoji": "🚫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "para", "es": "Para", "uk": "Для / Щоб", "descripcion_es": "Indica finalidad o destinatario. 'Es para ti'.", "descripcion": "Вказує на мету або отримувача", "emoji": "🎯", "imagen": "", "etiquetas": ["database"] },
+            { "id": "por", "es": "Por", "uk": "Через / За / По", "descripcion_es": "Indica causa, medio o duración. 'Gracias por todo'.", "descripcion": "Вказує на причину, засіб або тривалість", "emoji": "↔️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sobre", "es": "Sobre", "uk": "Над / Про / На", "descripcion_es": "Indica posición encima o tema. 'Habla sobre ti'.", "descripcion": "Вказує на позицію зверху або тему", "emoji": "⬆️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bajo", "es": "Bajo / Debajo", "uk": "Під / Нижче", "descripcion_es": "Indica posición inferior. 'Debajo de la mesa'.", "descripcion": "Вказує на нижню позицію", "emoji": "⬇️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "entre", "es": "Entre", "uk": "Між", "descripcion_es": "Indica posición en medio de dos cosas. 'Entre tú y yo'.", "descripcion": "Вказує на позицію між двома речами", "emoji": "↔️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pero", "es": "Pero", "uk": "Але / Проте", "descripcion_es": "Conector que introduce una contradicción.", "descripcion": "Сполучник що вводить протиріччя", "emoji": "🔄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "porque", "es": "Porque", "uk": "Тому що / Бо", "descripcion_es": "Introduce la causa o razón.", "descripcion": "Вводить причину або підставу", "emoji": "💡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "aunque", "es": "Aunque", "uk": "Хоча / Незважаючи на", "descripcion_es": "Introduce una concesión. 'Aunque llueve, salgo'.", "descripcion": "Вводить поступку", "emoji": "🌧️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tambien", "es": "También", "uk": "Також / Теж", "descripcion_es": "Indica adición. 'Yo también quiero'.", "descripcion": "Вказує на додавання", "emoji": "➕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ya", "es": "Ya", "uk": "Вже / Зараз", "descripcion_es": "Indica que algo ha ocurrido o ocurrirá pronto.", "descripcion": "Вказує що щось вже сталось або станеться", "emoji": "✅", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "adverbios-lugar-tiempo",
+          "nombre": { "es": "Adverbios útiles", "uk": "Корисні прислівники" },
+          "emoji": "📌",
+          "palabras": [
+            { "id": "aqui", "es": "Aquí / Acá", "uk": "Тут / Сюди", "descripcion_es": "Indica el lugar donde está el hablante.", "descripcion": "Вказує місце де знаходиться мовець", "emoji": "📍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "alli", "es": "Allí / Allá", "uk": "Там / Туди", "descripcion_es": "Indica un lugar alejado.", "descripcion": "Вказує на далеке місце", "emoji": "🗺️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "arriba", "es": "Arriba", "uk": "Вгорі / Вгору", "descripcion_es": "Hacia la parte superior.", "descripcion": "До верхньої частини", "emoji": "⬆️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "abajo", "es": "Abajo", "uk": "Внизу / Вниз", "descripcion_es": "Hacia la parte inferior.", "descripcion": "До нижньої частини", "emoji": "⬇️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cerca", "es": "Cerca", "uk": "Близько", "descripcion_es": "A poca distancia.", "descripcion": "На невеликій відстані", "emoji": "📏", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lejos", "es": "Lejos", "uk": "Далеко", "descripcion_es": "A gran distancia.", "descripcion": "На великій відстані", "emoji": "🔭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "siempre", "es": "Siempre", "uk": "Завжди", "descripcion_es": "En todo momento, sin excepción.", "descripcion": "У будь-який час, без винятку", "emoji": "♾️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nunca", "es": "Nunca", "uk": "Ніколи", "descripcion_es": "En ningún momento.", "descripcion": "У жодний момент", "emoji": "🚫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mucho", "es": "Mucho", "uk": "Багато", "descripcion_es": "En gran cantidad o intensidad.", "descripcion": "У великій кількості або інтенсивності", "emoji": "🔝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "poco", "es": "Poco", "uk": "Мало", "descripcion_es": "En pequeña cantidad o intensidad.", "descripcion": "У невеликій кількості або інтенсивності", "emoji": "🔅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "muy", "es": "Muy", "uk": "Дуже", "descripcion_es": "Intensificador de adjetivos y adverbios.", "descripcion": "Підсилювач прикметників і прислівників", "emoji": "‼️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mas", "es": "Más", "uk": "Більше", "descripcion_es": "Mayor cantidad o grado.", "descripcion": "Більша кількість або ступінь", "emoji": "➕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "menos", "es": "Menos", "uk": "Менше", "descripcion_es": "Menor cantidad o grado.", "descripcion": "Менша кількість або ступінь", "emoji": "➖", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horas-tiempo",
+      "nombre": { "es": "Las horas y el tiempo", "uk": "Час і години" },
+      "emoji": "⏰",
+      "subcategorias": [
+        {
+          "id": "horas",
+          "nombre": { "es": "Horas del día", "uk": "Години дня" },
+          "emoji": "🕐",
+          "palabras": [
+            { "id": "hora", "es": "Hora", "uk": "Година", "descripcion_es": "Unidad de tiempo de 60 minutos.", "descripcion": "Одиниця часу 60 хвилин", "emoji": "🕐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "minuto", "es": "Minuto", "uk": "Хвилина", "descripcion_es": "Unidad de tiempo de 60 segundos.", "descripcion": "Одиниця часу 60 секунд", "emoji": "⏱️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "segundo-tiempo", "es": "Segundo", "uk": "Секунда", "descripcion_es": "Unidad de tiempo básica.", "descripcion": "Базова одиниця часу", "emoji": "⚡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "manana-momento", "es": "Mañana", "uk": "Ранок", "descripcion_es": "Primera parte del día, de 6 a 12 h.", "descripcion": "Перша частина дня з 6 до 12", "emoji": "🌅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tarde", "es": "Tarde", "uk": "День / Після обіду", "descripcion_es": "Parte del día de 12 a 20 h.", "descripcion": "Частина дня з 12 до 20", "emoji": "🌤️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "noche", "es": "Noche", "uk": "Ніч / Вечір", "descripcion_es": "Parte del día de 20 a 6 h.", "descripcion": "Частина дня з 20 до 6", "emoji": "🌙", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mediodia", "es": "Mediodía", "uk": "Полудень", "descripcion_es": "Las 12 del día.", "descripcion": "12 година дня", "emoji": "☀️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "medianoche", "es": "Medianoche", "uk": "Північ", "descripcion_es": "Las 12 de la noche.", "descripcion": "12 година ночі", "emoji": "🌑", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "expresiones-tiempo",
+          "nombre": { "es": "Expresiones de tiempo", "uk": "Вирази часу" },
+          "emoji": "📅",
+          "palabras": [
+            { "id": "hoy", "es": "Hoy", "uk": "Сьогодні", "descripcion_es": "El día actual.", "descripcion": "Поточний день", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ayer", "es": "Ayer", "uk": "Вчора", "descripcion_es": "El día anterior a hoy.", "descripcion": "День перед сьогодні", "emoji": "⬅️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "manana-dia", "es": "Mañana", "uk": "Завтра", "descripcion_es": "El día siguiente a hoy.", "descripcion": "День після сьогодні", "emoji": "➡️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ahora", "es": "Ahora", "uk": "Зараз", "descripcion_es": "En este momento.", "descripcion": "У цей момент", "emoji": "⚡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "antes", "es": "Antes", "uk": "Раніше / До", "descripcion_es": "En un tiempo anterior.", "descripcion": "У попередній час", "emoji": "⏮️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "despues", "es": "Después", "uk": "Після / Пізніше", "descripcion_es": "En un tiempo posterior.", "descripcion": "У наступний час", "emoji": "⏭️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pronto", "es": "Pronto", "uk": "Скоро / Незабаром", "descripcion_es": "En poco tiempo.", "descripcion": "У найближчий час", "emoji": "⏩", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tarde-adv", "es": "Tarde", "uk": "Пізно", "descripcion_es": "Después de la hora prevista.", "descripcion": "Після передбаченого часу", "emoji": "😴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "semana", "es": "Semana", "uk": "Тиждень", "descripcion_es": "Período de 7 días.", "descripcion": "Період 7 днів", "emoji": "📅", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mes", "es": "Mes", "uk": "Місяць", "descripcion_es": "Período de 28-31 días.", "descripcion": "Період 28-31 днів", "emoji": "🗓️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ano", "es": "Año", "uk": "Рік", "descripcion_es": "Período de 12 meses o 365 días.", "descripcion": "Період 12 місяців або 365 днів", "emoji": "🎆", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "naturaleza-ampliada",
+      "nombre": { "es": "Naturaleza y medio ambiente", "uk": "Природа і довкілля" },
+      "emoji": "🌿",
+      "subcategorias": [
+        {
+          "id": "plantas-flores",
+          "nombre": { "es": "Plantas y flores", "uk": "Рослини і квіти" },
+          "emoji": "🌸",
+          "palabras": [
+            { "id": "rosa", "es": "Rosa", "uk": "Троянда", "descripcion_es": "La flor más popular en España. Símbolo del amor.", "descripcion": "Найпопулярніша квітка в Іспанії, символ кохання", "emoji": "🌹", "imagen": "", "etiquetas": ["database"] },
+            { "id": "girasol", "es": "Girasol", "uk": "Соняшник", "descripcion_es": "Flor grande amarilla que sigue la dirección del sol.", "descripcion": "Велика жовта квітка що слідує за сонцем", "emoji": "🌻", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tulipan", "es": "Tulipán", "uk": "Тюльпан", "descripcion_es": "Flor de colores variados muy popular en primavera.", "descripcion": "Квітка різних кольорів, дуже популярна навесні", "emoji": "🌷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "arbol", "es": "Árbol", "uk": "Дерево", "descripcion_es": "Planta grande con tronco de madera.", "descripcion": "Велика рослина з дерев'яним стовбуром", "emoji": "🌳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pino", "es": "Pino", "uk": "Сосна", "descripcion_es": "Árbol de hoja perenne con piñas. Muy común en España.", "descripcion": "Вічнозелене дерево з шишками", "emoji": "🌲", "imagen": "", "etiquetas": ["database"] },
+            { "id": "palmera", "es": "Palmera", "uk": "Пальма", "descripcion_es": "Árbol tropical típico de las costas del Mediterráneo.", "descripcion": "Тропічне дерево типове для Середземномор'я", "emoji": "🌴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hierba", "es": "Hierba / Césped", "uk": "Трава / Газон", "descripcion_es": "Plantas verdes bajas que cubren el suelo.", "descripcion": "Низькі зелені рослини що покривають землю", "emoji": "🌿", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hoja", "es": "Hoja", "uk": "Листок", "descripcion_es": "Parte plana y verde de una planta o árbol.", "descripcion": "Плоска зелена частина рослини або дерева", "emoji": "🍃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "semilla", "es": "Semilla", "uk": "Насіння", "descripcion_es": "Parte de la planta de la que nace una nueva planta.", "descripcion": "Частина рослини з якої виростає нова рослина", "emoji": "🌱", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "insectos-animales-pequenos",
+          "nombre": { "es": "Insectos y pequeños animales", "uk": "Комахи і дрібні тварини" },
+          "emoji": "🦋",
+          "palabras": [
+            { "id": "abeja", "es": "Abeja", "uk": "Бджола", "descripcion_es": "Insecto que produce miel y poliniza las flores.", "descripcion": "Комаха що виробляє мед і запилює квіти", "emoji": "🐝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mariposa", "es": "Mariposa", "uk": "Метелик", "descripcion_es": "Insecto con alas coloridas.", "descripcion": "Комаха з кольоровими крилами", "emoji": "🦋", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hormiga", "es": "Hormiga", "uk": "Мураха", "descripcion_es": "Insecto social pequeño que vive en colonias.", "descripcion": "Маленька соціальна комаха що живе колоніями", "emoji": "🐜", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mosquito", "es": "Mosquito", "uk": "Комар", "descripcion_es": "Insecto que pica y puede transmitir enfermedades.", "descripcion": "Комаха що кусає і може передавати хвороби", "emoji": "🦟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "araña", "es": "Araña", "uk": "Павук", "descripcion_es": "Arácnido de ocho patas que teje telas.", "descripcion": "Павукоподібна з восьма лапами що плете павутину", "emoji": "🕷️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "caracol", "es": "Caracol", "uk": "Равлик", "descripcion_es": "Molusco terrestre con concha en espiral.", "descripcion": "Наземний молюск зі спіральною мушлею", "emoji": "🐌", "imagen": "", "etiquetas": ["database"] },
+            { "id": "rana", "es": "Rana", "uk": "Жаба", "descripcion_es": "Anfibio verde que vive cerca del agua.", "descripcion": "Зелена земноводна що живе біля води", "emoji": "🐸", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "medio-ambiente",
+          "nombre": { "es": "Medio ambiente", "uk": "Навколишнє середовище" },
+          "emoji": "♻️",
+          "palabras": [
+            { "id": "reciclaje", "es": "Reciclaje", "uk": "Переробка / Рециклінг", "descripcion_es": "Proceso de reutilizar materiales de desecho.", "descripcion": "Процес повторного використання відходів", "emoji": "♻️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "basura", "es": "Basura", "uk": "Сміття", "descripcion_es": "Residuos que se desechan.", "descripcion": "Відходи що викидаються", "emoji": "🗑️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "contaminacion", "es": "Contaminación", "uk": "Забруднення", "descripcion_es": "Presencia de sustancias dañinas en el ambiente.", "descripcion": "Наявність шкідливих речовин у довкіллі", "emoji": "🏭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "energia-solar", "es": "Energía solar", "uk": "Сонячна енергія", "descripcion_es": "Energía obtenida del sol. Muy usada en España.", "descripcion": "Енергія отримана від сонця, широко використовується в Іспанії", "emoji": "☀️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "agua-dulce", "es": "Agua dulce", "uk": "Прісна вода", "descripcion_es": "Agua sin sal, de ríos y lagos.", "descripcion": "Вода без солі, з річок і озер", "emoji": "💧", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ciudad-ampliada",
+      "nombre": { "es": "Ciudad y servicios", "uk": "Місто і послуги" },
+      "emoji": "🏙️",
+      "subcategorias": [
+        {
+          "id": "lugares-ciudad",
+          "nombre": { "es": "Más lugares de la ciudad", "uk": "Більше місць у місті" },
+          "emoji": "🗺️",
+          "palabras": [
+            { "id": "oficina-correos", "es": "Oficina de correos", "uk": "Поштове відділення", "descripcion_es": "Lugar para enviar cartas y paquetes.", "descripcion": "Місце для відправки листів та посилок", "emoji": "📮", "imagen": "", "etiquetas": ["database"] },
+            { "id": "comisaria", "es": "Comisaría", "uk": "Поліцейський відділок", "descripcion_es": "Oficina de la policía donde denunciar delitos.", "descripcion": "Офіс поліції де подають заяви про злочини", "emoji": "🚔", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bomberos", "es": "Parque de bomberos", "uk": "Пожежна частина", "descripcion_es": "Base de los bomberos.", "descripcion": "База пожежників", "emoji": "🚒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cementerio", "es": "Cementerio", "uk": "Цвинтар", "descripcion_es": "Lugar donde se entierran los fallecidos.", "descripcion": "Місце де ховають померлих", "emoji": "⚰️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "polideportivo", "es": "Polideportivo", "uk": "Спортивний комплекс", "descripcion_es": "Centro deportivo municipal con piscina, gimnasio y canchas.", "descripcion": "Муніципальний спортивний центр з басейном і залами", "emoji": "🏋️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "centro-comercial", "es": "Centro comercial", "uk": "Торговий центр", "descripcion_es": "Gran edificio con múltiples tiendas.", "descripcion": "Велика будівля з численними магазинами", "emoji": "🏬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gasolinera-ciudad", "es": "Gasolinera", "uk": "Заправна станція", "descripcion_es": "Lugar para repostar combustible.", "descripcion": "Місце для заправки пальним", "emoji": "⛽", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jardin-botanico", "es": "Jardín botánico", "uk": "Ботанічний сад", "descripcion_es": "Parque con plantas de todo el mundo.", "descripcion": "Парк з рослинами з усього світу", "emoji": "🌿", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "emergencias",
+          "nombre": { "es": "Emergencias y servicios", "uk": "Надзвичайні ситуації та служби" },
+          "emoji": "🆘",
+          "palabras": [
+            { "id": "numero-emergencia", "es": "112", "uk": "112 (номер екстреної допомоги)", "descripcion_es": "Número de emergencias en España y Europa. Gratis desde cualquier teléfono.", "descripcion": "Номер екстреної допомоги в Іспанії та Європі", "emoji": "📞", "imagen": "", "etiquetas": ["database"] },
+            { "id": "policia-num", "es": "Policía (091)", "uk": "Поліція (091)", "descripcion_es": "Número de la Policía Nacional en España.", "descripcion": "Номер Національної поліції Іспанії", "emoji": "🚔", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bomberos-num", "es": "Bomberos (080)", "uk": "Пожежники (080)", "descripcion_es": "Número de bomberos en la mayoría de ciudades.", "descripcion": "Номер пожежників у більшості міст", "emoji": "🚒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "accidente", "es": "Accidente", "uk": "Аварія / Нещасний випадок", "descripcion_es": "Suceso inesperado que causa daño.", "descripcion": "Несподівана подія що заподіює шкоду", "emoji": "💥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "incendio", "es": "Incendio", "uk": "Пожежа", "descripcion_es": "Fuego de grandes proporciones que causa daños.", "descripcion": "Вогонь великих розмірів що завдає збитків", "emoji": "🔥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "robo", "es": "Robo", "uk": "Крадіжка", "descripcion_es": "Delito de tomar algo de alguien sin permiso.", "descripcion": "Злочин взяти щось у когось без дозволу", "emoji": "🦹", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "profesiones-ampliadas",
+      "nombre": { "es": "Más profesiones", "uk": "Більше професій" },
+      "emoji": "👷",
+      "subcategorias": [
+        {
+          "id": "oficios",
+          "nombre": { "es": "Oficios y trabajos manuales", "uk": "Ремесла і ручна праця" },
+          "emoji": "🔨",
+          "palabras": [
+            { "id": "fontanero", "es": "Fontanero", "uk": "Сантехнік", "descripcion_es": "Profesional que instala y repara tuberías de agua.", "descripcion": "Фахівець що встановлює та ремонтує труби", "emoji": "🔧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "electricista", "es": "Electricista", "uk": "Електрик", "descripcion_es": "Profesional que instala y repara instalaciones eléctricas.", "descripcion": "Фахівець що встановлює та ремонтує електрику", "emoji": "⚡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "carpintero", "es": "Carpintero", "uk": "Тесля / Столяр", "descripcion_es": "Artesano que trabaja la madera.", "descripcion": "Майстер що працює з деревом", "emoji": "🪚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pintor-obra", "es": "Pintor (de obra)", "uk": "Маляр", "descripcion_es": "Profesional que pinta paredes y edificios.", "descripcion": "Фахівець що фарбує стіни та будівлі", "emoji": "🖌️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "albanil", "es": "Albañil", "uk": "Муляр / Будівельник", "descripcion_es": "Profesional de la construcción de edificios.", "descripcion": "Будівельний фахівець", "emoji": "🧱", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mecanico", "es": "Mecánico", "uk": "Механік", "descripcion_es": "Profesional que repara coches y maquinaria.", "descripcion": "Фахівець що ремонтує автомобілі та техніку", "emoji": "🔧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "peluquero", "es": "Peluquero", "uk": "Перукар", "descripcion_es": "Profesional que corta y peina el cabello.", "descripcion": "Фахівець що стриже та укладає волосся", "emoji": "💇", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cocinero-prof", "es": "Cocinero / Chef", "uk": "Кухар / Шеф", "descripcion_es": "Profesional que cocina en restaurantes.", "descripcion": "Фахівець що готує у ресторанах", "emoji": "👨‍🍳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "veterinario", "es": "Veterinario", "uk": "Ветеринар", "descripcion_es": "Médico especializado en animales.", "descripcion": "Лікар що спеціалізується на тваринах", "emoji": "🐾", "imagen": "", "etiquetas": ["database"] },
+            { "id": "traductor-prof", "es": "Traductor / Intérprete", "uk": "Перекладач", "descripcion_es": "Profesional que traduce entre idiomas.", "descripcion": "Фахівець що перекладає між мовами", "emoji": "🌐", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
     }
   ]
 }
