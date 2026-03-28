@@ -18,9 +18,22 @@
   <div id="app">
     <!-- Header -->
     <header class="header">
-      <h1 class="header-title">
-        <span class="flag">🇪🇸</span> Vocabulario <span class="flag">🇺🇦</span>
-      </h1>
+      <div class="header-top">
+        <h1 class="header-title">
+          <span class="flag">🇪🇸</span> Vocabulario <span class="flag">🇺🇦</span>
+        </h1>
+        <!-- Auth UI -->
+        <div id="auth-area">
+          <button id="btn-login" class="btn-auth" onclick="loginWithGoogle()">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" height="18" alt="G">
+            Entrar / Увійти
+          </button>
+          <div id="user-info" class="user-info hidden">
+            <img id="user-avatar" src="" width="32" height="32" alt="Avatar">
+            <button id="btn-logout" onclick="logout()" title="Cerrar sesión / Вийти">↩</button>
+          </div>
+        </div>
+      </div>
       <nav class="tabs">
         <button class="tab active" data-view="vocabulario">📚 Palabras<br><small>Слова</small></button>
         <button class="tab" data-view="buscar">🔍 Buscar<br><small>Шукати</small></button>
@@ -155,6 +168,11 @@
     <button id="quiz-btn" class="fab" title="Modo Quiz">🧠</button>
   </div>
 
+  <!-- Firebase compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-sync.js"></script>
   <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {

@@ -15,20 +15,55 @@ let modalTags = [];         // etiquetas del modal en edición
 // ==================== INIT ====================
 document.addEventListener('DOMContentLoaded', async () => {
   await loadVocabBase();
-  loadMyVocab();
+
+  // Iniciar Firebase Auth — esperar a saber si hay sesión antes de cargar vocab
+  initAuth(async (user) => {
+    updateAuthUI(user);
+    if (user) {
+      // Intentar cargar desde la nube
+      const cloudWords = await loadVocabFromCloud();
+      if (cloudWords !== null) {
+        miVocabulario = cloudWords;
+        saveMyVocabLocal(); // guardar copia local también
+      } else {
+        // Primera vez en la nube: subir lo que hay en local
+        loadMyVocabLocal();
+        await saveVocabToCloud(miVocabulario);
+      }
+    } else {
+      // Sin sesión: usar localStorage
+      loadMyVocabLocal();
+    }
+    setupFilter();
+    renderMyVocab();
+    renderCategorias();
+    renderTagsBar();
+    enrichVocabWithImages();
+  });
+
   setupTabs();
   setupSearch();
   setupModal();
   setupQuiz();
-  setupFilter();
-  renderMyVocab();
-  renderCategorias();
   setupImagePicker();
   setupTagsInput();
-  renderTagsBar();
-  // Fetch real images for words that don't have one yet
-  enrichVocabWithImages();
 });
+
+function updateAuthUI(user) {
+  const btnLogin = document.getElementById('btn-login');
+  const userInfo = document.getElementById('user-info');
+  const avatar = document.getElementById('user-avatar');
+
+  if (user) {
+    btnLogin.classList.add('hidden');
+    userInfo.classList.remove('hidden');
+    avatar.src = user.photoURL || '';
+    showToast(`¡Bienvenido! / Вітаємо, ${user.displayName?.split(' ')[0] || ''}! ☁️`);
+  } else {
+    btnLogin.classList.remove('hidden');
+    userInfo.classList.add('hidden');
+  }
+}
 
 // ==================== DATA LOADING ====================
 async function loadVocabBase() {
@@ -41,20 +76,25 @@ async function loadVocabBase() {
   }
 }
 
-function loadMyVocab() {
+function loadMyVocabLocal() {
   const saved = localStorage.getItem('mi_vocabulario');
   miVocabulario = saved ? JSON.parse(saved) : [];
-  // If first time, load all base words
   if (!saved) {
-    getAllBaseWords().forEach(w => {
-      miVocabulario.push({ ...w });
-    });
-    saveMyVocab();
+    getAllBaseWords().forEach(w => miVocabulario.push({ ...w }));
+    saveMyVocabLocal();
   }
 }
 
-function saveMyVocab() {
+function saveMyVocabLocal() {
   localStorage.setItem('mi_vocabulario', JSON.stringify(miVocabulario));
+}
+
+// Guarda localmente y en la nube si hay sesión
+function saveMyVocab() {
+  saveMyVocabLocal();
+  if (typeof currentUser !== 'undefined' && currentUser) {
+    saveVocabToCloud(miVocabulario);
+  }
 }
 
 function getAllBaseWords() {
@@ -1011,3 +1051,5 @@ window.selectPickerImage = selectPickerImage;
 window.closeImagePicker = closeImagePicker;
 window.setTagFilter = setTagFilter;
 window.removeModalTag = removeModalTag;
+window.loginWithGoogle = loginWithGoogle;
+window.logout = logout;
