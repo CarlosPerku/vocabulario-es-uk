@@ -215,8 +215,10 @@ function setupFilter() {
 
 function populateCategoryFilter() {
   const select = document.getElementById('filter-categoria');
-  const cats = new Set(miVocabulario.map(w => w.categoria));
+  const cats = new Set(miVocabulario.map(w => w.categoria).filter(Boolean));
   select.innerHTML = '<option value="">Todas / Усі категорії</option>';
+  const sinCat = miVocabulario.filter(w => !w.categoria).length;
+  if (sinCat > 0) select.innerHTML += `<option value="__none__">⚠️ Sin categoría (${sinCat})</option>`;
   cats.forEach(cat => {
     const w = miVocabulario.find(w => w.categoria === cat);
     const uk = w ? w.categoriaUk || '' : '';
@@ -241,7 +243,9 @@ function renderMyVocab() {
     );
   }
 
-  if (filterCat) {
+  if (filterCat === '__none__') {
+    words = words.filter(w => !w.categoria);
+  } else if (filterCat) {
     words = words.filter(w => w.categoria === filterCat);
   }
 
@@ -256,24 +260,29 @@ function renderMyVocab() {
   }
 
   empty.style.display = 'none';
-  list.innerHTML = words.map(w => `
-    <div class="word-card" data-id="${w.id}" onclick="openWordDetail('${w.id}')">
-      <div class="card-image" onclick="event.stopPropagation(); openImagePicker('${w.id}')" title="Cambiar imagen / Змінити зображення">
+  list.innerHTML = words.map(w => {
+    const isSelected = selectedWords.has(w.id);
+    const clickAction = selectMode
+      ? `toggleWordSelect('${w.id}', event)`
+      : `openWordDetail('${w.id}')`;
+    const imgAction = selectMode
+      ? `toggleWordSelect('${w.id}', event)`
+      : `event.stopPropagation(); openImagePicker('${w.id}')`;
+    return `
+    <div class="word-card${isSelected ? ' selected' : ''}" data-id="${w.id}" onclick="${clickAction}">
+      ${selectMode ? `<div class="word-select-check">${isSelected ? '✓' : ''}</div>` : ''}
+      <div class="card-image" onclick="${imgAction}" title="Cambiar imagen / Змінити зображення">
         ${wordVisual(w)}
-        <div class="card-image-hint">🖼️</div>
+        ${!selectMode ? '<div class="card-image-hint">🖼️</div>' : ''}
       </div>
       <div class="card-info">
-        <div class="card-es-row"><span class="card-es">${w.es}</span>${speakBtns(w.es)}</div>
+        <div class="card-es-row"><span class="card-es">${w.es}</span>${selectMode ? '' : speakBtns(w.es)}</div>
         <div class="card-uk">${w.uk}</div>
         ${w.descripcion_es ? `<div class="card-desc card-desc-es">${w.descripcion_es}</div>` : ''}
-        ${w.descripcion ? `<div class="card-desc card-desc-uk">${w.descripcion}</div>` : ''}
-        <span class="card-category">${w.categoria || ''}${w.subcategoria ? ' › ' + w.subcategoria : ''}</span>
-        ${w.etiquetas && w.etiquetas.length > 0
-          ? `<div class="card-tags">${w.etiquetas.map(t => `<span class="tag-badge">#${t}</span>`).join('')}</div>`
-          : ''}
+        <span class="card-category">${w.categoria || '<em style="color:#ef4444">Sin categoría</em>'}${w.subcategoria ? ' › ' + w.subcategoria : ''}</span>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 function removeWord(id) {
@@ -2236,6 +2245,144 @@ function renderQuizFilterOptions() {
 }
 
 // Make functions available globally for onclick handlers
+// ==================== SELECCIÓN MÚLTIPLE ====================
+let selectMode = false;
+let selectedWords = new Set();
+
+function toggleSelectMode() {
+  selectMode = !selectMode;
+  selectedWords.clear();
+  const bar = document.getElementById('bulk-action-bar');
+  const btn = document.getElementById('btn-select-mode');
+  if (selectMode) {
+    bar.classList.remove('hidden');
+    btn.classList.add('active');
+    btn.textContent = '✕';
+    pushModalState();
+  } else {
+    bar.classList.add('hidden');
+    btn.classList.remove('active');
+    btn.textContent = '☑️';
+  }
+  updateBulkCount();
+  renderMyVocab();
+}
+
+function toggleWordSelect(id, e) {
+  e.stopPropagation();
+  if (selectedWords.has(id)) selectedWords.delete(id);
+  else selectedWords.add(id);
+  // Actualizar clase sin re-render completo
+  const card = document.querySelector(`.word-card[data-id="${id}"]`);
+  if (card) card.classList.toggle('selected', selectedWords.has(id));
+  updateBulkCount();
+}
+
+function selectAllVisible() {
+  const cards = document.querySelectorAll('.word-card[data-id]');
+  const allSelected = cards.length > 0 && [...cards].every(c => selectedWords.has(c.dataset.id));
+  cards.forEach(c => {
+    if (allSelected) selectedWords.delete(c.dataset.id);
+    else selectedWords.add(c.dataset.id);
+    c.classList.toggle('selected', selectedWords.has(c.dataset.id));
+  });
+  updateBulkCount();
+}
+
+function updateBulkCount() {
+  const n = selectedWords.size;
+  document.getElementById('bulk-count').textContent =
+    n === 0 ? 'Selecciona palabras' : `${n} seleccionada${n !== 1 ? 's' : ''}`;
+}
+
+function deleteSelectedWords() {
+  if (selectedWords.size === 0) return;
+  if (!confirm(`¿Eliminar ${selectedWords.size} palabras?\nВидалити ${selectedWords.size} слів?`)) return;
+  miVocabulario = miVocabulario.filter(w => !selectedWords.has(w.id));
+  saveMyVocab();
+  toggleSelectMode();
+  populateCategoryFilter();
+  renderMyVocab();
+  renderCategorias();
+  showToast(`${selectedWords.size} palabras eliminadas`);
+}
+
+function openBulkCatModal() {
+  if (selectedWords.size === 0) { showToast('Selecciona al menos una palabra'); return; }
+  const catSel = document.getElementById('bulk-cat-select');
+  catSel.innerHTML = '';
+  const allCatsMap = new Map();
+  vocabBase.categorias.forEach(c => allCatsMap.set(c.id, { id: c.id, es: c.nombre.es, uk: c.nombre.uk, emoji: c.emoji || '' }));
+  getUserCategories().forEach(c => { if (!allCatsMap.has(c.id)) allCatsMap.set(c.id, { id: c.id, es: c.nombre?.es || c.id, uk: c.nombre?.uk || '', emoji: '' }); });
+  miVocabulario.forEach(w => { if (w.categoriaId && !allCatsMap.has(w.categoriaId)) allCatsMap.set(w.categoriaId, { id: w.categoriaId, es: w.categoria || w.categoriaId, uk: w.categoriaUk || '', emoji: '' }); });
+  allCatsMap.forEach(c => { catSel.innerHTML += `<option value="${c.id}">${c.emoji ? c.emoji + ' ' : ''}${c.es}</option>`; });
+  updateBulkSubcatOptions();
+  document.getElementById('bulk-cat-modal').classList.remove('hidden');
+  pushModalState();
+}
+
+function closeBulkCatModal() {
+  document.getElementById('bulk-cat-modal').classList.add('hidden');
+}
+
+function updateBulkSubcatOptions() {
+  const catId = document.getElementById('bulk-cat-select').value;
+  const subSel = document.getElementById('bulk-subcat-select');
+  subSel.innerHTML = '';
+  const baseCat = vocabBase.categorias.find(c => c.id === catId);
+  if (baseCat) {
+    baseCat.subcategorias.forEach(s => {
+      subSel.innerHTML += `<option value="${s.id}">${s.emoji ? s.emoji + ' ' : ''}${s.nombre.es}</option>`;
+    });
+  }
+  getUserSubcategories(catId).forEach(s => {
+    subSel.innerHTML += `<option value="${s.id}">${s.nombre?.es || s.id}</option>`;
+  });
+  miVocabulario.filter(w => w.categoriaId === catId && w.subcategoriaId).forEach(w => {
+    if (!subSel.querySelector(`option[value="${w.subcategoriaId}"]`))
+      subSel.innerHTML += `<option value="${w.subcategoriaId}">${w.subcategoria || w.subcategoriaId}</option>`;
+  });
+}
+
+function applyBulkCategory() {
+  const catId = document.getElementById('bulk-cat-select').value;
+  const subcatId = document.getElementById('bulk-subcat-select').value;
+  if (!catId) { showToast('Selecciona una categoría'); return; }
+
+  const allCatsMap = new Map();
+  vocabBase.categorias.forEach(c => allCatsMap.set(c.id, c));
+  const baseCat = allCatsMap.get(catId);
+  const catEs   = baseCat ? baseCat.nombre.es : (miVocabulario.find(w => w.categoriaId === catId)?.categoria || catId);
+  const catUk   = baseCat ? baseCat.nombre.uk : '';
+
+  let subcatEs = '', subcatUk = '';
+  if (subcatId && baseCat) {
+    const sub = baseCat.subcategorias.find(s => s.id === subcatId);
+    subcatEs = sub ? sub.nombre.es : subcatId;
+    subcatUk = sub ? sub.nombre.uk : '';
+  }
+
+  let count = 0;
+  miVocabulario.forEach(w => {
+    if (!selectedWords.has(w.id)) return;
+    w.categoriaId   = catId;
+    w.categoria     = catEs;
+    w.categoriaUk   = catUk;
+    w.subcategoriaId = subcatId || '';
+    w.subcategoria   = subcatEs;
+    w.subcategoriaUk = subcatUk;
+    count++;
+  });
+
+  saveMyVocab();
+  closeBulkCatModal();
+  toggleSelectMode();          // limpia selección y cierra barra
+  populateCategoryFilter();
+  renderMyVocab();
+  renderCategorias();
+  showToast(`✅ ${count} palabras movidas a "${catEs}"`);
+}
+
 // ==================== BOTÓN ATRÁS ANDROID ====================
 function pushModalState() {
   history.pushState({ modal: true }, '');
@@ -2247,6 +2394,7 @@ function closeTopModal() {
     { id: 'correction-modal',   close: () => closeCorrectionModal() },
     { id: 'word-detail-modal',  close: () => { document.getElementById('word-detail-modal').classList.add('hidden'); } },
     { id: 'cat-modal',          close: () => closeCatModal() },
+    { id: 'bulk-cat-modal',     close: () => closeBulkCatModal() },
     { id: 'add-modal',          close: () => closeModal() },
     { id: 'quiz-overlay',       close: () => endQuiz() },
   ];
@@ -2274,6 +2422,14 @@ window.openImagePicker = openImagePicker;
 window.selectPickerImage = selectPickerImage;
 window.closeImagePicker = closeImagePicker;
 window.discardPickerImage = discardPickerImage;
+window.toggleSelectMode = toggleSelectMode;
+window.toggleWordSelect = toggleWordSelect;
+window.selectAllVisible = selectAllVisible;
+window.deleteSelectedWords = deleteSelectedWords;
+window.openBulkCatModal = openBulkCatModal;
+window.closeBulkCatModal = closeBulkCatModal;
+window.updateBulkSubcatOptions = updateBulkSubcatOptions;
+window.applyBulkCategory = applyBulkCategory;
 window.switchPickerTab = switchPickerTab;
 window.selectPickerEmoji = selectPickerEmoji;
 window.applyEmojiFromInput = applyEmojiFromInput;

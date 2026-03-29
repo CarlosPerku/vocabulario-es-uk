@@ -66,6 +66,7 @@
         <select id="filter-categoria" class="select-field">
           <option value="">Todas / Усі категорії</option>
         </select>
+        <button id="btn-select-mode" class="btn btn-secondary btn-select-toggle" onclick="toggleSelectMode()" title="Seleccionar varias / Вибрати кілька">☑️</button>
       </div>
       <!-- Barra de etiquetas -->
       <div id="tags-bar" class="tags-bar"></div>
@@ -76,6 +77,36 @@
         <p class="empty-hint">Ve a <strong>Buscar / Шукати</strong> para añadir palabras</p>
       </div>
     </main>
+
+    <!-- Barra flotante de selección múltiple -->
+    <div id="bulk-action-bar" class="bulk-action-bar hidden">
+      <span id="bulk-count" class="bulk-count">0 seleccionadas</span>
+      <div class="bulk-actions">
+        <button class="btn bulk-btn-all" onclick="selectAllVisible()">Todas</button>
+        <button class="btn bulk-btn-move" onclick="openBulkCatModal()">📁 Mover</button>
+        <button class="btn bulk-btn-delete" onclick="deleteSelectedWords()">🗑️</button>
+        <button class="btn bulk-btn-cancel" onclick="toggleSelectMode()">✕</button>
+      </div>
+    </div>
+
+    <!-- Modal: Asignar categoría en lote -->
+    <div id="bulk-cat-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3 class="modal-title">📁 Mover palabras<br><small>Перемістити слова</small></h3>
+        <div class="form-group">
+          <label>Categoría / Категорія</label>
+          <select id="bulk-cat-select" class="select-field" onchange="updateBulkSubcatOptions()"></select>
+        </div>
+        <div class="form-group">
+          <label>Subcategoría / Підкатегорія</label>
+          <select id="bulk-subcat-select" class="select-field"></select>
+        </div>
+        <div class="modal-actions" style="margin-top:16px">
+          <button class="btn btn-secondary" onclick="closeBulkCatModal()">Cancelar</button>
+          <button class="btn btn-primary" onclick="applyBulkCategory()">Aplicar / Застосувати</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Vista: Buscar -->
     <main id="view-buscar" class="view">

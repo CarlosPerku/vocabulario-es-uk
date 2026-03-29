@@ -984,6 +984,84 @@ body {
   min-height: 0;
 }
 
+/* Botón modo selección */
+.btn-select-toggle {
+  flex-shrink: 0;
+  padding: 0 10px;
+  font-size: 18px;
+  min-width: 40px;
+}
+.btn-select-toggle.active {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+/* Barra flotante de acciones múltiples */
+.bulk-action-bar {
+  position: fixed;
+  bottom: calc(16px + var(--safe-bottom));
+  left: 16px;
+  right: 16px;
+  background: #1e293b;
+  color: white;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+.bulk-count {
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+}
+.bulk-actions {
+  display: flex;
+  gap: 6px;
+}
+.bulk-actions .btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+.bulk-btn-all    { background: #475569; color: white; border: none; }
+.bulk-btn-move   { background: #1a56db; color: white; border: none; }
+.bulk-btn-delete { background: #ef4444; color: white; border: none; }
+.bulk-btn-cancel { background: #64748b; color: white; border: none; }
+
+/* Card seleccionada */
+.word-card.selected {
+  border: 2.5px solid var(--primary);
+  background: #eff6ff;
+}
+.word-select-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  z-index: 2;
+}
+.word-card.selected .word-select-check {
+  background: var(--primary);
+  color: white;
+}
+.word-card { position: relative; }
+
 /* FAB */
 .fab {
   position: fixed;
