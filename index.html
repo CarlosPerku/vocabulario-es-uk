@@ -236,19 +236,31 @@
     <div id="image-picker-modal" class="modal hidden">
       <div class="modal-content">
         <h3 class="modal-title" id="image-picker-title"></h3>
-        <p style="text-align:center;font-size:13px;color:#64748b;margin-bottom:12px">
-          Toca una imagen para seleccionarla<br>
-          <small>Натисни на зображення, щоб обрати</small>
-        </p>
-        <div class="image-picker-search">
-          <input type="text" id="image-picker-query" class="input-field" placeholder="Buscar otras imágenes... / Шукати інші...">
-          <button id="image-picker-search-btn" class="btn btn-primary">🔍</button>
+        <!-- Pestañas -->
+        <div class="picker-tabs">
+          <button class="picker-tab active" id="picker-tab-img" onclick="switchPickerTab('img')">🖼️ Imagen</button>
+          <button class="picker-tab" id="picker-tab-emoji" onclick="switchPickerTab('emoji')">😊 Emoji</button>
         </div>
-        <div id="image-picker-grid" class="image-picker-grid"></div>
+        <!-- Panel imagen -->
+        <div id="picker-panel-img">
+          <div class="image-picker-search">
+            <input type="text" id="image-picker-query" class="input-field" placeholder="Buscar otras imágenes... / Шукати інші...">
+            <button id="image-picker-search-btn" class="btn btn-primary">🔍</button>
+          </div>
+          <div id="image-picker-grid" class="image-picker-grid"></div>
+          <button onclick="openCameraInput()" class="btn btn-secondary" style="width:100%;margin-top:8px">📷 Foto / Фото</button>
+        </div>
+        <!-- Panel emoji -->
+        <div id="picker-panel-emoji" class="hidden">
+          <div class="image-picker-search">
+            <input type="text" id="emoji-picker-input" class="input-field" placeholder="Escribe un emoji o búscalo... / Введи або шукай...">
+            <button class="btn btn-primary" onclick="applyEmojiFromInput()">✓</button>
+          </div>
+          <div id="emoji-picker-suggestions" class="emoji-picker-grid"></div>
+        </div>
         <input type="hidden" id="image-picker-wordid">
-        <div class="modal-actions" style="margin-top:16px;gap:8px">
-          <button onclick="openCameraInput()" class="btn btn-secondary" style="flex:1">📷 Foto / Фото</button>
-          <button id="image-picker-close" class="btn btn-primary" style="flex:1">Listo / Готово</button>
+        <div class="modal-actions" style="margin-top:12px">
+          <button id="image-picker-close" class="btn btn-primary" style="width:100%">Listo / Готово</button>
         </div>
       </div>
     </div>

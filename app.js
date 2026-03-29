@@ -1412,6 +1412,7 @@ async function openImagePicker(wordId) {
   grid.innerHTML = '<div class="loading"><div class="spinner"></div>Buscando imágenes...</div>';
   modal.classList.remove('hidden');
   document.getElementById('image-picker-wordid').value = wordId;
+  switchPickerTab('img'); // siempre empezar en pestaña imagen
 
   // Obtener imágenes: primero caché, luego Wikipedia
   let images = getCachedImages(word.es.toLowerCase()) || [];
@@ -1472,6 +1473,85 @@ function selectPickerImage(wordId, url, el) {
 function closeImagePicker() {
   document.getElementById('image-picker-modal').classList.add('hidden');
   renderMyVocab();
+  renderCategorias();
+  // Actualizar miniatura en el modal de detalle si está abierto
+  const wordId = document.getElementById('image-picker-wordid').value;
+  if (wordId && !document.getElementById('word-detail-modal').classList.contains('hidden')) {
+    const word = miVocabulario.find(w => w.id === wordId);
+    if (word) {
+      const imgDiv = document.getElementById('detail-image');
+      imgDiv.innerHTML = wordVisual(word, 'width:100%;height:100%;object-fit:cover;border-radius:12px');
+    }
+  }
+}
+
+function switchPickerTab(tab) {
+  const isImg = tab === 'img';
+  document.getElementById('picker-tab-img').classList.toggle('active', isImg);
+  document.getElementById('picker-tab-emoji').classList.toggle('active', !isImg);
+  document.getElementById('picker-panel-img').classList.toggle('hidden', !isImg);
+  document.getElementById('picker-panel-emoji').classList.toggle('hidden', isImg);
+  if (!isImg) renderEmojiSuggestions();
+}
+
+function renderEmojiSuggestions() {
+  const wordId = document.getElementById('image-picker-wordid').value;
+  const word = miVocabulario.find(w => w.id === wordId);
+  if (!word) return;
+
+  const grid = document.getElementById('emoji-picker-suggestions');
+  const key = normalizeEmojiKey(word.es);
+  const firstWord = key.split(/\s+/)[0];
+
+  // Recoger candidatos: exacto + similares del mapa externo
+  const candidates = new Set();
+  if (word.emoji && !GENERIC_EMOJIS.has(word.emoji)) candidates.add(word.emoji);
+  if (emojiMapExternal[key]) candidates.add(emojiMapExternal[key]);
+  if (emojiMapExternal[firstWord]) candidates.add(emojiMapExternal[firstWord]);
+
+  // Añadir emojis de palabras similares (misma primera letra)
+  Object.entries(emojiMapExternal).forEach(([k, v]) => {
+    if (candidates.size >= 25) return;
+    if (k.startsWith(firstWord[0])) candidates.add(v);
+  });
+
+  // Emojis comunes de fallback si hay pocos
+  const extras = ['😊','🏠','🚗','🍎','👕','💡','⭐','🎯','🌟','🔑','📱','🎵','🏋️','🌸','🦋'];
+  extras.forEach(e => { if (candidates.size < 20) candidates.add(e); });
+
+  const currentEmoji = word.emoji;
+  grid.innerHTML = [...candidates].map(e => `
+    <button class="emoji-picker-btn ${e === currentEmoji ? 'selected' : ''}"
+      onclick="selectPickerEmoji('${wordId}', '${e}', this)"
+      title="${e}">${e}</button>
+  `).join('');
+}
+
+function selectPickerEmoji(wordId, emoji, btn) {
+  document.querySelectorAll('.emoji-picker-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('emoji-picker-input').value = emoji;
+
+  const word = miVocabulario.find(w => w.id === wordId);
+  if (word) {
+    word.emoji = emoji;
+    word.imagen = '';   // el emoji tiene prioridad — limpiar imagen
+    saveMyVocab();
+  }
+}
+
+function applyEmojiFromInput() {
+  const wordId = document.getElementById('image-picker-wordid').value;
+  const emoji = document.getElementById('emoji-picker-input').value.trim();
+  if (!emoji) return;
+  const word = miVocabulario.find(w => w.id === wordId);
+  if (word) {
+    word.emoji = emoji;
+    word.imagen = '';
+    saveMyVocab();
+    showToast('Emoji guardado ✓');
+    renderEmojiSuggestions();
+  }
 }
 
 function setupImagePicker() {
@@ -2194,6 +2274,9 @@ window.openImagePicker = openImagePicker;
 window.selectPickerImage = selectPickerImage;
 window.closeImagePicker = closeImagePicker;
 window.discardPickerImage = discardPickerImage;
+window.switchPickerTab = switchPickerTab;
+window.selectPickerEmoji = selectPickerEmoji;
+window.applyEmojiFromInput = applyEmojiFromInput;
 window.setTagFilter = setTagFilter;
 window.removeModalTag = removeModalTag;
 window.openCatModal = openCatModal;
