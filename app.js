@@ -37,6 +37,14 @@ let emojiMapExternal = {};   // cargado de emoji-es.json
 let miVocabulario = [];
 let quizWords = [];
 let quizIndex = 0;
+let quizMode = 'flashcard';   // 'flashcard' | 'choices' | 'type'
+let quizScore = 0;
+let quizLives = 3;
+let quizStreak = 0;
+let quizCorrect = 0;
+let quizWrong = 0;
+let quizChoiceOptions = [];   // opciones actuales en modo choices
+const QUIZ_MAX_LIVES = 3;
 let selectedImageUrl = '';
 let activeTagFilter = '';   // etiqueta activa para filtrar
 let modalTags = [];         // etiquetas del modal en edición
@@ -924,8 +932,6 @@ function setupQuiz() {
   document.getElementById('quiz-btn').addEventListener('click', startQuiz);
   document.getElementById('quiz-close').addEventListener('click', endQuiz);
   document.getElementById('quiz-reveal').addEventListener('click', revealQuizAnswer);
-  document.getElementById('quiz-prev').addEventListener('click', () => navigateQuiz(-1));
-  document.getElementById('quiz-next').addEventListener('click', () => navigateQuiz(1));
 }
 
 let quizSelectedFilter = 'all';
@@ -937,11 +943,12 @@ function startQuiz() {
     return;
   }
   quizSelectedFilter = 'all';
-  // Mostrar pantalla de filtro
   document.getElementById('quiz-overlay').classList.remove('hidden');
   document.getElementById('quiz-filter-screen').classList.remove('hidden');
-  pushModalState();
   document.getElementById('quiz-card-screen').classList.add('hidden');
+  document.getElementById('quiz-nav').classList.add('hidden');
+  document.getElementById('quiz-results-screen').classList.add('hidden');
+  pushModalState();
   renderQuizFilterOptions();
 }
 
@@ -986,45 +993,287 @@ function startQuizWithFilter() {
 
   quizWords = shuffleArray(words);
   quizIndex = 0;
+  // Reset game state
+  quizScore = 0;
+  quizLives = QUIZ_MAX_LIVES;
+  quizStreak = 0;
+  quizCorrect = 0;
+  quizWrong = 0;
+
   document.getElementById('quiz-filter-screen').classList.add('hidden');
+  document.getElementById('quiz-results-screen').classList.add('hidden');
   document.getElementById('quiz-card-screen').classList.remove('hidden');
   showQuizCard();
 }
 
 function endQuiz() {
   document.getElementById('quiz-overlay').classList.add('hidden');
+  // Resetear a pantalla de filtro para próxima vez
+  document.getElementById('quiz-filter-screen').classList.remove('hidden');
+  document.getElementById('quiz-card-screen').classList.add('hidden');
+  document.getElementById('quiz-nav').classList.add('hidden');
+  document.getElementById('quiz-results-screen').classList.add('hidden');
+}
+
+function setQuizMode(mode, el) {
+  quizMode = mode;
+  document.querySelectorAll('.quiz-mode-btn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+}
+
+function updateQuizStatusBar() {
+  const livesEl = document.getElementById('quiz-lives-display');
+  if (livesEl) {
+    if (quizMode === 'flashcard') {
+      livesEl.style.display = 'none';
+    } else {
+      livesEl.style.display = '';
+      livesEl.textContent = '❤️'.repeat(Math.max(0, quizLives)) + '🖤'.repeat(Math.max(0, QUIZ_MAX_LIVES - quizLives));
+    }
+  }
+  const scoreEl = document.getElementById('quiz-score-display');
+  if (scoreEl) scoreEl.textContent = `${quizScore} pts`;
+
+  const streakEl = document.getElementById('quiz-streak-display');
+  const streakCount = document.getElementById('quiz-streak-count');
+  if (streakEl && streakCount) {
+    if (quizStreak >= 2) {
+      streakEl.classList.remove('hidden');
+      streakCount.textContent = quizStreak;
+    } else {
+      streakEl.classList.add('hidden');
+    }
+  }
+}
+
+function updateQuizScore(correct) {
+  if (correct) {
+    quizStreak++;
+    quizCorrect++;
+    let points = 10;
+    if (quizStreak >= 5) points = 20;
+    else if (quizStreak >= 3) points = 15;
+    quizScore += points;
+    if (quizStreak >= 3) {
+      showToast(`🔥 Racha ×${quizStreak}! +${points} pts`);
+    }
+  } else {
+    quizStreak = 0;
+    quizWrong++;
+    if (quizMode !== 'flashcard') quizLives--;
+  }
+  updateQuizStatusBar();
+}
+
+function advanceQuiz() {
+  if (quizMode !== 'flashcard' && quizLives <= 0) {
+    showQuizResults();
+    return;
+  }
+  quizIndex++;
+  if (quizIndex >= quizWords.length) {
+    showQuizResults();
+    return;
+  }
+  showQuizCard();
+}
+
+function showQuizResults() {
+  document.getElementById('quiz-card-screen').classList.add('hidden');
+  document.getElementById('quiz-nav').classList.add('hidden');
+  document.getElementById('quiz-results-screen').classList.remove('hidden');
+
+  const total = quizCorrect + quizWrong;
+  const pct = total > 0 ? Math.round((quizCorrect / total) * 100) : 0;
+
+  let emoji, title;
+  if (quizMode === 'flashcard') {
+    emoji = pct >= 80 ? '🏆' : pct >= 60 ? '😊' : '💪';
+    title = pct >= 80 ? '¡Excelente! / Відмінно!' : pct >= 60 ? '¡Bien hecho! / Гарна робота!' : '¡Sigue practicando! / Практикуй далі!';
+  } else {
+    emoji = quizScore >= 100 ? '🏆' : quizScore >= 50 ? '🌟' : quizLives <= 0 ? '💔' : '💪';
+    title = quizLives <= 0 ? '¡Sin vidas! / Без життів!' : pct >= 80 ? '¡Excelente! / Відмінно!' : pct >= 60 ? '¡Bien! / Добре!' : '¡Sigue así! / Продовжуй!';
+  }
+  document.getElementById('quiz-results-emoji').textContent = emoji;
+  document.getElementById('quiz-results-title').textContent = title;
+
+  document.getElementById('quiz-results-stats').innerHTML = `
+    <div class="quiz-stat">
+      <span class="quiz-stat-val quiz-stat-correct">${quizCorrect}</span>
+      <span class="quiz-stat-lbl">✓ Correctas</span>
+    </div>
+    <div class="quiz-stat">
+      <span class="quiz-stat-val quiz-stat-wrong">${quizWrong}</span>
+      <span class="quiz-stat-lbl">✗ Errores</span>
+    </div>
+    <div class="quiz-stat">
+      <span class="quiz-stat-val quiz-stat-score">${quizScore}</span>
+      <span class="quiz-stat-lbl">🏅 Puntos</span>
+    </div>
+  `;
+
+  const bestKey = 'quiz_best_score';
+  const prevBest = parseInt(localStorage.getItem(bestKey) || '0');
+  if (quizScore > prevBest) {
+    localStorage.setItem(bestKey, quizScore);
+    document.getElementById('quiz-results-best').innerHTML = `<div class="quiz-new-best">🌟 ¡Nuevo récord! / Новий рекорд!</div>`;
+  } else if (prevBest > 0) {
+    document.getElementById('quiz-results-best').innerHTML = `<div class="quiz-prev-best">Récord: ${prevBest} pts</div>`;
+  } else {
+    document.getElementById('quiz-results-best').innerHTML = '';
+  }
+}
+
+function restartQuiz() {
+  quizScore = 0;
+  quizLives = QUIZ_MAX_LIVES;
+  quizStreak = 0;
+  quizCorrect = 0;
+  quizWrong = 0;
+  quizIndex = 0;
+  quizWords = shuffleArray(quizWords);
+  document.getElementById('quiz-results-screen').classList.add('hidden');
+  document.getElementById('quiz-card-screen').classList.remove('hidden');
+  showQuizCard();
+}
+
+function renderChoices(word) {
+  const pool = quizWords.filter(w => w.id !== word.id);
+  const distractors = shuffleArray(pool).slice(0, 3);
+  quizChoiceOptions = shuffleArray([word, ...distractors]);
+
+  const container = document.getElementById('quiz-choices');
+  container.innerHTML = quizChoiceOptions.map((opt, i) => `
+    <button class="quiz-choice-btn" onclick="checkChoiceAnswer(${i},'${word.id.replace(/'/g,"\\'")}')">
+      ${opt.es}
+    </button>
+  `).join('');
+}
+
+function checkChoiceAnswer(idx, correctId) {
+  const isCorrect = quizChoiceOptions[idx].id === correctId;
+  document.querySelectorAll('.quiz-choice-btn').forEach((btn, i) => {
+    btn.disabled = true;
+    if (quizChoiceOptions[i].id === correctId) btn.classList.add('quiz-choice-correct');
+    else if (i === idx && !isCorrect) btn.classList.add('quiz-choice-wrong');
+  });
+  updateQuizScore(isCorrect);
+  setTimeout(() => advanceQuiz(), 1400);
+}
+
+function checkTypeAnswer() {
+  const word = quizWords[quizIndex];
+  const input = document.getElementById('quiz-type-input');
+  const typed = input.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const expected = word.es.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const isCorrect = typed === expected;
+
+  const feedbackDiv = document.getElementById('quiz-type-feedback');
+  feedbackDiv.classList.remove('hidden');
+  feedbackDiv.innerHTML = isCorrect
+    ? `<div class="quiz-type-correct">✓ ¡Correcto! / Правильно!</div>`
+    : `<div class="quiz-type-wrong">✗ Era: <strong>${word.es}</strong></div>`;
+
+  input.disabled = true;
+  const checkBtn = document.getElementById('quiz-type-check-btn');
+  if (checkBtn) checkBtn.disabled = true;
+
+  updateQuizScore(isCorrect);
+  setTimeout(() => advanceQuiz(), 1600);
+}
+
+function quizFeedback(correct) {
+  document.getElementById('quiz-feedback-btns').classList.add('hidden');
+  updateQuizScore(correct);
+  setTimeout(() => {
+    quizIndex++;
+    if (quizIndex >= quizWords.length) {
+      showQuizResults();
+    } else {
+      showQuizCard();
+    }
+  }, 250);
 }
 
 function showQuizCard() {
   const word = quizWords[quizIndex];
+
+  // Progreso
+  const progress = (quizIndex / quizWords.length) * 100;
+  document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
+  document.getElementById('quiz-counter').textContent = `${quizIndex + 1} / ${quizWords.length}`;
+
+  // Status bar
+  updateQuizStatusBar();
+
+  // Visual: emoji o imagen
   const imageDiv = document.getElementById('quiz-image');
   const exactEmoji = word.emoji && !GENERIC_EMOJIS.has(word.emoji);
   if (exactEmoji) {
-    imageDiv.innerHTML = `<span style="font-size:80px">${word.emoji}</span>`;
+    imageDiv.innerHTML = `<span style="font-size:72px">${word.emoji}</span>`;
   } else if (word.imagen) {
-    imageDiv.innerHTML = `<img src="${word.imagen}" onerror="this.outerHTML='<span style=font-size:80px>${word.emoji || '🍽️'}</span>'">`;
+    imageDiv.innerHTML = `<img src="${word.imagen}" onerror="this.outerHTML='<span style=font-size:72px>${word.emoji || '🍽️'}</span>'">`;
   } else {
-    imageDiv.innerHTML = `<span style="font-size:80px">${word.emoji || '🍽️'}</span>`;
+    imageDiv.innerHTML = `<span style="font-size:72px">${word.emoji || '🍽️'}</span>`;
   }
-  // Mostrar ucraniano, ocultar español
-  document.getElementById('quiz-question').textContent = word.uk;
-  const answerDiv = document.getElementById('quiz-answer');
-  const safeEs = word.es.replace(/'/g, "\\'");
-  answerDiv.innerHTML = `<div class="quiz-answer-row"><span>${word.es}</span><div class="speak-btns"><button class="btn-speak" onclick="speakWord('${safeEs}',1.0)" title="Pronunciar">🔊</button><button class="btn-speak btn-speak-slow" onclick="speakWord('${safeEs}',0.25)" title="Lento">🐢</button></div></div>${word.descripcion ? `<div class="quiz-desc">${word.descripcion}</div>` : ''}`;
-  answerDiv.classList.add('hidden');
-  document.getElementById('quiz-reveal').style.display = 'block';
-  document.getElementById('quiz-counter').textContent = `${quizIndex + 1} / ${quizWords.length}`;
 
-  // Ocultar botón añadir hasta que se revele la respuesta
-  const addBtn = document.getElementById('quiz-add-word-btn');
-  if (addBtn) addBtn.remove();
+  // Pregunta en ucraniano
+  document.getElementById('quiz-question').textContent = word.uk;
+
+  // Limpiar botón añadir si existe
+  const oldAddBtn = document.getElementById('quiz-add-word-btn');
+  if (oldAddBtn) oldAddBtn.remove();
+
+  // Zonas por modo
+  const flashcardZone = document.getElementById('quiz-flashcard-zone');
+  const choicesZone   = document.getElementById('quiz-choices-zone');
+  const typeZone      = document.getElementById('quiz-type-zone');
+  const navDiv        = document.getElementById('quiz-nav');
+
+  if (quizMode === 'flashcard') {
+    flashcardZone.classList.remove('hidden');
+    choicesZone.classList.add('hidden');
+    typeZone.classList.add('hidden');
+    navDiv.classList.remove('hidden');
+
+    const safeEs = word.es.replace(/'/g, "\\'");
+    const answerDiv = document.getElementById('quiz-answer');
+    answerDiv.innerHTML = `<div class="quiz-answer-row"><span>${word.es}</span><div class="speak-btns"><button class="btn-speak" onclick="speakWord('${safeEs}',1.0)" title="Pronunciar">🔊</button><button class="btn-speak btn-speak-slow" onclick="speakWord('${safeEs}',0.25)" title="Lento">🐢</button></div></div>${word.descripcion ? `<div class="quiz-desc">${word.descripcion}</div>` : ''}`;
+    answerDiv.classList.add('hidden');
+    document.getElementById('quiz-reveal').style.display = 'block';
+    document.getElementById('quiz-feedback-btns').classList.add('hidden');
+    document.getElementById('quiz-counter-nav').textContent = `${quizIndex + 1} / ${quizWords.length}`;
+
+  } else if (quizMode === 'choices') {
+    flashcardZone.classList.add('hidden');
+    choicesZone.classList.remove('hidden');
+    typeZone.classList.add('hidden');
+    navDiv.classList.add('hidden');
+    renderChoices(word);
+
+  } else if (quizMode === 'type') {
+    flashcardZone.classList.add('hidden');
+    choicesZone.classList.add('hidden');
+    typeZone.classList.remove('hidden');
+    navDiv.classList.add('hidden');
+
+    const input = document.getElementById('quiz-type-input');
+    input.value = '';
+    input.disabled = false;
+    const checkBtn = document.getElementById('quiz-type-check-btn');
+    if (checkBtn) checkBtn.disabled = false;
+    document.getElementById('quiz-type-feedback').classList.add('hidden');
+    input.onkeydown = (e) => { if (e.key === 'Enter') checkTypeAnswer(); };
+    setTimeout(() => input.focus(), 100);
+  }
 }
 
 function revealQuizAnswer() {
   document.getElementById('quiz-answer').classList.remove('hidden');
   document.getElementById('quiz-reveal').style.display = 'none';
+  document.getElementById('quiz-feedback-btns').classList.remove('hidden');
 
-  // Mostrar botón "+" solo al revelar la respuesta
+  // Botón "+" para palabras que no están en el vocabulario
   const word = quizWords[quizIndex];
   const isInMyVocab = miVocabulario.some(w => w.id === word.id);
   if (!isInMyVocab) {
@@ -1032,9 +1281,9 @@ function revealQuizAnswer() {
     if (!addBtn) {
       addBtn = document.createElement('button');
       addBtn.id = 'quiz-add-word-btn';
-      addBtn.className = 'btn btn-primary btn-block';
-      addBtn.style.marginTop = '8px';
-      document.getElementById('quiz-nav').before(addBtn);
+      addBtn.className = 'btn btn-secondary btn-block';
+      addBtn.style.marginTop = '6px';
+      document.getElementById('quiz-feedback-btns').after(addBtn);
     }
     addBtn.textContent = `+ Añadir "${word.es}" a mi vocabulario`;
     addBtn.onclick = () => {
@@ -2200,8 +2449,13 @@ function renderQuizFilterOptions() {
     html += `<div class="quiz-filter-group"><div class="quiz-filter-label">Por categoría / За категорією</div>`;
     cats.forEach(cat => {
       const count = miVocabulario.filter(w => w.categoria === cat).length;
-      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'cat:' + cat ? 'active' : ''}" onclick="setQuizFilter('cat:${cat}', this)">
-        📂 ${cat} (${count})
+      // Buscar emoji de la categoría en vocabBase
+      const sampleWord = miVocabulario.find(w => w.categoria === cat);
+      const baseCat = sampleWord?.categoriaId ? vocabBase.categorias.find(c => c.id === sampleWord.categoriaId) : null;
+      const catEmoji = baseCat?.emoji || '📂';
+      const safeFilter = cat.replace(/'/g, "\\'");
+      html += `<label class="quiz-filter-opt ${quizSelectedFilter === 'cat:' + cat ? 'active' : ''}" onclick="setQuizFilter('cat:${safeFilter}', this)">
+        ${catEmoji} ${cat} (${count})
       </label>`;
     });
     html += '</div>';

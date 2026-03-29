@@ -239,27 +239,82 @@
     <div id="quiz-overlay" class="quiz-overlay hidden">
       <div class="quiz-card">
         <button id="quiz-close" class="quiz-close">✕</button>
-        <!-- Selector de filtro del quiz -->
+
+        <!-- PANTALLA 1: Filtro + Modo -->
         <div id="quiz-filter-screen" class="quiz-filter-screen">
-          <h3 class="quiz-filter-title">¿Con qué palabras practicar?<br><small>З якими словами практикувати?</small></h3>
+          <h3 class="quiz-filter-title">🧠 Quiz<br><small>¿Con qué palabras practicar? / З якими словами?</small></h3>
           <div id="quiz-filter-options" class="quiz-filter-options"></div>
-          <button id="quiz-start-btn" class="btn btn-primary btn-block" style="margin-top:16px" onclick="startQuizWithFilter()">
-            Empezar quiz / Почати
+          <!-- Selector de modo -->
+          <div class="quiz-mode-section">
+            <div class="quiz-filter-label" style="margin-bottom:8px">Modo / Режим</div>
+            <div class="quiz-mode-grid">
+              <button class="quiz-mode-btn active" id="quiz-mode-flashcard" onclick="setQuizMode('flashcard',this)">🃏<br><span>Flashcard</span></button>
+              <button class="quiz-mode-btn" id="quiz-mode-choices" onclick="setQuizMode('choices',this)">🔤<br><span>4 opciones</span></button>
+              <button class="quiz-mode-btn" id="quiz-mode-type" onclick="setQuizMode('type',this)">⌨️<br><span>Escribe</span></button>
+            </div>
+          </div>
+          <button id="quiz-start-btn" class="btn btn-primary btn-block" style="margin-top:12px" onclick="startQuizWithFilter()">
+            🚀 Empezar / Почати
           </button>
         </div>
-        <!-- Tarjeta del quiz -->
+
+        <!-- PANTALLA 2: Tarjeta -->
         <div id="quiz-card-screen" class="hidden">
+          <!-- Barra de estado -->
+          <div class="quiz-status-bar">
+            <div id="quiz-lives-display" class="quiz-lives-display">❤️❤️❤️</div>
+            <div id="quiz-streak-display" class="quiz-streak-display hidden">🔥 <span id="quiz-streak-count">0</span></div>
+            <div id="quiz-score-display" class="quiz-score-display">0 pts</div>
+          </div>
+          <!-- Barra de progreso -->
+          <div class="quiz-progress-bar">
+            <div id="quiz-progress-fill" class="quiz-progress-fill" style="width:0%"></div>
+          </div>
+          <div id="quiz-counter" class="quiz-counter" style="text-align:center;margin:4px 0 12px"></div>
+
           <div id="quiz-image" class="quiz-image"></div>
           <div id="quiz-question" class="quiz-question"></div>
-          <div id="quiz-answer" class="quiz-answer hidden"></div>
-          <button id="quiz-reveal" class="btn btn-primary btn-block">Mostrar / Показати</button>
+
+          <!-- Zona Flashcard -->
+          <div id="quiz-flashcard-zone">
+            <div id="quiz-answer" class="quiz-answer hidden"></div>
+            <button id="quiz-reveal" class="btn btn-primary btn-block">👀 Mostrar / Показати</button>
+            <div id="quiz-feedback-btns" class="quiz-feedback-btns hidden">
+              <button class="quiz-btn-wrong" onclick="quizFeedback(false)">✗ No sabía</button>
+              <button class="quiz-btn-correct" onclick="quizFeedback(true)">✓ ¡Lo sabía!</button>
+            </div>
+          </div>
+
+          <!-- Zona 4 Opciones -->
+          <div id="quiz-choices-zone" class="hidden">
+            <div id="quiz-choices" class="quiz-choices"></div>
+          </div>
+
+          <!-- Zona Escribe -->
+          <div id="quiz-type-zone" class="hidden">
+            <input type="text" id="quiz-type-input" class="input-field quiz-type-input" placeholder="Escribe en español... / Напиши іспанською..." autocomplete="off" autocorrect="off" spellcheck="false">
+            <button class="btn btn-primary btn-block" id="quiz-type-check-btn" style="margin-top:8px" onclick="checkTypeAnswer()">✓ Comprobar / Перевірити</button>
+            <div id="quiz-type-feedback" class="quiz-type-feedback hidden"></div>
+          </div>
         </div>
-        <div id="quiz-nav" class="quiz-nav">
-          <button id="quiz-prev" class="btn btn-secondary">← Anterior / Назад</button>
-          <span id="quiz-counter" class="quiz-counter"></span>
-          <button id="quiz-next" class="btn btn-secondary">Siguiente / Далі →</button>
+
+        <!-- Nav flashcard -->
+        <div id="quiz-nav" class="quiz-nav hidden">
+          <button class="btn btn-secondary" onclick="navigateQuiz(-1)">← Anterior</button>
+          <span id="quiz-counter-nav" class="quiz-counter"></span>
+          <button class="btn btn-secondary" onclick="navigateQuiz(1)">Siguiente →</button>
         </div>
-        </div><!-- fin quiz-card-screen -->
+
+        <!-- PANTALLA 3: Resultados -->
+        <div id="quiz-results-screen" class="quiz-results-screen hidden">
+          <div id="quiz-results-emoji" class="quiz-results-emoji">🏆</div>
+          <h2 id="quiz-results-title" class="quiz-results-title"></h2>
+          <div id="quiz-results-stats" class="quiz-results-stats"></div>
+          <div id="quiz-results-best" class="quiz-results-best"></div>
+          <button class="btn btn-primary btn-block" onclick="restartQuiz()">🔄 Otra vez / Ще раз</button>
+          <button class="btn btn-secondary btn-block" style="margin-top:8px" onclick="endQuiz()">Salir / Вийти</button>
+        </div>
+
       </div>
     </div>
 

@@ -1,0 +1,336 @@
+[
+    {
+      "id": "verbos",
+      "nombre": { "es": "Verbos", "uk": "Дієслова" },
+      "emoji": "🏃",
+      "subcategorias": [
+        {
+          "id": "movimiento",
+          "nombre": { "es": "Verbos de movimiento", "uk": "Дієслова руху" },
+          "emoji": "🏃",
+          "palabras": [
+            { "id": "correr", "es": "Correr", "uk": "Бігти", "descripcion_es": "Moverse rápidamente a pie.", "descripcion": "Рухатися швидко пішки", "emoji": "🏃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "caminar", "es": "Caminar", "uk": "Ходити", "descripcion_es": "Moverse a pie a ritmo normal.", "descripcion": "Рухатися пішки в нормальному темпі", "emoji": "🚶", "imagen": "", "etiquetas": ["database"] },
+            { "id": "saltar", "es": "Saltar", "uk": "Стрибати", "descripcion_es": "Elevarse del suelo con un impulso.", "descripcion": "Піднятися над землею з поштовху", "emoji": "🦘", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nadar", "es": "Nadar", "uk": "Плавати", "descripcion_es": "Moverse dentro del agua con el cuerpo.", "descripcion": "Рухатися у воді тілом", "emoji": "🏊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "volar", "es": "Volar", "uk": "Літати", "descripcion_es": "Moverse por el aire.", "descripcion": "Рухатися по повітрю", "emoji": "✈️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "caer", "es": "Caer", "uk": "Падати", "descripcion_es": "Descender por la fuerza de gravedad.", "descripcion": "Опускатися під дією гравітації", "emoji": "⬇️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "subir", "es": "Subir", "uk": "Підніматися", "descripcion_es": "Moverse hacia arriba.", "descripcion": "Рухатися вгору", "emoji": "⬆️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bajar", "es": "Bajar", "uk": "Спускатися", "descripcion_es": "Moverse hacia abajo.", "descripcion": "Рухатися вниз", "emoji": "⬇️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "entrar", "es": "Entrar", "uk": "Входити", "descripcion_es": "Pasar al interior de un lugar.", "descripcion": "Переходити всередину місця", "emoji": "🚪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "salir", "es": "Salir", "uk": "Виходити", "descripcion_es": "Pasar al exterior de un lugar.", "descripcion": "Переходити назовні місця", "emoji": "🚪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "llegar", "es": "Llegar", "uk": "Прибувати", "descripcion_es": "Alcanzar el destino o lugar de llegada.", "descripcion": "Досягати місця призначення", "emoji": "📍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ir", "es": "Ir", "uk": "Йти", "descripcion_es": "Desplazarse de un lugar a otro.", "descripcion": "Переміщуватися з одного місця в інше", "emoji": "➡️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "volver", "es": "Volver", "uk": "Повертатися", "descripcion_es": "Regresar al lugar de origen.", "descripcion": "Повертатися до місця походження", "emoji": "↩️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cruzar", "es": "Cruzar", "uk": "Перетинати", "descripcion_es": "Pasar de un lado al otro.", "descripcion": "Переходити з одного боку на інший", "emoji": "➕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "girar", "es": "Girar", "uk": "Повертати", "descripcion_es": "Cambiar de dirección dando la vuelta.", "descripcion": "Змінювати напрямок, повертаючись", "emoji": "🔄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pararse", "es": "Pararse", "uk": "Зупинятися", "descripcion_es": "Dejar de moverse.", "descripcion": "Припинити рухатися", "emoji": "🛑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "empujar", "es": "Empujar", "uk": "Штовхати", "descripcion_es": "Ejercer fuerza para mover algo hacia adelante.", "descripcion": "Докладати силу для переміщення вперед", "emoji": "👊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tirar", "es": "Tirar", "uk": "Тягнути", "descripcion_es": "Ejercer fuerza para mover algo hacia uno.", "descripcion": "Докладати силу для переміщення до себе", "emoji": "💪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "llevar", "es": "Llevar", "uk": "Нести", "descripcion_es": "Transportar algo de un lugar a otro.", "descripcion": "Переносити щось з місця на місце", "emoji": "📦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "traer", "es": "Traer", "uk": "Приносити", "descripcion_es": "Llevar algo hacia el lugar donde se habla.", "descripcion": "Нести щось до місця, де говорять", "emoji": "🎁", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "comunicacion",
+          "nombre": { "es": "Verbos de comunicación", "uk": "Дієслова спілкування" },
+          "emoji": "💬",
+          "palabras": [
+            { "id": "hablar", "es": "Hablar", "uk": "Говорити", "descripcion_es": "Expresarse con palabras oralmente.", "descripcion": "Висловлюватися словами усно", "emoji": "💬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "escuchar", "es": "Escuchar", "uk": "Слухати", "descripcion_es": "Prestar atención a los sonidos.", "descripcion": "Звертати увагу на звуки", "emoji": "👂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "leer", "es": "Leer", "uk": "Читати", "descripcion_es": "Interpretar un texto escrito.", "descripcion": "Розбирати написаний текст", "emoji": "📖", "imagen": "", "etiquetas": ["database"] },
+            { "id": "escribir", "es": "Escribir", "uk": "Писати", "descripcion_es": "Representar ideas con letras o símbolos.", "descripcion": "Виражати ідеї літерами або символами", "emoji": "✍️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "preguntar", "es": "Preguntar", "uk": "Запитувати", "descripcion_es": "Formular una pregunta para obtener información.", "descripcion": "Ставити запитання для отримання інформації", "emoji": "❓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "responder", "es": "Responder", "uk": "Відповідати", "descripcion_es": "Dar una respuesta a una pregunta.", "descripcion": "Давати відповідь на запитання", "emoji": "💡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gritar", "es": "Gritar", "uk": "Кричати", "descripcion_es": "Hablar con mucha fuerza y volumen.", "descripcion": "Говорити з великою силою та гучністю", "emoji": "📢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "susurrar", "es": "Susurrar", "uk": "Шепотіти", "descripcion_es": "Hablar muy bajito, casi sin voz.", "descripcion": "Говорити дуже тихо, майже без голосу", "emoji": "🤫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "llamar", "es": "Llamar", "uk": "Дзвонити", "descripcion_es": "Contactar con alguien por teléfono.", "descripcion": "Зв'язуватися з кимось по телефону", "emoji": "📞", "imagen": "", "etiquetas": ["database"] },
+            { "id": "explicar", "es": "Explicar", "uk": "Пояснювати", "descripcion_es": "Hacer entender algo a alguien.", "descripcion": "Допомогти комусь зрозуміти щось", "emoji": "💭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "contar", "es": "Contar", "uk": "Розповідати", "descripcion_es": "Narrar hechos o historias.", "descripcion": "Розповідати факти або історії", "emoji": "📚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "decir", "es": "Decir", "uk": "Казати", "descripcion_es": "Expresar algo con palabras.", "descripcion": "Висловлювати щось словами", "emoji": "💬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cantar", "es": "Cantar", "uk": "Співати", "descripcion_es": "Emitir sonidos musicales con la voz.", "descripcion": "Видавати музичні звуки голосом", "emoji": "🎤", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mentir", "es": "Mentir", "uk": "Брехати", "descripcion_es": "Decir algo falso a sabiendas.", "descripcion": "Говорити завідомо неправдиве", "emoji": "🤥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "prometer", "es": "Prometer", "uk": "Обіцяти", "descripcion_es": "Comprometerse a hacer algo.", "descripcion": "Зобов'язуватися щось зробити", "emoji": "🤝", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "acciones-cotidianas",
+          "nombre": { "es": "Acciones cotidianas", "uk": "Повсякденні дії" },
+          "emoji": "🌅",
+          "palabras": [
+            { "id": "comer", "es": "Comer", "uk": "Їсти", "descripcion_es": "Ingerir alimentos.", "descripcion": "Вживати їжу", "emoji": "🍽️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "beber", "es": "Beber", "uk": "Пити", "descripcion_es": "Ingerir líquidos.", "descripcion": "Вживати рідину", "emoji": "🥤", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dormir", "es": "Dormir", "uk": "Спати", "descripcion_es": "Estado de reposo y descanso del cuerpo.", "descripcion": "Стан відпочинку та спокою тіла", "emoji": "😴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "despertar", "es": "Despertar", "uk": "Прокидатися", "descripcion_es": "Dejar de dormir y volver a la consciencia.", "descripcion": "Припинити спати і повернутися до свідомості", "emoji": "⏰", "imagen": "", "etiquetas": ["database"] },
+            { "id": "levantarse", "es": "Levantarse", "uk": "Вставати", "descripcion_es": "Ponerse de pie desde la cama o el suelo.", "descripcion": "Підніматися з ліжка або підлоги", "emoji": "🛏️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lavarse", "es": "Lavarse", "uk": "Митися", "descripcion_es": "Limpiar el cuerpo con agua y jabón.", "descripcion": "Очищати тіло водою та милом", "emoji": "🚿", "imagen": "", "etiquetas": ["database"] },
+            { "id": "vestirse", "es": "Vestirse", "uk": "Одягатися", "descripcion_es": "Ponerse la ropa.", "descripcion": "Надягати одяг", "emoji": "👕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cocinar", "es": "Cocinar", "uk": "Готувати їжу", "descripcion_es": "Preparar alimentos para comer.", "descripcion": "Готувати продукти для вживання", "emoji": "🍳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "limpiar", "es": "Limpiar", "uk": "Прибирати", "descripcion_es": "Quitar la suciedad de algo.", "descripcion": "Видаляти бруд з чогось", "emoji": "🧹", "imagen": "", "etiquetas": ["database"] },
+            { "id": "comprar", "es": "Comprar", "uk": "Купувати", "descripcion_es": "Adquirir algo a cambio de dinero.", "descripcion": "Отримувати щось в обмін на гроші", "emoji": "🛒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "trabajar", "es": "Trabajar", "uk": "Працювати", "descripcion_es": "Realizar una actividad laboral.", "descripcion": "Виконувати трудову діяльність", "emoji": "💼", "imagen": "", "etiquetas": ["database"] },
+            { "id": "estudiar", "es": "Estudiar", "uk": "Навчатися", "descripcion_es": "Dedicar tiempo a aprender conocimientos.", "descripcion": "Присвячувати час засвоєнню знань", "emoji": "📚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jugar", "es": "Jugar", "uk": "Грати", "descripcion_es": "Entretenerse con un juego o actividad lúdica.", "descripcion": "Розважатися грою або розважальною діяльністю", "emoji": "🎮", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ver", "es": "Ver", "uk": "Дивитися", "descripcion_es": "Percibir con los ojos.", "descripcion": "Сприймати очима", "emoji": "👁️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pensar", "es": "Pensar", "uk": "Думати", "descripcion_es": "Usar la mente para reflexionar.", "descripcion": "Використовувати розум для роздумів", "emoji": "🤔", "imagen": "", "etiquetas": ["database"] },
+            { "id": "recordar", "es": "Recordar", "uk": "Пам'ятати", "descripcion_es": "Traer a la memoria algo del pasado.", "descripcion": "Відновлювати в пам'яті щось із минулого", "emoji": "🧠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "olvidar", "es": "Olvidar", "uk": "Забувати", "descripcion_es": "Dejar de recordar algo.", "descripcion": "Переставати пам'ятати щось", "emoji": "🤯", "imagen": "", "etiquetas": ["database"] },
+            { "id": "abrir", "es": "Abrir", "uk": "Відкривати", "descripcion_es": "Quitar el cierre de algo.", "descripcion": "Знімати закриття з чогось", "emoji": "🔓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cerrar", "es": "Cerrar", "uk": "Закривати", "descripcion_es": "Poner el cierre a algo.", "descripcion": "Ставити закриття на щось", "emoji": "🔒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pagar", "es": "Pagar", "uk": "Платити", "descripcion_es": "Dar dinero por algo recibido.", "descripcion": "Давати гроші за отримане", "emoji": "💳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ayudar", "es": "Ayudar", "uk": "Допомагати", "descripcion_es": "Colaborar con alguien en algo.", "descripcion": "Співпрацювати з кимось у чомусь", "emoji": "🤝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "esperar", "es": "Esperar", "uk": "Чекати", "descripcion_es": "Permanecer en un lugar hasta que algo ocurra.", "descripcion": "Залишатися на місці, поки щось не відбудеться", "emoji": "⏳", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "sentimientos",
+          "nombre": { "es": "Verbos de sentimientos", "uk": "Дієслова почуттів" },
+          "emoji": "❤️",
+          "palabras": [
+            { "id": "amar", "es": "Amar", "uk": "Любити", "descripcion_es": "Sentir amor profundo por alguien.", "descripcion": "Відчувати глибоку любов до когось", "emoji": "❤️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "querer", "es": "Querer", "uk": "Хотіти", "descripcion_es": "Desear algo o sentir afecto por alguien.", "descripcion": "Бажати чогось або відчувати прив'язаність", "emoji": "💛", "imagen": "", "etiquetas": ["database"] },
+            { "id": "odiar", "es": "Odiar", "uk": "Ненавидіти", "descripcion_es": "Sentir un rechazo intenso hacia algo o alguien.", "descripcion": "Відчувати сильну неприязнь до когось або чогось", "emoji": "😠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "temer", "es": "Temer", "uk": "Боятися", "descripcion_es": "Sentir miedo ante algo.", "descripcion": "Відчувати страх перед чимось", "emoji": "😨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "reir", "es": "Reír", "uk": "Сміятися", "descripcion_es": "Expresar alegría con carcajadas.", "descripcion": "Виражати радість сміхом", "emoji": "😂", "imagen": "", "etiquetas": ["database"] },
+            { "id": "llorar", "es": "Llorar", "uk": "Плакати", "descripcion_es": "Derramar lágrimas por tristeza o emoción.", "descripcion": "Проливати сльози від смутку або хвилювання", "emoji": "😢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sentir", "es": "Sentir", "uk": "Відчувати", "descripcion_es": "Percibir emociones o sensaciones.", "descripcion": "Сприймати емоції або відчуття", "emoji": "💭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "desear", "es": "Desear", "uk": "Бажати", "descripcion_es": "Querer con intensidad que algo ocurra.", "descripcion": "Сильно хотіти щоб щось сталося", "emoji": "🌟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "preocupar", "es": "Preocupar", "uk": "Турбуватися", "descripcion_es": "Sentir inquietud por algo.", "descripcion": "Відчувати тривогу через щось", "emoji": "😟", "imagen": "", "etiquetas": ["database"] },
+            { "id": "alegrarse", "es": "Alegrarse", "uk": "Радіти", "descripcion_es": "Sentir alegría por algo bueno.", "descripcion": "Відчувати радість від чогось доброго", "emoji": "😊", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "creacion",
+          "nombre": { "es": "Verbos de creación", "uk": "Дієслова творення" },
+          "emoji": "🎨",
+          "palabras": [
+            { "id": "hacer", "es": "Hacer", "uk": "Робити", "descripcion_es": "Crear o ejecutar algo.", "descripcion": "Створювати або виконувати щось", "emoji": "🔨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "crear", "es": "Crear", "uk": "Створювати", "descripcion_es": "Producir algo que no existía antes.", "descripcion": "Виробляти те, чого раніше не існувало", "emoji": "✨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "construir", "es": "Construir", "uk": "Будувати", "descripcion_es": "Edificar o fabricar una estructura.", "descripcion": "Зводити або виготовляти конструкцію", "emoji": "🏗️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dibujar", "es": "Dibujar", "uk": "Малювати", "descripcion_es": "Representar imágenes con lápiz o bolígrafo.", "descripcion": "Зображувати образи олівцем або ручкою", "emoji": "✏️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pintar", "es": "Pintar", "uk": "Фарбувати", "descripcion_es": "Aplicar color con pintura o pinceles.", "descripcion": "Наносити колір фарбою або пензлями", "emoji": "🎨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "disenar", "es": "Diseñar", "uk": "Проектувати", "descripcion_es": "Planear y crear el aspecto de algo.", "descripcion": "Планувати та створювати вигляд чогось", "emoji": "📐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "inventar", "es": "Inventar", "uk": "Вигадувати", "descripcion_es": "Crear algo nuevo o imaginar cosas.", "descripcion": "Створювати щось нове або уявляти речі", "emoji": "💡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "arreglar", "es": "Arreglar", "uk": "Ремонтувати", "descripcion_es": "Reparar algo que estaba roto.", "descripcion": "Ремонтувати те, що було зламано", "emoji": "🔧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "romper", "es": "Romper", "uk": "Ламати", "descripcion_es": "Partir o destruir algo.", "descripcion": "Розламувати або руйнувати щось", "emoji": "💥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mezclar", "es": "Mezclar", "uk": "Змішувати", "descripcion_es": "Combinar varias cosas.", "descripcion": "Поєднувати кілька речей", "emoji": "🔀", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adjetivos",
+      "nombre": { "es": "Adjetivos", "uk": "Прикметники" },
+      "emoji": "🌈",
+      "subcategorias": [
+        {
+          "id": "tamano-forma",
+          "nombre": { "es": "Tamaño y forma", "uk": "Розмір та форма" },
+          "emoji": "📏",
+          "palabras": [
+            { "id": "grande", "es": "Grande", "uk": "Великий", "descripcion_es": "De tamaño superior a lo normal.", "descripcion": "Розміром більше за звичайне", "emoji": "🐘", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pequeno", "es": "Pequeño", "uk": "Маленький", "descripcion_es": "De tamaño inferior a lo normal.", "descripcion": "Розміром менше за звичайне", "emoji": "🐭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "alto", "es": "Alto", "uk": "Високий", "descripcion_es": "Con mucha altura o elevación.", "descripcion": "З великою висотою або підйомом", "emoji": "🏔️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bajo", "es": "Bajo", "uk": "Низький", "descripcion_es": "Con poca altura.", "descripcion": "З малою висотою", "emoji": "⬇️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "largo", "es": "Largo", "uk": "Довгий", "descripcion_es": "De gran extensión en longitud.", "descripcion": "Великої протяжності в довжину", "emoji": "📏", "imagen": "", "etiquetas": ["database"] },
+            { "id": "corto", "es": "Corto", "uk": "Короткий", "descripcion_es": "De poca extensión en longitud.", "descripcion": "Малої протяжності в довжину", "emoji": "📏", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ancho", "es": "Ancho", "uk": "Широкий", "descripcion_es": "De gran extensión en anchura.", "descripcion": "Великої протяжності в ширину", "emoji": "↔️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "estrecho", "es": "Estrecho", "uk": "Вузький", "descripcion_es": "De poca anchura.", "descripcion": "Малої ширини", "emoji": "↔️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "grueso", "es": "Grueso", "uk": "Товстий", "descripcion_es": "Con mucho grosor o espesor.", "descripcion": "З великою товщиною", "emoji": "📦", "imagen": "", "etiquetas": ["database"] },
+            { "id": "delgado", "es": "Delgado", "uk": "Тонкий", "descripcion_es": "Con poco grosor.", "descripcion": "З малою товщиною", "emoji": "📄", "imagen": "", "etiquetas": ["database"] },
+            { "id": "redondo", "es": "Redondo", "uk": "Круглий", "descripcion_es": "Con forma circular.", "descripcion": "Кругла форма", "emoji": "⭕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cuadrado-adj", "es": "Cuadrado", "uk": "Квадратний", "descripcion_es": "Con forma de cuadrado, cuatro lados iguales.", "descripcion": "Чотирикутна форма з рівними сторонами", "emoji": "⬛", "imagen": "", "etiquetas": ["database"] },
+            { "id": "plano", "es": "Plano", "uk": "Плаский", "descripcion_es": "Sin relieve ni curvas, superficie lisa.", "descripcion": "Без рельєфу та кривих, рівна поверхня", "emoji": "📋", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "calidad",
+          "nombre": { "es": "Calidad y estado", "uk": "Якість та стан" },
+          "emoji": "⭐",
+          "palabras": [
+            { "id": "bueno", "es": "Bueno", "uk": "Хороший", "descripcion_es": "Con cualidades positivas.", "descripcion": "З позитивними якостями", "emoji": "👍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "malo", "es": "Malo", "uk": "Поганий", "descripcion_es": "Con cualidades negativas.", "descripcion": "З негативними якостями", "emoji": "👎", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nuevo", "es": "Nuevo", "uk": "Новий", "descripcion_es": "Recién fabricado o que no ha sido usado.", "descripcion": "Щойно виготовлений або невикористаний", "emoji": "🆕", "imagen": "", "etiquetas": ["database"] },
+            { "id": "viejo", "es": "Viejo", "uk": "Старий", "descripcion_es": "Con mucho tiempo de existencia o uso.", "descripcion": "Довго існуючий або використовуваний", "emoji": "🏚️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "limpio", "es": "Limpio", "uk": "Чистий", "descripcion_es": "Sin suciedad ni manchas.", "descripcion": "Без бруду та плям", "emoji": "✨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sucio", "es": "Sucio", "uk": "Брудний", "descripcion_es": "Con suciedad o manchas.", "descripcion": "З брудом або плямами", "emoji": "🤢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "bonito", "es": "Bonito", "uk": "Гарний", "descripcion_es": "Que resulta agradable a la vista.", "descripcion": "Приємний для ока", "emoji": "😍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "feo", "es": "Feo", "uk": "Некрасивий", "descripcion_es": "Que no resulta agradable a la vista.", "descripcion": "Неприємний для ока", "emoji": "😬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "caro", "es": "Caro", "uk": "Дорогий", "descripcion_es": "Que tiene un precio elevado.", "descripcion": "Що має високу ціну", "emoji": "💰", "imagen": "", "etiquetas": ["database"] },
+            { "id": "barato", "es": "Barato", "uk": "Дешевий", "descripcion_es": "Que tiene un precio bajo.", "descripcion": "Що має низьку ціну", "emoji": "🏷️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "facil", "es": "Fácil", "uk": "Легкий", "descripcion_es": "Que no requiere esfuerzo.", "descripcion": "Що не вимагає зусиль", "emoji": "😊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "dificil", "es": "Difícil", "uk": "Важкий", "descripcion_es": "Que requiere mucho esfuerzo.", "descripcion": "Що вимагає великих зусиль", "emoji": "😤", "imagen": "", "etiquetas": ["database"] },
+            { "id": "importante", "es": "Importante", "uk": "Важливий", "descripcion_es": "Que tiene gran valor o relevancia.", "descripcion": "Що має велике значення або актуальність", "emoji": "⭐", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "emociones-adj",
+          "nombre": { "es": "Emociones y estados de ánimo", "uk": "Емоції та настрій" },
+          "emoji": "😊",
+          "palabras": [
+            { "id": "feliz", "es": "Feliz", "uk": "Щасливий", "descripcion_es": "Que siente felicidad y bienestar.", "descripcion": "Хто відчуває щастя та добробут", "emoji": "😊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "triste", "es": "Triste", "uk": "Сумний", "descripcion_es": "Que siente tristeza o pena.", "descripcion": "Хто відчуває смуток або горе", "emoji": "😢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "enfadado", "es": "Enfadado", "uk": "Сердитий", "descripcion_es": "Que siente enojo o irritación.", "descripcion": "Хто відчуває злість або роздратування", "emoji": "😠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "asustado", "es": "Asustado", "uk": "Наляканий", "descripcion_es": "Que siente miedo o susto.", "descripcion": "Хто відчуває страх або переляк", "emoji": "😨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "sorprendido", "es": "Sorprendido", "uk": "Здивований", "descripcion_es": "Que siente sorpresa ante algo inesperado.", "descripcion": "Хто відчуває здивування від несподіваного", "emoji": "😲", "imagen": "", "etiquetas": ["database"] },
+            { "id": "aburrido", "es": "Aburrido", "uk": "Нудний", "descripcion_es": "Que siente o produce aburrimiento.", "descripcion": "Хто відчуває або викликає нудьгу", "emoji": "😑", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cansado", "es": "Cansado", "uk": "Втомлений", "descripcion_es": "Que siente fatiga o agotamiento.", "descripcion": "Хто відчуває втому або виснаження", "emoji": "😪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nervioso", "es": "Nervioso", "uk": "Нервовий", "descripcion_es": "Que siente ansiedad o tensión.", "descripcion": "Хто відчуває тривогу або напругу", "emoji": "😬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "emocionado", "es": "Emocionado", "uk": "Схвильований", "descripcion_es": "Que siente una emoción intensa.", "descripcion": "Хто відчуває сильну емоцію", "emoji": "🥹", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tranquilo", "es": "Tranquilo", "uk": "Спокійний", "descripcion_es": "Que está en calma y sin agitación.", "descripcion": "Хто перебуває в спокої без хвилювання", "emoji": "😌", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "fisico",
+          "nombre": { "es": "Propiedades físicas", "uk": "Фізичні властивості" },
+          "emoji": "🌡️",
+          "palabras": [
+            { "id": "fuerte", "es": "Fuerte", "uk": "Сильний", "descripcion_es": "Con mucha fuerza o resistencia.", "descripcion": "З великою силою або стійкістю", "emoji": "💪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "debil", "es": "Débil", "uk": "Слабкий", "descripcion_es": "Con poca fuerza o resistencia.", "descripcion": "З малою силою або стійкістю", "emoji": "😓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "rapido", "es": "Rápido", "uk": "Швидкий", "descripcion_es": "Que se mueve o actúa con velocidad.", "descripcion": "Хто рухається або діє швидко", "emoji": "⚡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lento", "es": "Lento", "uk": "Повільний", "descripcion_es": "Que se mueve o actúa con poca velocidad.", "descripcion": "Хто рухається або діє повільно", "emoji": "🐢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "suave", "es": "Suave", "uk": "М'який", "descripcion_es": "De textura agradable al tacto, sin asperezas.", "descripcion": "Приємна на дотик текстура без нерівностей", "emoji": "☁️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "duro", "es": "Duro", "uk": "Твердий", "descripcion_es": "Con consistencia firme, difícil de comprimir.", "descripcion": "Міцна консистенція, важко стискати", "emoji": "🪨", "imagen": "", "etiquetas": ["suave"] },
+            { "id": "caliente", "es": "Caliente", "uk": "Гарячий", "descripcion_es": "Con temperatura elevada.", "descripcion": "З підвищеною температурою", "emoji": "🔥", "imagen": "", "etiquetas": ["database"] },
+            { "id": "frio-adj", "es": "Frío", "uk": "Холодний", "descripcion_es": "Con temperatura baja.", "descripcion": "З низькою температурою", "emoji": "❄️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "humedo", "es": "Húmedo", "uk": "Вологий", "descripcion_es": "Con presencia de agua o vapor.", "descripcion": "З наявністю води або пари", "emoji": "💧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "seco", "es": "Seco", "uk": "Сухий", "descripcion_es": "Sin agua ni humedad.", "descripcion": "Без води та вологи", "emoji": "🏜️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "pesado", "es": "Pesado", "uk": "Важкий", "descripcion_es": "Con mucho peso.", "descripcion": "З великою вагою", "emoji": "⚖️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ligero", "es": "Ligero", "uk": "Легкий", "descripcion_es": "Con poco peso.", "descripcion": "З малою вагою", "emoji": "🪶", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "colores",
+          "nombre": { "es": "Colores", "uk": "Кольори" },
+          "emoji": "🎨",
+          "palabras": [
+            { "id": "rojo", "es": "Rojo", "uk": "Червоний", "descripcion_es": "Color primario cálido. Color del fuego y la sangre.", "descripcion": "Основний теплий колір. Колір вогню та крові", "emoji": "🔴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "azul", "es": "Azul", "uk": "Синій", "descripcion_es": "Color primario frío. Color del cielo y el mar.", "descripcion": "Основний холодний колір. Колір неба та моря", "emoji": "🔵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "verde", "es": "Verde", "uk": "Зелений", "descripcion_es": "Color de la naturaleza y las plantas.", "descripcion": "Колір природи та рослин", "emoji": "🟢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "amarillo", "es": "Amarillo", "uk": "Жовтий", "descripcion_es": "Color primario cálido. Color del sol.", "descripcion": "Основний теплий колір. Колір сонця", "emoji": "🟡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "negro", "es": "Negro", "uk": "Чорний", "descripcion_es": "Ausencia de color visible.", "descripcion": "Відсутність видимого кольору", "emoji": "⚫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "blanco", "es": "Blanco", "uk": "Білий", "descripcion_es": "Presencia de todos los colores de luz.", "descripcion": "Наявність усіх кольорів світла", "emoji": "⚪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gris", "es": "Gris", "uk": "Сірий", "descripcion_es": "Color neutro entre el negro y el blanco.", "descripcion": "Нейтральний колір між чорним і білим", "emoji": "🩶", "imagen": "", "etiquetas": ["database"] },
+            { "id": "marron", "es": "Marrón", "uk": "Коричневий", "descripcion_es": "Color de la tierra y la madera.", "descripcion": "Колір землі та дерева", "emoji": "🟤", "imagen": "", "etiquetas": ["database"] },
+            { "id": "naranja-color", "es": "Naranja", "uk": "Помаранчевий", "descripcion_es": "Color cálido entre el rojo y el amarillo.", "descripcion": "Теплий колір між червоним і жовтим", "emoji": "🟠", "imagen": "", "etiquetas": ["database"] },
+            { "id": "morado", "es": "Morado", "uk": "Фіолетовий", "descripcion_es": "Color frío mezcla de rojo y azul.", "descripcion": "Холодний колір суміші червоного і синього", "emoji": "🟣", "imagen": "", "etiquetas": ["database"] },
+            { "id": "rosa", "es": "Rosa", "uk": "Рожевий", "descripcion_es": "Color claro entre el rojo y el blanco.", "descripcion": "Світлий колір між червоним і білим", "emoji": "🩷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "azul-claro", "es": "Azul claro", "uk": "Блакитний", "descripcion_es": "Tono suave y pálido del azul.", "descripcion": "М'який і блідий відтінок синього", "emoji": "🩵", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deportes",
+      "nombre": { "es": "Deportes y ocio", "uk": "Спорт та дозвілля" },
+      "emoji": "⚽",
+      "subcategorias": [
+        {
+          "id": "deportes-equipo",
+          "nombre": { "es": "Deportes de equipo", "uk": "Командні види спорту" },
+          "emoji": "⚽",
+          "palabras": [
+            { "id": "futbol", "es": "Fútbol", "uk": "Футбол", "descripcion_es": "Deporte de equipo con balón y portería. El más popular del mundo.", "descripcion": "Командний спорт з м'ячем і воротами", "emoji": "⚽", "imagen": "", "etiquetas": ["database"] },
+            { "id": "baloncesto", "es": "Baloncesto", "uk": "Баскетбол", "descripcion_es": "Deporte de equipo con balón y canasta.", "descripcion": "Командний спорт з м'ячем і кошиком", "emoji": "🏀", "imagen": "", "etiquetas": ["database"] },
+            { "id": "voleibol", "es": "Voleibol", "uk": "Волейбол", "descripcion_es": "Deporte de equipo con red y balón.", "descripcion": "Командний спорт з сіткою і м'ячем", "emoji": "🏐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "beisbol", "es": "Béisbol", "uk": "Бейсбол", "descripcion_es": "Deporte americano con bate y pelota.", "descripcion": "Американський спорт з битою і м'ячем", "emoji": "⚾", "imagen": "", "etiquetas": ["database"] },
+            { "id": "rugby", "es": "Rugby", "uk": "Регбі", "descripcion_es": "Deporte de contacto con balón ovalado.", "descripcion": "Контактний спорт з овальним м'ячем", "emoji": "🏉", "imagen": "", "etiquetas": ["database"] },
+            { "id": "hockey", "es": "Hockey", "uk": "Хокей", "descripcion_es": "Deporte con palo y disco o pelota.", "descripcion": "Спорт з ключкою та шайбою або м'ячем", "emoji": "🏒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "waterpolo", "es": "Waterpolo", "uk": "Ватерпол", "descripcion_es": "Deporte acuático por equipos.", "descripcion": "Командний водний спорт", "emoji": "🤽", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "deportes-individuales",
+          "nombre": { "es": "Deportes individuales", "uk": "Індивідуальні види спорту" },
+          "emoji": "🏊",
+          "palabras": [
+            { "id": "natacion", "es": "Natación", "uk": "Плавання", "descripcion_es": "Deporte acuático individual.", "descripcion": "Індивідуальний водний спорт", "emoji": "🏊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "atletismo", "es": "Atletismo", "uk": "Легка атлетика", "descripcion_es": "Conjunto de deportes de pista: carrera, salto, lanzamiento.", "descripcion": "Набір трекових видів спорту: біг, стрибки, метання", "emoji": "🏃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ciclismo", "es": "Ciclismo", "uk": "Велоспорт", "descripcion_es": "Deporte en bicicleta por carretera o montaña.", "descripcion": "Спорт на велосипеді по дорозі або горах", "emoji": "🚴", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tenis", "es": "Tenis", "uk": "Теніс", "descripcion_es": "Deporte con raqueta y pelota en pista.", "descripcion": "Спорт з ракеткою і м'ячем на корті", "emoji": "🎾", "imagen": "", "etiquetas": ["database"] },
+            { "id": "golf", "es": "Golf", "uk": "Гольф", "descripcion_es": "Deporte de precisión con palo y pelota.", "descripcion": "Прецизійний спорт з ключкою і м'ячем", "emoji": "⛳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "boxeo", "es": "Boxeo", "uk": "Бокс", "descripcion_es": "Deporte de combate con los puños.", "descripcion": "Бойовий спорт з кулаками", "emoji": "🥊", "imagen": "", "etiquetas": ["database"] },
+            { "id": "gimnasia", "es": "Gimnasia", "uk": "Гімнастика", "descripcion_es": "Deporte de flexibilidad y acrobacias.", "descripcion": "Спорт гнучкості та акробатики", "emoji": "🤸", "imagen": "", "etiquetas": ["database"] },
+            { "id": "escalada", "es": "Escalada", "uk": "Скелелазіння", "descripcion_es": "Deporte de ascenso en paredes o montañas.", "descripcion": "Спорт підйому на стінах або горах", "emoji": "🧗", "imagen": "", "etiquetas": ["database"] },
+            { "id": "esqui", "es": "Esquí", "uk": "Лижний спорт", "descripcion_es": "Deporte de deslizamiento sobre nieve.", "descripcion": "Спорт ковзання по снігу", "emoji": "⛷️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "judo", "es": "Judo", "uk": "Дзюдо", "descripcion_es": "Arte marcial japonés de agarre y derribe.", "descripcion": "Японське бойове мистецтво захвату та кидків", "emoji": "🥋", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "ocio",
+          "nombre": { "es": "Ocio y entretenimiento", "uk": "Дозвілля та розваги" },
+          "emoji": "🎭",
+          "palabras": [
+            { "id": "cine", "es": "Cine", "uk": "Кіно", "descripcion_es": "Arte de crear películas y espacio donde se proyectan.", "descripcion": "Мистецтво кіно та місце для перегляду", "emoji": "🎬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "teatro", "es": "Teatro", "uk": "Театр", "descripcion_es": "Arte escénico y lugar donde se representan obras.", "descripcion": "Сценічне мистецтво та місце вистав", "emoji": "🎭", "imagen": "", "etiquetas": ["database"] },
+            { "id": "musica-ocio", "es": "Música", "uk": "Музика", "descripcion_es": "Arte de combinar sonidos de forma armoniosa.", "descripcion": "Мистецтво поєднувати звуки гармонійно", "emoji": "🎵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "baile", "es": "Baile", "uk": "Танець", "descripcion_es": "Arte de moverse al ritmo de la música.", "descripcion": "Мистецтво рухатися в ритм музики", "emoji": "💃", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fotografia", "es": "Fotografía", "uk": "Фотографія", "descripcion_es": "Arte de capturar imágenes con una cámara.", "descripcion": "Мистецтво фіксувати зображення камерою", "emoji": "📷", "imagen": "", "etiquetas": ["database"] },
+            { "id": "viaje", "es": "Viaje", "uk": "Подорож", "descripcion_es": "Desplazamiento a lugares distintos al habitual.", "descripcion": "Переміщення до місць, відмінних від звичайних", "emoji": "✈️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lectura", "es": "Lectura", "uk": "Читання", "descripcion_es": "Actividad de leer libros o textos.", "descripcion": "Діяльність читання книг або текстів", "emoji": "📚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "videojuegos", "es": "Videojuegos", "uk": "Відеоігри", "descripcion_es": "Juegos electrónicos interactivos.", "descripcion": "Інтерактивні електронні ігри", "emoji": "🎮", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cocina-ocio", "es": "Cocina creativa", "uk": "Кулінарія", "descripcion_es": "Actividad de cocinar como hobby.", "descripcion": "Готування їжі як хобі", "emoji": "🍳", "imagen": "", "etiquetas": ["database"] },
+            { "id": "jardineria", "es": "Jardinería", "uk": "Садівництво", "descripcion_es": "Actividad de cuidar plantas y jardines.", "descripcion": "Діяльність догляду за рослинами та садами", "emoji": "🌱", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "educacion",
+      "nombre": { "es": "Educación", "uk": "Освіта" },
+      "emoji": "🎓",
+      "subcategorias": [
+        {
+          "id": "lugares-educacion",
+          "nombre": { "es": "Lugares de educación", "uk": "Навчальні заклади" },
+          "emoji": "🏫",
+          "palabras": [
+            { "id": "colegio", "es": "Colegio", "uk": "Школа", "descripcion_es": "Centro educativo de enseñanza primaria y secundaria.", "descripcion": "Навчальний заклад початкової та середньої освіти", "emoji": "🏫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "instituto", "es": "Instituto", "uk": "Ліцей", "descripcion_es": "Centro de educación secundaria.", "descripcion": "Заклад середньої освіти", "emoji": "🏫", "imagen": "", "etiquetas": ["database"] },
+            { "id": "universidad", "es": "Universidad", "uk": "Університет", "descripcion_es": "Centro de educación superior.", "descripcion": "Заклад вищої освіти", "emoji": "🎓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "aula", "es": "Aula", "uk": "Клас", "descripcion_es": "Sala donde se imparten las clases.", "descripcion": "Кімната для проведення уроків", "emoji": "📋", "imagen": "", "etiquetas": ["database"] },
+            { "id": "laboratorio", "es": "Laboratorio", "uk": "Лабораторія", "descripcion_es": "Sala equipada para experimentos científicos.", "descripcion": "Кімната, обладнана для наукових дослідів", "emoji": "🔬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "guarderia", "es": "Guardería", "uk": "Дитячий садок", "descripcion_es": "Centro educativo para niños pequeños.", "descripcion": "Навчальний заклад для маленьких дітей", "emoji": "👶", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "materias",
+          "nombre": { "es": "Asignaturas y materias", "uk": "Предмети та дисципліни" },
+          "emoji": "📐",
+          "palabras": [
+            { "id": "matematicas", "es": "Matemáticas", "uk": "Математика", "descripcion_es": "Ciencia de los números, formas y relaciones.", "descripcion": "Наука про числа, форми та відношення", "emoji": "🔢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "lengua", "es": "Lengua", "uk": "Мова", "descripcion_es": "Asignatura de gramática y literatura.", "descripcion": "Предмет граматики та літератури", "emoji": "📝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "historia", "es": "Historia", "uk": "Історія", "descripcion_es": "Estudio del pasado y los eventos históricos.", "descripcion": "Вивчення минулого та історичних подій", "emoji": "📜", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ciencias", "es": "Ciencias", "uk": "Природознавство", "descripcion_es": "Estudio del mundo natural y sus leyes.", "descripcion": "Вивчення природного світу та його законів", "emoji": "🔬", "imagen": "", "etiquetas": ["database"] },
+            { "id": "ingles", "es": "Inglés", "uk": "Англійська", "descripcion_es": "Idioma internacional más hablado.", "descripcion": "Найпоширеніша міжнародна мова", "emoji": "🇬🇧", "imagen": "", "etiquetas": ["database"] },
+            { "id": "arte-materia", "es": "Arte", "uk": "Мистецтво", "descripcion_es": "Asignatura de expresión creativa y plástica.", "descripcion": "Предмет творчого та пластичного вираження", "emoji": "🎨", "imagen": "", "etiquetas": ["database"] },
+            { "id": "musica-materia", "es": "Música", "uk": "Музика (предмет)", "descripcion_es": "Asignatura de teoría y práctica musical.", "descripcion": "Предмет музичної теорії та практики", "emoji": "🎵", "imagen": "", "etiquetas": ["database"] },
+            { "id": "fisica", "es": "Física", "uk": "Фізика", "descripcion_es": "Ciencia que estudia la materia y la energía.", "descripcion": "Наука про матерію та енергію", "emoji": "⚡", "imagen": "", "etiquetas": ["database"] },
+            { "id": "quimica", "es": "Química", "uk": "Хімія", "descripcion_es": "Ciencia que estudia la composición de la materia.", "descripcion": "Наука про склад речовини", "emoji": "🧪", "imagen": "", "etiquetas": ["database"] },
+            { "id": "biologia", "es": "Biología", "uk": "Біологія", "descripcion_es": "Ciencia que estudia los seres vivos.", "descripcion": "Наука про живі організми", "emoji": "🌱", "imagen": "", "etiquetas": ["database"] },
+            { "id": "geografia", "es": "Geografía", "uk": "Географія", "descripcion_es": "Estudio de la Tierra y sus características.", "descripcion": "Вивчення Землі та її характеристик", "emoji": "🌍", "imagen": "", "etiquetas": ["database"] },
+            { "id": "educacion-fisica", "es": "Educación física", "uk": "Фізична культура", "descripcion_es": "Asignatura de ejercicio físico y deporte.", "descripcion": "Предмет фізичних вправ та спорту", "emoji": "🏃", "imagen": "", "etiquetas": ["database"] }
+          ]
+        },
+        {
+          "id": "utiles-escolares",
+          "nombre": { "es": "Útiles escolares", "uk": "Шкільне приладдя" },
+          "emoji": "✏️",
+          "palabras": [
+            { "id": "lapiz", "es": "Lápiz", "uk": "Олівець", "descripcion_es": "Utensilio para escribir con grafito.", "descripcion": "Прилад для написання графітом", "emoji": "✏️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "boligrafo", "es": "Bolígrafo", "uk": "Ручка", "descripcion_es": "Utensilio para escribir con tinta.", "descripcion": "Прилад для написання чорнилом", "emoji": "🖊️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "cuaderno", "es": "Cuaderno", "uk": "Зошит", "descripcion_es": "Libro de páginas en blanco para escribir.", "descripcion": "Книга з чистими сторінками для написання", "emoji": "📓", "imagen": "", "etiquetas": ["database"] },
+            { "id": "libro", "es": "Libro", "uk": "Підручник", "descripcion_es": "Conjunto de páginas impresas encuadernadas.", "descripcion": "Набір надрукованих переплетених сторінок", "emoji": "📚", "imagen": "", "etiquetas": ["database"] },
+            { "id": "mochila-escolar", "es": "Mochila", "uk": "Шкільний рюкзак", "descripcion_es": "Bolsa para llevar el material escolar.", "descripcion": "Сумка для перенесення шкільного приладдя", "emoji": "🎒", "imagen": "", "etiquetas": ["database"] },
+            { "id": "calculadora", "es": "Calculadora", "uk": "Калькулятор", "descripcion_es": "Aparato para realizar cálculos matemáticos.", "descripcion": "Прилад для математичних обчислень", "emoji": "🔢", "imagen": "", "etiquetas": ["database"] },
+            { "id": "regla", "es": "Regla", "uk": "Лінійка", "descripcion_es": "Instrumento para medir y trazar líneas rectas.", "descripcion": "Прилад для вимірювання та креслення прямих", "emoji": "📏", "imagen": "", "etiquetas": ["database"] },
+            { "id": "goma", "es": "Goma", "uk": "Гумка", "descripcion_es": "Utensilio para borrar lo escrito con lápiz.", "descripcion": "Прилад для стирання написаного олівцем", "emoji": "🧹", "imagen": "", "etiquetas": ["database"] },
+            { "id": "tijeras-escolar", "es": "Tijeras", "uk": "Ножиці", "descripcion_es": "Herramienta de dos hojas para cortar.", "descripcion": "Інструмент з двома лезами для різання", "emoji": "✂️", "imagen": "", "etiquetas": ["database"] },
+            { "id": "examen", "es": "Examen", "uk": "Іспит", "descripcion_es": "Prueba para evaluar los conocimientos.", "descripcion": "Перевірка для оцінки знань", "emoji": "📝", "imagen": "", "etiquetas": ["database"] },
+            { "id": "nota", "es": "Nota", "uk": "Оцінка", "descripcion_es": "Puntuación que refleja el rendimiento académico.", "descripcion": "Бал, що відображає академічну успішність", "emoji": "⭐", "imagen": "", "etiquetas": ["database"] },
+            { "id": "deberes", "es": "Deberes", "uk": "Домашнє завдання", "descripcion_es": "Trabajo escolar para hacer en casa.", "descripcion": "Шкільна робота для виконання вдома", "emoji": "📋", "imagen": "", "etiquetas": ["database"] }
+          ]
+        }
+      ]
+    }
+]
