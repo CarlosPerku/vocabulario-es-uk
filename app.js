@@ -1480,7 +1480,9 @@ function closeImagePicker() {
     const word = miVocabulario.find(w => w.id === wordId);
     if (word) {
       const imgDiv = document.getElementById('detail-image');
-      imgDiv.innerHTML = wordVisual(word, 'width:100%;height:100%;object-fit:cover;border-radius:12px');
+      imgDiv.innerHTML = word.imagen
+        ? `<img src="${word.imagen}" alt="${word.es}" style="width:100%;height:100%;object-fit:cover;border-radius:12px" onerror="this.parentElement.innerHTML='<span class=detail-no-img>📷</span>'">`
+        : `<span class="detail-no-img">📷</span>`;
     }
   }
 }
@@ -1535,7 +1537,6 @@ function selectPickerEmoji(wordId, emoji, btn) {
   const word = miVocabulario.find(w => w.id === wordId);
   if (word) {
     word.emoji = emoji;
-    word.imagen = '';   // el emoji tiene prioridad — limpiar imagen
     saveMyVocab();
   }
 }
@@ -1547,7 +1548,6 @@ function applyEmojiFromInput() {
   const word = miVocabulario.find(w => w.id === wordId);
   if (word) {
     word.emoji = emoji;
-    word.imagen = '';
     saveMyVocab();
     showToast('Emoji guardado ✓');
     renderEmojiSuggestions();
@@ -1748,8 +1748,8 @@ function openWordDetail(wordId) {
 
   const imgDiv = document.getElementById('detail-image');
   imgDiv.innerHTML = word.imagen
-    ? `<img src="${word.imagen}" alt="${word.es}" onerror="this.outerHTML='<span style=font-size:56px>${word.emoji || '🍽️'}</span>'">`
-    : `<span style="font-size:56px">${word.emoji || '🍽️'}</span>`;
+    ? `<img src="${word.imagen}" alt="${word.es}" style="width:100%;height:100%;object-fit:cover;border-radius:12px" onerror="this.parentElement.innerHTML='<span class=detail-no-img>📷</span>'">`
+    : `<span class="detail-no-img">📷</span>`;
 
   // Poblar select de categoría
   const detailCatSelect = document.getElementById('detail-cat');

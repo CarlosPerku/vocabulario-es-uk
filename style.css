@@ -1334,6 +1334,15 @@ body {
   align-items: center;
   height: 140px;
   margin-bottom: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f1f5f9;
+  cursor: pointer;
+}
+
+.detail-no-img {
+  font-size: 40px;
+  opacity: 0.35;
 }
 
 .detail-image img {
